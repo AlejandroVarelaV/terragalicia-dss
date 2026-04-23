@@ -1,0 +1,166 @@
+[
+  {
+    "id": "urn:ngsi-ld:AgriFertilizer:npk-15-15-15:batch2026-01",
+    "type": "AgriFertilizer",
+    "productName": {
+      "type": "Property",
+      "value": "NPK 15-15-15"
+    },
+    "nutrientN": {
+      "type": "Property",
+      "value": 15,
+      "unitCode": "P1"
+    },
+    "nutrientP": {
+      "type": "Property",
+      "value": 15,
+      "unitCode": "P1"
+    },
+    "nutrientK": {
+      "type": "Property",
+      "value": 15,
+      "unitCode": "P1"
+    },
+    "formulationType": {
+      "type": "Property",
+      "value": "granular"
+    },
+    "stockQuantity": {
+      "type": "Property",
+      "value": 2200,
+      "unitCode": "KGM"
+    },
+    "supplierName": {
+      "type": "Property",
+      "value": "Cooperativa Agro Bergondo"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriFertilizer:urea-46-0-0:batch2026-02",
+    "type": "AgriFertilizer",
+    "productName": {
+      "type": "Property",
+      "value": "Urea 46-0-0"
+    },
+    "nutrientN": {
+      "type": "Property",
+      "value": 46,
+      "unitCode": "P1"
+    },
+    "nutrientP": {
+      "type": "Property",
+      "value": 0,
+      "unitCode": "P1"
+    },
+    "nutrientK": {
+      "type": "Property",
+      "value": 0,
+      "unitCode": "P1"
+    },
+    "formulationType": {
+      "type": "Property",
+      "value": "granular"
+    },
+    "stockQuantity": {
+      "type": "Property",
+      "value": 1450,
+      "unitCode": "KGM"
+    },
+    "supplierName": {
+      "type": "Property",
+      "value": "Agroinsumos Betanzos"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriFertilizer:ammonium-nitrate-27-0-0:batch2026-01",
+    "type": "AgriFertilizer",
+    "productName": {
+      "type": "Property",
+      "value": "Ammonium Nitrate 27-0-0"
+    },
+    "nutrientN": {
+      "type": "Property",
+      "value": 27,
+      "unitCode": "P1"
+    },
+    "nutrientP": {
+      "type": "Property",
+      "value": 0,
+      "unitCode": "P1"
+    },
+    "nutrientK": {
+      "type": "Property",
+      "value": 0,
+      "unitCode": "P1"
+    },
+    "formulationType": {
+      "type": "Property",
+      "value": "granular"
+    },
+    "stockQuantity": {
+      "type": "Property",
+      "value": 1180,
+      "unitCode": "KGM"
+    },
+    "supplierName": {
+      "type": "Property",
+      "value": "Distribuciones Terra Norte"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriFertilizer:organic-compost-3-2-2:batch2026-03",
+    "type": "AgriFertilizer",
+    "productName": {
+      "type": "Property",
+      "value": "Organic Compost 3-2-2"
+    },
+    "nutrientN": {
+      "type": "Property",
+      "value": 3,
+      "unitCode": "P1"
+    },
+    "nutrientP": {
+      "type": "Property",
+      "value": 2,
+      "unitCode": "P1"
+    },
+    "nutrientK": {
+      "type": "Property",
+      "value": 2,
+      "unitCode": "P1"
+    },
+    "formulationType": {
+      "type": "Property",
+      "value": "organic-compost"
+    },
+    "organicCertified": {
+      "type": "Property",
+      "value": true
+    },
+    "stockQuantity": {
+      "type": "Property",
+      "value": 3600,
+      "unitCode": "KGM"
+    },
+    "supplierName": {
+      "type": "Property",
+      "value": "Compost Galicia Eco"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  }
+]

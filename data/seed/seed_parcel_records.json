@@ -1,0 +1,2702 @@
+[
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-23T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-23T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 91.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-23T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-23T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.33,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.6,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 91.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-24T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-24T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.33,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 90.7,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-24T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-24T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.31,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 90.7,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-25T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-25T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.3,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 90.3,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-25T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-25T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.9,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.3,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 90.3,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-26T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-26T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.2,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 90.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-26T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-26T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.4,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 90.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-27T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-27T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.6,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.4,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 89.6,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-27T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-27T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.32,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.2,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.6,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 89.6,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-28T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-28T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.32,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.5,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 89.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-28T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-28T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.3,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.3,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.7,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 89.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-29T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-29T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 8.8,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.6,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 88.9,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-29T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-29T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.33,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.8,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 88.9,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-30T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-30T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.39,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.8,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 88.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-30T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-30T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.6,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 88.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-31T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-31T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.38,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 10.9,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 88.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-03-31T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-03-31T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 88.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-01T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-01T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.3,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 87.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-01T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-01T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.9,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.3,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 87.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-02T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-02T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.2,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 87.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-02T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-02T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.33,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.4,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 87.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-03T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-03T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.38,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.5,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.3,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 87.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-03T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-03T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.5,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 87.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-04T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-04T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.5,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 86.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-04T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-04T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.3,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.7,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 86.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-05T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-05T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 9.8,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.6,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 86.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-05T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-05T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.32,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 14.8,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 86.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-06T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-06T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.8,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 86.1,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-06T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-06T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.6,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 86.1,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-07T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-07T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.39,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 11.9,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 85.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-07T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-07T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 85.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-08T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-08T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.2,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 85.4,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-08T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-08T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.8,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.2,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 85.4,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-09T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-09T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.2,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 85.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-09T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-09T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.33,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.4,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 85.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-10T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-10T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.5,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.3,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 84.7,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-10T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-10T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.5,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 84.7,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-11T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-11T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.41,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.5,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 84.3,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-11T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-11T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.39,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.3,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.7,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 84.3,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-12T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-12T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.8,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.6,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 84.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-12T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-12T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.38,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.8,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 84.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-13T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-13T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.38,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 10.9,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.7,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 83.7,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-13T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-13T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.5,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 15.9,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 83.7,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-14T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-14T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 12.9,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 83.3,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-14T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-14T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 83.3,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-15T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-15T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.39,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.2,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 83.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-15T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-15T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.8,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.2,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 83.0,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-16T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-16T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.39,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.2,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 82.6,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-16T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-16T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.4,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 82.6,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-17T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-17T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.5,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.3,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 82.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-17T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-17T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 13.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.5,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 82.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -69,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-18T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-18T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.6,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.4,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 81.9,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-18T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-18T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.33,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 13.2,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.6,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 81.9,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -68,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-19T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-19T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.37,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.8,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.6,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 81.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-19T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-19T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.35,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 13.4,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.8,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 81.5,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -67,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-20T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-20T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 11.9,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.7,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 81.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-20T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-20T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 13.5,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 16.9,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 81.2,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -66,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-21T06:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-21T06:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.36,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 12.1,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 13.9,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 80.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-21T18:00:00Z",
+    "type": "AgriParcelRecord",
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    },
+    "source": {
+      "type": "Property",
+      "value": "iot:soil-probe:oleiros-node-01"
+    },
+    "dateObserved": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "soilMoistureVwc": {
+      "type": "Property",
+      "value": 0.34,
+      "unitCode": "P1"
+    },
+    "soilTemperature": {
+      "type": "Property",
+      "value": 13.7,
+      "unitCode": "DEG_C"
+    },
+    "airTemperature": {
+      "type": "Property",
+      "value": 17.1,
+      "unitCode": "DEG_C"
+    },
+    "batteryLevel": {
+      "type": "Property",
+      "value": 80.8,
+      "unitCode": "P1"
+    },
+    "signalStrength": {
+      "type": "Property",
+      "value": -65,
+      "unitCode": "DBM"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  }
+]

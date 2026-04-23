@@ -1,0 +1,370 @@
+[
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:millo",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "millo"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-04-05",
+        "end": "2026-05-20"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-09-15",
+        "end": "2026-10-25"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 520,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 8.4,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.8,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.8,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:pataca",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "pataca"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-03-10",
+        "end": "2026-04-30"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-07-20",
+        "end": "2026-09-10"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 430,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 30.2,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.2,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.2,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:kiwi",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "kiwi"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-02-15",
+        "end": "2026-04-10"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-10-20",
+        "end": "2026-11-25"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 690,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 22.5,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.5,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:albarino",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "Albarino"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-02-01",
+        "end": "2026-03-25"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-09-05",
+        "end": "2026-10-05"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 470,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 9.1,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.5,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:mencia",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "Mencia"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-02-01",
+        "end": "2026-03-25"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-09-15",
+        "end": "2026-10-20"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 440,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 8.3,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.4,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.4,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:grelos",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "grelos"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-02-20",
+        "end": "2026-04-15"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-05-25",
+        "end": "2026-07-05"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 300,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 14.8,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.5,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.8,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:trigo",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "trigo"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2025-11-01",
+        "end": "2026-01-20"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-07-01",
+        "end": "2026-08-10"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 380,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 5.7,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.8,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriCrop:catalog:centeo",
+    "type": "AgriCrop",
+    "cropSpecies": {
+      "type": "Property",
+      "value": "centeo"
+    },
+    "plantingDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2025-10-20",
+        "end": "2026-01-10"
+      }
+    },
+    "expectedHarvestDateRange": {
+      "type": "Property",
+      "value": {
+        "start": "2026-06-20",
+        "end": "2026-08-05"
+      }
+    },
+    "waterNeed": {
+      "type": "Property",
+      "value": 340,
+      "unitCode": "MM"
+    },
+    "modelledYield": {
+      "type": "Property",
+      "value": 4.9,
+      "unitCode": "TNE/HA"
+    },
+    "recommendedSoilPHMin": {
+      "type": "Property",
+      "value": 5.2,
+      "unitCode": "pH"
+    },
+    "recommendedSoilPHMax": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "pH"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  }
+]

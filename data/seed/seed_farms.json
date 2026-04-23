@@ -1,0 +1,156 @@
+[
+  {
+    "id": "urn:ngsi-ld:AgriFarm:acoruna:oleiros:farm001",
+    "type": "AgriFarm",
+    "name": {
+      "type": "Property",
+      "value": "Finca A Marola"
+    },
+    "farmType": {
+      "type": "Property",
+      "value": "smallholder"
+    },
+    "ownerName": {
+      "type": "Property",
+      "value": "Joao Martins"
+    },
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Oleiros",
+        "addressRegion": "A Coruna",
+        "addressCountry": "ES"
+      }
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3172,
+          43.3338
+        ]
+      }
+    },
+    "refMunicipality": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AdministrativeArea:municipality:oleiros"
+    },
+    "hasAgriParcel": {
+      "type": "Relationship",
+      "object": [
+        "urn:ngsi-ld:AgriParcel:farm001:parcel01",
+        "urn:ngsi-ld:AgriParcel:farm001:parcel02",
+        "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+      ]
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriFarm:acoruna:bergondo:farm002",
+    "type": "AgriFarm",
+    "name": {
+      "type": "Property",
+      "value": "SAT Rego das Flores"
+    },
+    "farmType": {
+      "type": "Property",
+      "value": "cooperative-member"
+    },
+    "ownerName": {
+      "type": "Property",
+      "value": "Rosa Garcia Fernandez"
+    },
+    "cooperativeCode": {
+      "type": "Property",
+      "value": "SAT-ACOR-017"
+    },
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Bergondo",
+        "addressRegion": "A Coruna",
+        "addressCountry": "ES"
+      }
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2331,
+          43.3169
+        ]
+      }
+    },
+    "refMunicipality": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AdministrativeArea:municipality:bergondo"
+    },
+    "hasAgriParcel": {
+      "type": "Relationship",
+      "object": [
+        "urn:ngsi-ld:AgriParcel:farm002:parcel01",
+        "urn:ngsi-ld:AgriParcel:farm002:parcel02",
+        "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+      ]
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriFarm:acoruna:betanzos:farm003",
+    "type": "AgriFarm",
+    "name": {
+      "type": "Property",
+      "value": "Granxa San Martino"
+    },
+    "farmType": {
+      "type": "Property",
+      "value": "smallholder"
+    },
+    "ownerName": {
+      "type": "Property",
+      "value": "Miguel Alvarez Garcia"
+    },
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Betanzos",
+        "addressRegion": "A Coruna",
+        "addressCountry": "ES"
+      }
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2148,
+          43.2809
+        ]
+      }
+    },
+    "refMunicipality": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AdministrativeArea:municipality:betanzos"
+    },
+    "hasAgriParcel": {
+      "type": "Relationship",
+      "object": [
+        "urn:ngsi-ld:AgriParcel:farm003:parcel01",
+        "urn:ngsi-ld:AgriParcel:farm003:parcel02",
+        "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+      ]
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  }
+]

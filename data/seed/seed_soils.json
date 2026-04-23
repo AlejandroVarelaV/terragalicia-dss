@@ -1,0 +1,182 @@
+[
+  {
+    "id": "urn:ngsi-ld:AgriSoil:acoruna:atlantic-acid:001",
+    "type": "AgriSoil",
+    "soilTextureType": {
+      "type": "Property",
+      "value": "sandy-loam-granitic"
+    },
+    "soilPH": {
+      "type": "Property",
+      "value": 5.4,
+      "unitCode": "pH"
+    },
+    "organicMatter": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "P1"
+    },
+    "drainageClass": {
+      "type": "Property",
+      "value": "moderate"
+    },
+    "waterRetentionClass": {
+      "type": "Property",
+      "value": "medium"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.36, 43.36],
+            [-8.26, 43.36],
+            [-8.26, 43.30],
+            [-8.36, 43.30],
+            [-8.36, 43.36]
+          ]
+        ]
+      }
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriSoil:acoruna:alluvial-valley:002",
+    "type": "AgriSoil",
+    "soilTextureType": {
+      "type": "Property",
+      "value": "silt-loam-alluvial"
+    },
+    "soilPH": {
+      "type": "Property",
+      "value": 6.4,
+      "unitCode": "pH"
+    },
+    "organicMatter": {
+      "type": "Property",
+      "value": 6.2,
+      "unitCode": "P1"
+    },
+    "drainageClass": {
+      "type": "Property",
+      "value": "good"
+    },
+    "waterRetentionClass": {
+      "type": "Property",
+      "value": "high"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.25, 43.31],
+            [-8.17, 43.31],
+            [-8.17, 43.26],
+            [-8.25, 43.26],
+            [-8.25, 43.31]
+          ]
+        ]
+      }
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriSoil:acoruna:coastal-sandy:003",
+    "type": "AgriSoil",
+    "soilTextureType": {
+      "type": "Property",
+      "value": "coarse-sandy"
+    },
+    "soilPH": {
+      "type": "Property",
+      "value": 5.9,
+      "unitCode": "pH"
+    },
+    "organicMatter": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "P1"
+    },
+    "drainageClass": {
+      "type": "Property",
+      "value": "fast"
+    },
+    "waterRetentionClass": {
+      "type": "Property",
+      "value": "low"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.34, 43.35],
+            [-8.28, 43.35],
+            [-8.28, 43.31],
+            [-8.34, 43.31],
+            [-8.34, 43.35]
+          ]
+        ]
+      }
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004",
+    "type": "AgriSoil",
+    "soilTextureType": {
+      "type": "Property",
+      "value": "clay-loam"
+    },
+    "soilPH": {
+      "type": "Property",
+      "value": 5.7,
+      "unitCode": "pH"
+    },
+    "organicMatter": {
+      "type": "Property",
+      "value": 4.8,
+      "unitCode": "P1"
+    },
+    "drainageClass": {
+      "type": "Property",
+      "value": "moderate"
+    },
+    "waterRetentionClass": {
+      "type": "Property",
+      "value": "medium-high"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.24, 43.29],
+            [-8.18, 43.29],
+            [-8.18, 43.24],
+            [-8.24, 43.24],
+            [-8.24, 43.29]
+          ]
+        ]
+      }
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  }
+]
