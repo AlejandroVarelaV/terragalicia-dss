@@ -1,0 +1,202 @@
+# TerraGalicia DSS - Docker Compose MVP Infrastructure
+# Usage:
+#   cp .env.example .env && docker compose up -d
+
+x-env-file: &env_file
+  - .env
+
+x-service-network: &service_network
+  - terragalicia-net
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks: *service_network
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks: *service_network
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - orion
+      - postgres
+      - timescaledb
+      - redis
+    env_file: *env_file
+    networks: *service_network
+
+  orion:
+    image: fiware/orion-ld:latest
+    restart: unless-stopped
+    ports:
+      - "1026:1026"
+    depends_on:
+      - mongo
+    command: -dbhost mongo -logLevel DEBUG
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:1026/version"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks: *service_network
+
+  mongo:
+    image: mongo:5
+    restart: unless-stopped
+    expose:
+      - "27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks: *service_network
+
+  iot-agent:
+    image: fiware/iotagent-json:latest
+    restart: unless-stopped
+    ports:
+      - "4041:4041"
+      - "7896:7896"
+    depends_on:
+      - orion
+      - mongo
+      - mqtt-broker
+    environment:
+      - IOTA_MONGO_HOST=mongo
+      - IOTA_MONGO_PORT=27017
+      - IOTA_MONGO_DB=iotagent
+    env_file: *env_file
+    networks: *service_network
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    networks: *service_network
+
+  quantumleap:
+    image: orchestracities/quantumleap:latest
+    restart: unless-stopped
+    ports:
+      - "8668:8668"
+    depends_on:
+      - orion
+      - timescaledb
+    env_file: *env_file
+    networks: *service_network
+
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    restart: unless-stopped
+    expose:
+      - "5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    env_file: *env_file
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${TIMESCALEDB_USER:-postgres} -d ${TIMESCALEDB_DB:-postgres}"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks: *service_network
+
+  postgres:
+    image: postgis/postgis:15-3.4
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file: *env_file
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-postgres}"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks: *service_network
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    expose:
+      - "6379"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks: *service_network
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    depends_on:
+      - timescaledb
+      - postgres
+    volumes:
+      - grafana_data:/var/lib/grafana
+    env_file: *env_file
+    networks: *service_network
+
+  ml-service:
+    build:
+      context: ../ml
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8010:8010"
+    depends_on:
+      - redis
+    env_file: *env_file
+    networks: *service_network
+
+volumes:
+  mongo_data:
+  mosquitto_data:
+  mosquitto_log:
+  timescale_data:
+  postgres_data:
+  grafana_data:
+
+networks:
+  terragalicia-net:
+    driver: bridge
