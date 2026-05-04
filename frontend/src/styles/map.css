@@ -1,0 +1,283 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.14), transparent 30%),
+    linear-gradient(180deg, #f4f8f4 0%, #edf3ea 55%, #e6ebe2 100%);
+  color: #102015;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid rgba(16, 32, 21, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(16, 32, 21, 0.08);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4b6a55;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  max-width: 64ch;
+  color: #45584a;
+}
+
+.header-chip {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #102015;
+  color: #f7f9f4;
+  font-size: 0.92rem;
+}
+
+.map-frame,
+.map-shell {
+  flex: 1;
+  min-height: 72vh;
+}
+
+.map-shell {
+  position: relative;
+}
+
+.leaflet-map {
+  height: 100%;
+  min-height: 72vh;
+  width: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(16, 32, 21, 0.1);
+  box-shadow: 0 24px 60px rgba(16, 32, 21, 0.12);
+}
+
+.map-legend {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  min-width: 200px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(16, 32, 21, 0.08);
+  box-shadow: 0 16px 36px rgba(16, 32, 21, 0.12);
+}
+
+.map-data-badge {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(16, 32, 21, 0.82);
+  color: #f4f7f1;
+  font-size: 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(16, 32, 21, 0.22);
+}
+
+.map-legend h2 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+}
+
+.map-legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.map-legend li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #314236;
+  font-size: 0.92rem;
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(16, 32, 21, 0.12);
+}
+
+.status-prepared { background: #22c55e; }
+.status-fallow { background: #9ca3af; }
+.status-planted { background: #f59e0b; }
+.status-harvested { background: #3b82f6; }
+
+.parcel-popup .leaflet-popup-content-wrapper,
+.parcel-popup .leaflet-popup-tip {
+  background: #f9fbf8;
+}
+
+.popup-card {
+  min-width: 220px;
+  color: #102015;
+}
+
+.popup-kicker {
+  margin: 0 0 4px;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5b725f;
+}
+
+.popup-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.popup-card dl {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.popup-card dl > div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+}
+
+.popup-card dt {
+  font-weight: 700;
+  color: #48604d;
+}
+
+.popup-card dd {
+  margin: 0;
+}
+
+.leaflet-container a {
+  color: #1d4ed8;
+}
+
+.leaflet-control-layers {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  border: 1px solid rgba(16, 32, 21, 0.12);
+  box-shadow: 0 8px 24px rgba(16, 32, 21, 0.15);
+}
+
+.leaflet-control-layers-toggle {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(16,32,21,0.7)" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(16, 32, 21, 0.12);
+  box-shadow: 0 2px 8px rgba(16, 32, 21, 0.1);
+}
+
+.leaflet-control-layers-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(16, 32, 21, 0.2);
+}
+
+.leaflet-control-layers label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: #314236;
+  font-size: 0.9rem;
+}
+
+.leaflet-control-layers label input {
+  cursor: pointer;
+}
+
+.leaflet-control-layers-list {
+  padding: 8px 12px;
+}
+
+.leaflet-control-layers-separator {
+  border-top: 1px solid rgba(16, 32, 21, 0.08);
+  margin: 6px 0;
+}
+
+.leaflet-control-layers-group label {
+  font-weight: 600;
+  color: #102015;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 14px;
+  }
+
+  .app-header {
+    flex-direction: column;
+  }
+
+  .map-legend {
+    left: 16px;
+    right: 16px;
+  }
+
+  .leaflet-control-layers {
+    border-radius: 8px;
+  }
+}

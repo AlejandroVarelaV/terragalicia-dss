@@ -1,0 +1,3971 @@
+[
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.32085,
+          43.3364
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.3285,
+          43.3319
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.31265,
+          43.3297
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm001:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.23625,
+          43.3184
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.22875,
+          43.3143
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2402,
+          43.3122
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm002:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2188,
+          43.2856
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel01"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.21125,
+          43.2789
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel02"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-22T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-22T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-22T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.6,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-23T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-23T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-23T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 11.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 7.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 15.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.8,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-24T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-24T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-24T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 6.5,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 1.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.5,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-25T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-25T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-25T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 3.2,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-26T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-26T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-26T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 10.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 14.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 19.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 6.3,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-27T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-27T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-27T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 12.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 8.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 16.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 0.0,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 2.4,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:WeatherForecast:meteogalicia:fallback:2026-04-28T00:00:00Z",
+    "type": "WeatherForecast",
+    "issuedAt": {
+      "type": "Property",
+      "value": "2026-04-21T18:00:00Z"
+    },
+    "validFrom": {
+      "type": "Property",
+      "value": "2026-04-28T00:00:00Z"
+    },
+    "validTo": {
+      "type": "Property",
+      "value": "2026-04-28T23:59:59Z"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          -8.2082,
+          43.28265
+        ]
+      }
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 13.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMin": {
+      "type": "Property",
+      "value": 9.0,
+      "unitCode": "DEG_C"
+    },
+    "temperatureMax": {
+      "type": "Property",
+      "value": 17.0,
+      "unitCode": "DEG_C"
+    },
+    "precipitation": {
+      "type": "Property",
+      "value": 4.3,
+      "unitCode": "MM"
+    },
+    "windSpeed": {
+      "type": "Property",
+      "value": 4.1,
+      "unitCode": "MTS"
+    },
+    "source": {
+      "type": "Property",
+      "value": "MeteoGalicia (seed-fallback)"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ],
+    "refParcel": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriParcel:farm003:parcel03"
+    }
+  }
+]
