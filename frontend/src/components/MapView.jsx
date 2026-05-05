@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MapContainer,
   GeoJSON,
@@ -132,6 +132,8 @@ function FitToParcels({ bounds }) {
 }
 
 function Legend() {
+  const [collapsed, setCollapsed] = useState(false);
+
   const entries = [
     ['PREPARED', 'Prepared'],
     ['FALLOW', 'Fallow'],
@@ -140,16 +142,40 @@ function Legend() {
   ];
 
   return (
-    <div className="map-legend">
-      <h2>Status Legend</h2>
-      <ul>
-        {entries.map(([status, label]) => (
-          <li key={status}>
-            <span className={`legend-swatch status-${status.toLowerCase()}`} />
-            <span>{label}</span>
-          </li>
-        ))}
-      </ul>
+    <div className={`map-legend ${collapsed ? 'is-collapsed' : ''}`}>
+      {collapsed ? (
+        <button
+          type="button"
+          className="legend-compact-button"
+          onClick={() => setCollapsed(false)}
+          aria-label="Expand legend"
+        >
+          <span className="legend-compact-badge" aria-hidden="true">🗺</span>
+          <span className="legend-compact-title">Legend</span>
+        </button>
+      ) : (
+        <>
+          <div className="legend-header">
+            <h2>Legend</h2>
+            <button
+              type="button"
+              className="legend-collapse-button"
+              onClick={() => setCollapsed(true)}
+              aria-label="Minimize legend"
+            >
+              ↙
+            </button>
+          </div>
+          <ul>
+            {entries.map(([status, label]) => (
+              <li key={status}>
+                <span className={`legend-swatch status-${status.toLowerCase()}`} />
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
@@ -207,6 +233,11 @@ export default function MapView() {
     const fallbackGeo = toFallbackGeoJson(seedParcels);
     const fallbackBounds = computeBoundsFromGeoJson(fallbackGeo);
 
+    // Paint seed parcels immediately so map is never empty
+    setParcelsGeoJson(fallbackGeo);
+    setParcelsBounds(fallbackBounds);
+    setParcelSource('seed-fallback');
+
     (async () => {
       try {
         const geo = await fetchSigpacParcels();
@@ -218,21 +249,12 @@ export default function MapView() {
           setParcelsBounds(computeBoundsFromGeoJson(geo) || fallbackBounds);
           setParcelSource('backend-sigpac');
           console.info(`[PARCELS] Using backend SIGPAC parcels (${count} features)`);
-          return;
         }
-
-        console.warn('[PARCELS] Backend SIGPAC returned no features; falling back to local seed parcels');
-        setParcelsGeoJson(fallbackGeo);
-        setParcelsBounds(fallbackBounds);
-        setParcelSource('seed-fallback');
       } catch (e) {
-        console.warn('[PARCELS] Backend SIGPAC failed; falling back to local seed parcels:', e?.message || e);
-        if (!mounted) return;
-        setParcelsGeoJson(fallbackGeo);
-        setParcelsBounds(fallbackBounds);
-        setParcelSource('seed-fallback');
+        console.warn('[PARCELS] Backend SIGPAC failed; keeping seed parcels:', e?.message || e);
       }
     })();
+
     return () => { mounted = false; };
   }, []);
 
