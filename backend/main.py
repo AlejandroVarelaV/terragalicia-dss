@@ -2,8 +2,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.sigpac import router as sigpac_router
+from api.routes.copilot import router as copilot_router
+from api.routes.crops import router as crops_router
+from api.routes.farms import router as farms_router
+from api.routes.operations import router as operations_router
+from api.routes.parcels import router as parcels_router
+from api.routes.simulator import router as simulator_router
+from api.routes.suitability import router as suitability_router
+from api.routes.weather import router as weather_router
 
-app = FastAPI(title="TerraGalicia Backend Placeholder")
+app = FastAPI(
+    title="TerraGalicia DSS API",
+    docs_url="/api/v1/docs",
+    openapi_url="/api/v1/openapi.json",
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,14 +26,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(sigpac_router)
+app.include_router(sigpac_router, prefix="/api/v1", tags=["sigpac"])
+app.include_router(copilot_router, prefix="/api/v1", tags=["copilot"])
+app.include_router(crops_router, prefix="/api/v1", tags=["crops"])
+app.include_router(farms_router, prefix="/api/v1", tags=["farms"])
+app.include_router(operations_router, prefix="/api/v1", tags=["operations"])
+app.include_router(parcels_router, prefix="/api/v1", tags=["parcels"])
+app.include_router(simulator_router, prefix="/api/v1", tags=["simulator"])
+app.include_router(suitability_router, prefix="/api/v1", tags=["suitability"])
+app.include_router(weather_router, prefix="/api/v1", tags=["weather"])
 
-
-@app.get("/health")
+@app.get("/api/v1/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "service": "backend-placeholder"}
-
+    return {"status": "ok", "service": "TerraGalicia DSS Backend"}
 
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"message": "TerraGalicia backend placeholder is running"}
+    return {"message": "TerraGalicia DSS API is running"}

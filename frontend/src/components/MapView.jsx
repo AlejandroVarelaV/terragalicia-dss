@@ -7,7 +7,7 @@ import {
 import L from 'leaflet';
 import { fetchSigpacParcels, computeBoundsFromGeoJson } from '../data/sigpacService.js';
 import ParcelPopup from './ParcelPopup.jsx';
-import seedParcels from '../../../data/seed/seed_parcels.json';
+import seedParcels from '../data/seed_parcels.json';
 
 const mapCenter = [43.331, -8.284];
 

@@ -1,0 +1,450 @@
+[
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm001:parcel01",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Oleiros - Parcela Norte"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.3215, 43.3368],
+            [-8.3203, 43.3368],
+            [-8.3202, 43.3360],
+            [-8.3214, 43.3360],
+            [-8.3215, 43.3368]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 1.12,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "arable"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "PLANTED"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:oleiros:farm001"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:atlantic-acid:001"
+    },
+    "hasAgriCrop": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriCrop:catalog:millo"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm001:parcel02",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Oleiros - Parcela Costa"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.3292, 43.3324],
+            [-8.3279, 43.3324],
+            [-8.3278, 43.3314],
+            [-8.3291, 43.3314],
+            [-8.3292, 43.3324]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 2.84,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "horticulture"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "FALLOW"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:oleiros:farm001"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:coastal-sandy:003"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm001:parcel03",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Oleiros - Parcela Rego"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.3136, 43.3302],
+            [-8.3118, 43.3302],
+            [-8.3117, 43.3292],
+            [-8.3135, 43.3292],
+            [-8.3136, 43.3302]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 3.96,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "vineyard"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "PREPARED"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:oleiros:farm001"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm002:parcel01",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Bergondo - Parcela Grande"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.2378, 43.3193],
+            [-8.2349, 43.3193],
+            [-8.2347, 43.3175],
+            [-8.2376, 43.3175],
+            [-8.2378, 43.3193]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 7.42,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "arable"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "PLANTED"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:bergondo:farm002"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:alluvial-valley:002"
+    },
+    "hasAgriCrop": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriCrop:catalog:pataca"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm002:parcel02",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Bergondo - Parcela Pomar"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.2294, 43.3147],
+            [-8.2282, 43.3147],
+            [-8.2281, 43.3139],
+            [-8.2293, 43.3139],
+            [-8.2294, 43.3147]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 1.36,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "fruit"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "PLANTED"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:bergondo:farm002"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:alluvial-valley:002"
+    },
+    "hasAgriCrop": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriCrop:catalog:kiwi"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm002:parcel03",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Bergondo - Parcela Fonte"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.2411, 43.3128],
+            [-8.2394, 43.3128],
+            [-8.2393, 43.3116],
+            [-8.2410, 43.3116],
+            [-8.2411, 43.3128]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 2.58,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "mixed"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "FALLOW"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:bergondo:farm002"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:atlantic-acid:001"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm003:parcel01",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Betanzos - Parcela Veiga"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.2202, 43.2864],
+            [-8.2176, 43.2864],
+            [-8.2174, 43.2848],
+            [-8.2200, 43.2848],
+            [-8.2202, 43.2864]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 6.24,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "arable"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "PLANTED"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:betanzos:farm003"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004"
+    },
+    "hasAgriCrop": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriCrop:catalog:trigo"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm003:parcel02",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Betanzos - Parcela Ladeira"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.2119, 43.2794],
+            [-8.2107, 43.2794],
+            [-8.2106, 43.2784],
+            [-8.2118, 43.2784],
+            [-8.2119, 43.2794]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 1.94,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "vineyard"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "PREPARED"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:betanzos:farm003"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  },
+  {
+    "id": "urn:ngsi-ld:AgriParcel:farm003:parcel03",
+    "type": "AgriParcel",
+    "name": {
+      "type": "Property",
+      "value": "Betanzos - Parcela Pequena"
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-8.2087, 43.2830],
+            [-8.2078, 43.2830],
+            [-8.2077, 43.2823],
+            [-8.2086, 43.2823],
+            [-8.2087, 43.2830]
+          ]
+        ]
+      }
+    },
+    "area": {
+      "type": "Property",
+      "value": 0.78,
+      "unitCode": "HAR"
+    },
+    "category": {
+      "type": "Property",
+      "value": "horticulture"
+    },
+    "parcelStatus": {
+      "type": "Property",
+      "value": "FALLOW"
+    },
+    "belongsTo": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriFarm:acoruna:betanzos:farm003"
+    },
+    "hasAgriSoil": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:AgriSoil:acoruna:coastal-sandy:003"
+    },
+    "@context": [
+      "https://uri.fiware.org/ns/data-models",
+      "https://schema.org"
+    ]
+  }
+]
