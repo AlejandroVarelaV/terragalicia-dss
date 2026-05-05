@@ -85,13 +85,22 @@ services:
       - "4041:4041"
       - "7896:7896"
     depends_on:
-      - orion
-      - mongo
-      - mqtt-broker
+      orion:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      mqtt-broker:
+        condition: service_started
     environment:
       - IOTA_MONGO_HOST=mongo
       - IOTA_MONGO_PORT=27017
       - IOTA_MONGO_DB=iotagent
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:4041/iot/about', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     env_file: *env_file
     networks: *service_network
 
