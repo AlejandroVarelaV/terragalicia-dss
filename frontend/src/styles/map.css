@@ -92,6 +92,7 @@ select {
 }
 
 .leaflet-map {
+  position: relative;
   height: 100%;
   min-height: 72vh;
   width: 100%;
@@ -402,4 +403,48 @@ select {
   background: rgba(16,32,21,0.07);
   color: #5b725f;
   letter-spacing: 0.06em;
+}
+
+.zoom-controls {
+  position: absolute;
+  right: 16px;
+  bottom: 50%;
+  transform: translateY(50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(16, 32, 21, 0.1);
+  box-shadow: 0 8px 24px rgba(16, 32, 21, 0.14);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.zoom-btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: #102015;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.zoom-btn:hover {
+  background: rgba(16, 32, 21, 0.08);
+  color: #000;
+}
+
+.zoom-btn:active {
+  background: rgba(16, 32, 21, 0.14);
+}
+
+.zoom-divider {
+  height: 1px;
+  background: rgba(16, 32, 21, 0.08);
+  margin: 0 8px;
 }

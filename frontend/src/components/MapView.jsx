@@ -131,6 +131,39 @@ function FitToParcels({ bounds }) {
   return null;
 }
 
+function ZoomControls() {
+  const map = useMap();
+  return (
+    <div className="zoom-controls">
+      <button
+        type="button"
+        className="zoom-btn"
+        aria-label="Zoom in"
+        onClick={() => map.zoomIn()}
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 3v10M3 8h10" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      </button>
+      <div className="zoom-divider" />
+      <button
+        type="button"
+        className="zoom-btn"
+        aria-label="Zoom out"
+        onClick={() => map.zoomOut()}
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 8h10" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      </button>
+    </div>
+  );
+}
+
 function Legend() {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -282,8 +315,9 @@ export default function MapView() {
 
   return (
     <div className="map-shell">
-      <MapContainer center={mapCenter} zoom={11.5} className="leaflet-map" scrollWheelZoom>
+      <MapContainer center={mapCenter} zoom={11.5} className="leaflet-map" scrollWheelZoom zoomControl={false}>
         <WMSLayers />
+        <ZoomControls />
         <FitToParcels bounds={parcelsBounds} />
         {parcelsGeoJson && (
           <GeoJSON data={parcelsGeoJson} style={parcelStyle} onEachFeature={onEachFeature} />
