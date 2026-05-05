@@ -55,23 +55,25 @@ function WMSLayers() {
 
     // SIGPAC WMS (official) - configured as WMS (not tile fallback)
     // Use WMS version 1.1.1 to keep axis order predictable and request PNG with transparency
-    const sigpacWms = L.tileLayer.wms('https://wms.mapama.gob.es/wms/wms.aspx', {
-      layers: 'SIGPAC',
+    const sigpacWms = L.tileLayer.wms('https://wms.mapa.gob.es/sigpac/wms', {
+      layers: 'AU.Sigpac:recinto',
       format: 'image/png',
       transparent: true,
       version: '1.1.1',
-      attribution: '&copy; MAPAMA',
+      attribution: '&copy; MAPA',
       crs: L.CRS.EPSG3857,
+      maxZoom: 19,
     });
 
     // PNOA Orthophoto (IGN) as WMS
-    const pnoaWms = L.tileLayer.wms('https://www.ign.es/wms/pnoa-ma', {
-      layers: 'PNOA',
+    const pnoaWms = L.tileLayer.wms('https://www.ign.es/wms-inspire/pnoa-ma', {
+      layers: 'OI.OrthoimageCoverage',
       format: 'image/jpeg',
       transparent: false,
       version: '1.1.1',
       attribution: '&copy; IGN PNOA',
       crs: L.CRS.EPSG3857,
+      maxZoom: 20,
     });
 
     // OpenStreetMap (reference)
@@ -315,7 +317,7 @@ export default function MapView() {
 
   return (
     <div className="map-shell">
-      <MapContainer center={mapCenter} zoom={11.5} className="leaflet-map" scrollWheelZoom zoomControl={false}>
+      <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
         <WMSLayers />
         <ZoomControls />
         <FitToParcels bounds={parcelsBounds} />
