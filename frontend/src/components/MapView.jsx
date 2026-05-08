@@ -219,6 +219,30 @@ export default function MapView() {
   const [parcelsGeoJson, setParcelsGeoJson] = React.useState(null);
   const [parcelsBounds, setParcelsBounds] = React.useState(null);
   const [parcelSource, setParcelSource] = React.useState('loading');
+  const authTokenRef = React.useRef(null);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch('/api/v1/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            username: 'farmer1',
+            password: 'farmer123',
+            grant_type: 'password',
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          authTokenRef.current = data.access_token;
+          console.info('[AUTH] Demo token obtained successfully');
+        }
+      } catch (e) {
+        console.warn('[AUTH] Could not obtain demo token:', e?.message);
+      }
+    })();
+  }, []);
 
   // Parcel style functions (moved from mockParcels)
   function parcelStyle(feature) {
@@ -295,15 +319,34 @@ export default function MapView() {
 
   const onEachFeature = (feature, layer) => {
     layer.on({
-      click: () => {
+      click: async () => {
+        const parcelId = feature.properties?.id;
+
+        // Show popup immediately with loading state
         layer.bindPopup(
-          ParcelPopup({ parcel: feature.properties }),
-          {
-            closeButton: true,
-            maxWidth: 320,
-            className: 'parcel-popup',
-          },
+          ParcelPopup({ parcel: feature.properties, suitability: null, loading: true }),
+          { closeButton: true, maxWidth: 360, className: 'parcel-popup' }
         ).openPopup();
+
+        // Fetch suitability if we have a token and parcel id
+        if (authTokenRef.current && parcelId) {
+          try {
+            const res = await fetch(`/api/v1/parcels/${encodeURIComponent(parcelId)}/suitability`, {
+              headers: { 'Authorization': `Bearer ${authTokenRef.current}` },
+            });
+            if (res.ok) {
+              const suitability = await res.json();
+              // Update popup with suitability data if still open
+              if (layer.isPopupOpen()) {
+                layer.setPopupContent(
+                  ParcelPopup({ parcel: feature.properties, suitability, loading: false })
+                );
+              }
+            }
+          } catch (e) {
+            console.warn('[SUITABILITY] Failed to fetch:', e?.message);
+          }
+        }
       },
       mouseover: () => {
         layer.setStyle(parcelHoverStyle(feature));

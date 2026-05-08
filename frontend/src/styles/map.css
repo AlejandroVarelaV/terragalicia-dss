@@ -448,3 +448,86 @@ select {
   background: rgba(16, 32, 21, 0.08);
   margin: 0 8px;
 }
+
+.popup-section-title {
+  margin: 12px 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4b6a55;
+}
+
+.popup-ranking {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.popup-ranking-item {
+  display: grid;
+  grid-template-columns: 18px 1fr 60px 32px;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.popup-rank-num {
+  font-weight: 700;
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.popup-crop-id {
+  color: #102015;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popup-score-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(16,32,21,0.08);
+  overflow: hidden;
+}
+
+.popup-score-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.popup-score-pct {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #48604d;
+  text-align: right;
+}
+
+.popup-suitability-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 4px;
+  color: #5b725f;
+  font-size: 0.85rem;
+}
+
+.popup-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(16,32,21,0.15);
+  border-top-color: #22c55e;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

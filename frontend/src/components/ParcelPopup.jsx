@@ -1,4 +1,4 @@
-export default function ParcelPopup({ parcel }) {
+export default function ParcelPopup({ parcel, suitability = null, loading = false }) {
   const cropName = parcel?.cropName || parcel?.cultivo || 'Not assigned';
   const soilType = parcel?.soilType || 'Unknown soil';
   const areaText = parcel?.area != null ? `${Number(parcel.area).toFixed(2)} ha` : 'N/A';
@@ -21,6 +21,33 @@ export default function ParcelPopup({ parcel }) {
   const id = parcel?.id || parcel?.gid || parcel?.ref || 'Unknown';
   const shortId = id.length > 24 ? '…' + id.slice(-20) : id;
 
+  const bandColor = { high: '#22c55e', medium: '#f59e0b', low: '#ef4444' };
+
+  const suitabilitySection = loading
+    ? `<div class="popup-suitability-loading">
+         <span class="popup-spinner"></span>
+         <span>Loading recommendations…</span>
+       </div>`
+    : suitability?.ranking?.length
+    ? `<div class="popup-suitability">
+         <p class="popup-section-title">Crop recommendations</p>
+         <ol class="popup-ranking">
+           ${suitability.ranking.slice(0, 3).map((item, i) => `
+             <li class="popup-ranking-item">
+               <span class="popup-rank-num">${i + 1}</span>
+               <span class="popup-crop-id">${item.cropId.split(':').pop()}</span>
+               <span class="popup-score-bar">
+                 <span class="popup-score-fill" 
+                   style="width:${Math.round(item.score * 100)}%;background:${bandColor[item.band] || '#64748b'}">
+                 </span>
+               </span>
+               <span class="popup-score-pct">${Math.round(item.score * 100)}%</span>
+             </li>
+           `).join('')}
+         </ol>
+       </div>`
+    : '';
+
   return `
     <div class="popup-card">
       <p class="popup-kicker">Parcel</p>
@@ -34,8 +61,11 @@ export default function ParcelPopup({ parcel }) {
         <div><dt>Soil</dt><dd>${soilType}</dd></div>
         <div><dt>Area</dt><dd>${areaText}</dd></div>
       </dl>
+      ${suitabilitySection}
       <div class="popup-footer">
-        <span class="popup-source-badge">${parcel?.source === 'seed-fallback' ? 'Seed data' : 'Live data'}</span>
+        <span class="popup-source-badge">
+          ${parcel?.source === 'seed-fallback' ? 'Seed data' : 'Live data'}
+        </span>
       </div>
     </div>
   `;
