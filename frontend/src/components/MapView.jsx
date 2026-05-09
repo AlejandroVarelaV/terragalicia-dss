@@ -5,8 +5,11 @@ import {
   useMap,
 } from 'react-leaflet';
 import L from 'leaflet';
-import { fetchSigpacParcels, computeBoundsFromGeoJson } from '../data/sigpacService.js';
+import { fetchSigpacParcels, computeBoundsFromGeoJson, BACKEND_BASE_URL } from '../data/sigpacService.js';
 import ParcelPopup from './ParcelPopup.jsx';
+import WeatherPanel from './WeatherPanel.jsx';
+import AgroCopilot from './AgroCopilot.jsx';
+import WhatIfSimulator from './WhatIfSimulator.jsx';
 import seedParcels from '../data/seed_parcels.json';
 
 const mapCenter = [43.331, -8.284];
@@ -219,12 +222,15 @@ export default function MapView() {
   const [parcelsGeoJson, setParcelsGeoJson] = React.useState(null);
   const [parcelsBounds, setParcelsBounds] = React.useState(null);
   const [parcelSource, setParcelSource] = React.useState('loading');
+  const [selectedParcel, setSelectedParcel] = React.useState(null);
+  const [showWeather, setShowWeather] = React.useState(false);
+  const [showSimulator, setShowSimulator] = React.useState(false);
   const authTokenRef = React.useRef(null);
 
   React.useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/api/v1/auth/login', {
+        const res = await fetch(`${BACKEND_BASE_URL}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams({
@@ -322,16 +328,50 @@ export default function MapView() {
       click: async () => {
         const parcelId = feature.properties?.id;
 
-        // Show popup immediately with loading state
-        layer.bindPopup(
-          ParcelPopup({ parcel: feature.properties, suitability: null, loading: true }),
-          { closeButton: true, maxWidth: 360, className: 'parcel-popup' }
-        ).openPopup();
+          // Show popup immediately with loading state
+          layer.bindPopup(
+            ParcelPopup({ parcel: feature.properties, suitability: null, loading: true }),
+            { closeButton: true, maxWidth: 360, className: 'parcel-popup' }
+          ).openPopup();
+          // Track selected parcel and wire popup controls
+          setSelectedParcel(feature.properties);
+          setShowWeather(true);
+          setShowSimulator(false);
+          // Attach event handlers after popup DOM is created
+          setTimeout(() => {
+            try {
+              const popupEl = document.querySelector('.leaflet-popup .parcel-popup');
+              if (popupEl) {
+                const simBtn = popupEl.querySelector('.simulate-btn');
+                const statusSelect = popupEl.querySelector('.status-select');
+                if (simBtn) simBtn.addEventListener('click', (ev) => { setShowSimulator(true); });
+                if (statusSelect) statusSelect.addEventListener('change', async (ev) => {
+                  const newStatus = ev.target.value;
+                  const parcelId = ev.target.dataset.parcelId;
+                  try {
+                    const res = await fetch(`${BACKEND_BASE_URL}/parcels/${encodeURIComponent(parcelId)}`, {
+                      method: 'PATCH',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ parcelStatus: newStatus }),
+                    });
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    // reflect status locally
+                    feature.properties.status = newStatus;
+                    layer.setPopupContent(ParcelPopup({ parcel: feature.properties, suitability: null, loading: false }));
+                  } catch (e) {
+                    alert('Erro ao cargar os datos. Téntao de novo.');
+                  }
+                });
+              }
+            } catch (e) {
+              // ignore
+            }
+          }, 250);
 
         // Fetch suitability if we have a token and parcel id
         if (authTokenRef.current && parcelId) {
           try {
-            const res = await fetch(`/api/v1/parcels/${encodeURIComponent(parcelId)}/suitability`, {
+            const res = await fetch(`${BACKEND_BASE_URL}/parcels/${encodeURIComponent(parcelId)}/suitability`, {
               headers: { 'Authorization': `Bearer ${authTokenRef.current}` },
             });
             if (res.ok) {
@@ -360,6 +400,15 @@ export default function MapView() {
 
   return (
     <div className="map-shell">
+      {showWeather && selectedParcel && (
+        <div className="weather-drawer">
+          <WeatherPanel parcelId={selectedParcel.id} onClose={() => setShowWeather(false)} />
+        </div>
+      )}
+      <AgroCopilot parcelId={selectedParcel?.id} />
+      {showSimulator && selectedParcel && (
+        <WhatIfSimulator parcelId={selectedParcel.id} onClose={() => setShowSimulator(false)} />
+      )}
       <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
         <WMSLayers />
         <ZoomControls />

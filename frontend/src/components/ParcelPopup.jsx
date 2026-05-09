@@ -62,6 +62,16 @@ export default function ParcelPopup({ parcel, suitability = null, loading = fals
         <div><dt>Area</dt><dd>${areaText}</dd></div>
       </dl>
       ${suitabilitySection}
+      <div class="popup-controls">
+        <button class="simulate-btn" data-parcel-id="${id}">🔬 Simular escenarios</button>
+        <label for="status-select">Estado:</label>
+        <select id="status-select" class="status-select" data-parcel-id="${id}">
+          <option value="PREPARED" ${status==='PREPARED' ? 'selected' : ''}>🔧 PREPARED</option>
+          <option value="FALLOW" ${status==='FALLOW' ? 'selected' : ''}>💤 FALLOW</option>
+          <option value="PLANTED" ${status==='PLANTED' ? 'selected' : ''}>🌱 PLANTED</option>
+          <option value="HARVESTED" ${status==='HARVESTED' ? 'selected' : ''}>🌾 HARVESTED</option>
+        </select>
+      </div>
       <div class="popup-footer">
         <span class="popup-source-badge">
           ${parcel?.source === 'seed-fallback' ? 'Seed data' : 'Live data'}
