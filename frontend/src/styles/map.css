@@ -93,15 +93,20 @@ select {
 
 .sigpac-overlay-button {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  left: 10px;
+  top: 10px;
   z-index: 1100;
-  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  white-space: nowrap;
+  min-height: 36px;
+  padding: 8px 12px;
   border: 1px solid rgba(16, 32, 21, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
   color: #102015;
-  box-shadow: 0 8px 24px rgba(16, 32, 21, 0.12);
+  box-shadow: 0 2px 8px rgba(16, 32, 21, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
@@ -129,35 +134,42 @@ select {
   max-width: min(320px, calc(100vw - 32px));
 }
 
-.weather-drawer {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 1090;
-  pointer-events: none;
+.weather-button-container {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  z-index: 1000;
 }
 
-.weather-panel {
-  pointer-events: auto;
+.weather-toggle {
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #3b82f6, #1d4ed8);
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 14px 30px rgba(29, 78, 216, 0.34);
+  cursor: pointer;
+}
+
+.weather-drawer {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
   width: min(340px, calc(100vw - 32px));
-  max-height: calc(100vh - 32px);
+  max-height: min(70vh, 620px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 14px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(16, 32, 21, 0.1);
-  box-shadow: 0 18px 42px rgba(16, 32, 21, 0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.weather-panel.is-collapsed {
-  width: 82px;
-  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .weather-panel header,
@@ -196,6 +208,11 @@ select {
   border-radius: 999px;
   background: rgba(16, 32, 21, 0.08);
   color: #102015;
+}
+
+.weather-future-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .panel-loading,
@@ -261,10 +278,16 @@ select {
   font-size: 1.35rem;
 }
 
+.forecast-day-name,
 .forecast-date,
 .forecast-temp,
 .forecast-label {
   font-size: 0.82rem;
+}
+
+.forecast-day-name {
+  font-weight: 700;
+  color: #314236;
 }
 
 .forecast-label {
@@ -272,18 +295,11 @@ select {
   font-weight: 600;
 }
 
-.weather-panel.is-collapsed .panel-body,
-.weather-panel.is-collapsed .panel-loading,
-.weather-panel.is-collapsed .panel-error,
-.weather-panel.is-collapsed .panel-warning {
-  display: none;
-}
-
 .agro-copilot {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  z-index: 1100;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
 }
 
 .agro-toggle {
@@ -622,7 +638,7 @@ select {
 
 .map-data-badge {
   position: absolute;
-  top: 16px;
+  top: 56px;
   left: 16px;
   z-index: 1000;
   padding: 8px 12px;
@@ -733,6 +749,10 @@ select {
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(16, 32, 21, 0.12);
   box-shadow: 0 2px 8px rgba(16, 32, 21, 0.1);
+}
+
+.leaflet-top.leaflet-left .leaflet-control-layers {
+  margin-left: 140px;
 }
 
 .leaflet-control-layers-toggle:hover {

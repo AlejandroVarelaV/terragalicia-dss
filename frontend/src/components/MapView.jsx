@@ -340,6 +340,7 @@ export default function MapView() {
   const [mapCenter, setMapCenter] = React.useState([43.331, -8.284]);
   const [showSimulator, setShowSimulator] = React.useState(false);
   const [showSigpacOverlay, setShowSigpacOverlay] = React.useState(false);
+  const [showWeather, setShowWeather] = React.useState(false);
   const [toastMessage, setToastMessage] = React.useState('');
   const [authToken, setAuthToken] = React.useState(null);
   const authTokenRef = React.useRef(null);
@@ -543,20 +544,25 @@ export default function MapView() {
 
   return (
     <div className="map-shell">
-      <button
-        type="button"
-        className={`sigpac-overlay-button ${showSigpacOverlay ? 'is-active' : ''}`}
-        onClick={() => setShowSigpacOverlay((current) => !current)}
-      >
-        {showSigpacOverlay ? 'Ocultar SIGPAC' : 'Amosar SIGPAC'}
-      </button>
       {toastMessage && <div className="map-toast">{toastMessage}</div>}
-      <WeatherPanel mapCenter={mapCenter} authToken={authToken} />
+      <WeatherPanel
+        mapCenter={mapCenter}
+        open={showWeather}
+        onToggle={() => setShowWeather((current) => !current)}
+        onClose={() => setShowWeather(false)}
+      />
       <AgroCopilot parcelId={selectedParcel?.id} authToken={authToken} />
       {showSimulator && selectedParcel && (
         <WhatIfSimulator parcelId={selectedParcel.id} authToken={authToken} onClose={() => setShowSimulator(false)} />
       )}
       <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
+        <button
+          type="button"
+          className={`sigpac-overlay-button ${showSigpacOverlay ? 'is-active' : ''}`}
+          onClick={() => setShowSigpacOverlay((current) => !current)}
+        >
+          {showSigpacOverlay ? 'Ocultar SIGPAC' : 'Amosar SIGPAC'}
+        </button>
         <WMSLayers />
         <SigpacOverlayLayer enabled={showSigpacOverlay} onToast={onToast} />
         <MapCenterUpdater onCenterChange={setMapCenter} />
