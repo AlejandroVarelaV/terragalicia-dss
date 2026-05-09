@@ -513,19 +513,19 @@ export default function MapView() {
   return (
     <div className="map-shell">
       {toastMessage && <div className="map-toast">{toastMessage}</div>}
-      <WeatherPanel
-        mapCenter={mapCenter}
-        open={showWeather}
-        onToggle={() => setShowWeather((current) => !current)}
-        onClose={() => setShowWeather(false)}
-      />
       <div className="floating-action-group">
+        <WeatherPanel
+          mapCenter={mapCenter}
+          open={showWeather}
+          onToggle={() => setShowWeather((current) => !current)}
+          onClose={() => setShowWeather(false)}
+        />
         <AgroCopilot parcelId={selectedParcel?.id} authToken={authToken} />
       </div>
       {showSimulator && selectedParcel && (
         <WhatIfSimulator parcelId={selectedParcel.id} authToken={authToken} onClose={() => setShowSimulator(false)} />
       )}
-      <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
+      <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom>
         <button
           type="button"
           className={`sigpac-overlay-button ${showSigpacOverlay ? 'is-active' : ''}`}
@@ -536,7 +536,7 @@ export default function MapView() {
         <WMSLayers />
         <SigpacOverlayLayer enabled={showSigpacOverlay} onToast={onToast} />
         <MapCenterUpdater onCenterChange={setMapCenter} />
-        <ZoomControl position="topright" />
+
         <FitToParcels bounds={parcelsBounds} />
         {parcelsGeoJson && (
           <GeoJSON data={parcelsGeoJson} style={parcelStyle} onEachFeature={onEachFeature} />
