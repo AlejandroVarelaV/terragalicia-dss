@@ -1,8 +1,12 @@
 export const BACKEND_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
-export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL } = {}) {
-  const url = `${baseUrl}/sigpac/parcels`;
-  const response = await fetch(url);
+export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox } = {}) {
+  const url = new URL(`${baseUrl}/sigpac/parcels`);
+  if (bbox) {
+    url.searchParams.set('bbox', bbox);
+  }
+
+  const response = await fetch(url.toString());
 
   if (!response.ok) {
     throw new Error(`Backend SIGPAC API failed with HTTP ${response.status}`);

@@ -10,6 +10,7 @@ import ParcelPopup from './ParcelPopup.jsx';
 import WeatherPanel from './WeatherPanel.jsx';
 import AgroCopilot from './AgroCopilot.jsx';
 import WhatIfSimulator from './WhatIfSimulator.jsx';
+import { STATUS_NAMES } from '../data/uiLabels.js';
 import seedParcels from '../data/seed_parcels.json';
 
 const mapCenter = [43.331, -8.284];
@@ -24,6 +25,7 @@ function toFallbackGeoJson(seedItems) {
         geometry,
         properties: {
           id: item.id,
+          name: item?.name?.value || item?.name || null,
           status: item?.parcelStatus?.value || 'UNKNOWN',
           cropName: item?.hasAgriCrop?.object || 'Not assigned',
           soilType: item?.hasAgriSoil?.object || 'Unknown soil',
@@ -88,16 +90,12 @@ function WMSLayers() {
     // Always keep OSM as default so map never renders blank when external WMS fails.
     osmLayer.addTo(map);
 
-    // Keep SIGPAC as optional overlay because its endpoint can fail in-browser.
     const baseLayers = {
-      'Streets (OpenStreetMap)': osmLayer,
-      'Orthophoto (PNOA)': pnoaWms,
-    };
-    const overlays = {
-      'SIGPAC WMS Overlay': sigpacWms,
+      'Rúas (OpenStreetMap)': osmLayer,
+      'Ortofoto (PNOA)': pnoaWms,
     };
 
-    const layerControl = L.control.layers(baseLayers, overlays, { collapsed: true }).addTo(map);
+    const layerControl = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
 
     // Cleanup on unmount or re-run to prevent duplicate controls
     return () => {
@@ -115,6 +113,91 @@ function WMSLayers() {
       }
     };
   }, [map]);
+
+  return null;
+}
+
+function SigpacOverlayLayer({ enabled, onToast }) {
+  const map = useMap();
+  const [overlayGeoJson, setOverlayGeoJson] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) {
+      setOverlayGeoJson(null);
+      return undefined;
+    }
+
+    let cancelled = false;
+
+    const loadOverlay = async () => {
+      const bounds = map.getBounds();
+      const bbox = [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].join(',');
+      setLoading(true);
+      try {
+        const geo = await fetchSigpacParcels({ bbox });
+        if (!cancelled) {
+          setOverlayGeoJson(geo);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setOverlayGeoJson(null);
+          onToast('Non se puido cargar a capa SIGPAC');
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadOverlay();
+    const handleMoveEnd = () => {
+      loadOverlay();
+    };
+    map.on('moveend', handleMoveEnd);
+
+    return () => {
+      cancelled = true;
+      map.off('moveend', handleMoveEnd);
+    };
+  }, [enabled, map, onToast]);
+
+  useEffect(() => {
+    if (!enabled) {
+      setLoading(false);
+    }
+  }, [enabled]);
+
+  if (!enabled || !overlayGeoJson) return null;
+
+  return (
+    <GeoJSON
+      data={overlayGeoJson}
+      style={{
+        color: '#FF6B35',
+        weight: 1,
+        fillOpacity: 0.1,
+        fillColor: '#FF6B35',
+      }}
+    />
+  );
+}
+
+function MapCenterUpdater({ onCenterChange }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+    const handleMove = () => {
+      const center = map.getCenter();
+      onCenterChange([center.lat, center.lng]);
+    };
+    map.on('moveend', handleMove);
+    return () => {
+      map.off('moveend', handleMove);
+    };
+  }, [map, onCenterChange]);
 
   return null;
 }
@@ -171,13 +254,42 @@ function ZoomControls() {
 
 function Legend() {
   const [collapsed, setCollapsed] = useState(false);
+  const [mouseCoords, setMouseCoords] = useState(null);
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+    const handleMouseMove = (e) => {
+      if (e.latlng) {
+        setMouseCoords(e.latlng);
+      }
+    };
+    const handleMouseOut = () => {
+      setMouseCoords(null);
+    };
+    map.on('mousemove', handleMouseMove);
+    map.on('mouseout', handleMouseOut);
+    return () => {
+      map.off('mousemove', handleMouseMove);
+      map.off('mouseout', handleMouseOut);
+    };
+  }, [map]);
 
   const entries = [
-    ['PREPARED', 'Prepared'],
-    ['FALLOW', 'Fallow'],
-    ['PLANTED', 'Planted'],
-    ['HARVESTED', 'Harvested'],
+    ['PREPARED', STATUS_NAMES.PREPARED],
+    ['FALLOW', STATUS_NAMES.FALLOW],
+    ['PLANTED', STATUS_NAMES.PLANTED],
+    ['HARVESTED', STATUS_NAMES.HARVESTED],
   ];
+
+  const formatCoords = () => {
+    if (!mouseCoords) return '📍 —';
+    const lat = Math.abs(mouseCoords.lat);
+    const lon = Math.abs(mouseCoords.lng);
+    const latDir = mouseCoords.lat >= 0 ? 'N' : 'S';
+    const lonDir = mouseCoords.lng >= 0 ? 'E' : 'O';
+    return `📍 ${lat.toFixed(4)}° ${latDir}, ${lon.toFixed(4)}° ${lonDir}`;
+  };
 
   return (
     <div className={`map-legend ${collapsed ? 'is-collapsed' : ''}`}>
@@ -186,20 +298,20 @@ function Legend() {
           type="button"
           className="legend-compact-button"
           onClick={() => setCollapsed(false)}
-          aria-label="Expand legend"
+          aria-label="Expandir lenda"
         >
           <span className="legend-compact-badge" aria-hidden="true">🗺</span>
-          <span className="legend-compact-title">Legend</span>
+          <span className="legend-compact-title">Lenda</span>
         </button>
       ) : (
         <>
           <div className="legend-header">
-            <h2>Legend</h2>
+            <h2>Lenda</h2>
             <button
               type="button"
               className="legend-collapse-button"
               onClick={() => setCollapsed(true)}
-              aria-label="Minimize legend"
+              aria-label="Minimizar lenda"
             >
               ↙
             </button>
@@ -212,6 +324,8 @@ function Legend() {
               </li>
             ))}
           </ul>
+          <div className="legend-separator" />
+          <div className="legend-coords">{formatCoords()}</div>
         </>
       )}
     </div>
@@ -223,9 +337,20 @@ export default function MapView() {
   const [parcelsBounds, setParcelsBounds] = React.useState(null);
   const [parcelSource, setParcelSource] = React.useState('loading');
   const [selectedParcel, setSelectedParcel] = React.useState(null);
-  const [showWeather, setShowWeather] = React.useState(false);
+  const [mapCenter, setMapCenter] = React.useState([43.331, -8.284]);
   const [showSimulator, setShowSimulator] = React.useState(false);
+  const [showSigpacOverlay, setShowSigpacOverlay] = React.useState(false);
+  const [toastMessage, setToastMessage] = React.useState('');
+  const [authToken, setAuthToken] = React.useState(null);
   const authTokenRef = React.useRef(null);
+
+  const onToast = React.useCallback((message) => {
+    setToastMessage(message);
+    window.clearTimeout(window.__tgToastTimer);
+    window.__tgToastTimer = window.setTimeout(() => {
+      setToastMessage('');
+    }, 3000);
+  }, []);
 
   React.useEffect(() => {
     (async () => {
@@ -242,6 +367,7 @@ export default function MapView() {
         if (res.ok) {
           const data = await res.json();
           authTokenRef.current = data.access_token;
+          setAuthToken(data.access_token);
           console.info('[AUTH] Demo token obtained successfully');
         }
       } catch (e) {
@@ -327,6 +453,53 @@ export default function MapView() {
     layer.on({
       click: async () => {
         const parcelId = feature.properties?.id;
+        const refreshPopupInteractions = () => {
+          const popupEl = document.querySelector('.leaflet-popup .parcel-popup');
+          if (!popupEl || popupEl.dataset.popupWired === '1') return;
+          popupEl.dataset.popupWired = '1';
+
+          popupEl.addEventListener('click', async (event) => {
+            const areaButton = event.target.closest('[data-area-toggle="true"]');
+            if (areaButton) {
+              const areaHectares = Number(areaButton.dataset.areaHectares || '0');
+              const areaValueEl = popupEl.querySelector('.popup-area-value');
+              const currentUnit = areaValueEl?.dataset.areaUnit || 'ha';
+              const nextUnit = currentUnit === 'ha' ? 'm2' : 'ha';
+              if (areaValueEl) {
+                areaValueEl.textContent = nextUnit === 'ha'
+                  ? `${new Intl.NumberFormat('gl-ES', { maximumFractionDigits: 2 }).format(areaHectares)} ha`
+                  : `${new Intl.NumberFormat('gl-ES', { maximumFractionDigits: 0 }).format(areaHectares * 10000)} m²`;
+                areaValueEl.dataset.areaUnit = nextUnit;
+              }
+              areaButton.textContent = nextUnit === 'ha' ? 'm²' : 'ha';
+              areaButton.dataset.areaUnit = nextUnit;
+            }
+
+            const simulateButton = event.target.closest('.simulate-btn');
+            if (simulateButton) {
+              setShowSimulator(true);
+            }
+          });
+
+          popupEl.addEventListener('change', async (event) => {
+            const statusSelect = event.target.closest('.status-select');
+            if (!statusSelect) return;
+            const newStatus = statusSelect.value;
+            const parcelIdToUpdate = statusSelect.dataset.parcelId;
+            try {
+              const res = await fetch(`${BACKEND_BASE_URL}/parcels/${encodeURIComponent(parcelIdToUpdate)}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ parcelStatus: newStatus }),
+              });
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              feature.properties.status = newStatus;
+              layer.setPopupContent(ParcelPopup({ parcel: feature.properties, suitability: null, loading: false }));
+            } catch (error) {
+              onToast('Erro ao cargar os datos. Téntao de novo.');
+            }
+          });
+        };
 
           // Show popup immediately with loading state
           layer.bindPopup(
@@ -335,38 +508,8 @@ export default function MapView() {
           ).openPopup();
           // Track selected parcel and wire popup controls
           setSelectedParcel(feature.properties);
-          setShowWeather(true);
           setShowSimulator(false);
-          // Attach event handlers after popup DOM is created
-          setTimeout(() => {
-            try {
-              const popupEl = document.querySelector('.leaflet-popup .parcel-popup');
-              if (popupEl) {
-                const simBtn = popupEl.querySelector('.simulate-btn');
-                const statusSelect = popupEl.querySelector('.status-select');
-                if (simBtn) simBtn.addEventListener('click', (ev) => { setShowSimulator(true); });
-                if (statusSelect) statusSelect.addEventListener('change', async (ev) => {
-                  const newStatus = ev.target.value;
-                  const parcelId = ev.target.dataset.parcelId;
-                  try {
-                    const res = await fetch(`${BACKEND_BASE_URL}/parcels/${encodeURIComponent(parcelId)}`, {
-                      method: 'PATCH',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ parcelStatus: newStatus }),
-                    });
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    // reflect status locally
-                    feature.properties.status = newStatus;
-                    layer.setPopupContent(ParcelPopup({ parcel: feature.properties, suitability: null, loading: false }));
-                  } catch (e) {
-                    alert('Erro ao cargar os datos. Téntao de novo.');
-                  }
-                });
-              }
-            } catch (e) {
-              // ignore
-            }
-          }, 250);
+          setTimeout(refreshPopupInteractions, 50);
 
         // Fetch suitability if we have a token and parcel id
         if (authTokenRef.current && parcelId) {
@@ -400,17 +543,23 @@ export default function MapView() {
 
   return (
     <div className="map-shell">
-      {showWeather && selectedParcel && (
-        <div className="weather-drawer">
-          <WeatherPanel parcelId={selectedParcel.id} onClose={() => setShowWeather(false)} />
-        </div>
-      )}
-      <AgroCopilot parcelId={selectedParcel?.id} />
+      <button
+        type="button"
+        className={`sigpac-overlay-button ${showSigpacOverlay ? 'is-active' : ''}`}
+        onClick={() => setShowSigpacOverlay((current) => !current)}
+      >
+        {showSigpacOverlay ? 'Ocultar SIGPAC' : 'Amosar SIGPAC'}
+      </button>
+      {toastMessage && <div className="map-toast">{toastMessage}</div>}
+      <WeatherPanel mapCenter={mapCenter} authToken={authToken} />
+      <AgroCopilot parcelId={selectedParcel?.id} authToken={authToken} />
       {showSimulator && selectedParcel && (
-        <WhatIfSimulator parcelId={selectedParcel.id} onClose={() => setShowSimulator(false)} />
+        <WhatIfSimulator parcelId={selectedParcel.id} authToken={authToken} onClose={() => setShowSimulator(false)} />
       )}
       <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
         <WMSLayers />
+        <SigpacOverlayLayer enabled={showSigpacOverlay} onToast={onToast} />
+        <MapCenterUpdater onCenterChange={setMapCenter} />
         <ZoomControls />
         <FitToParcels bounds={parcelsBounds} />
         {parcelsGeoJson && (
@@ -418,10 +567,10 @@ export default function MapView() {
         )}
       </MapContainer>
       {parcelSource === 'seed-fallback' && (
-        <div className="map-data-badge">Parcels source: Local seed fallback</div>
+        <div className="map-data-badge">Fonte das parcelas: Datos de proba</div>
       )}
       {parcelSource === 'backend-sigpac' && (
-        <div className="map-data-badge">Parcels source: Backend SIGPAC API</div>
+        <div className="map-data-badge">Fonte das parcelas: API SIGPAC do backend</div>
       )}
       <Legend />
     </div>

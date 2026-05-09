@@ -29,18 +29,28 @@ def _parcel_location(parcel_id: str) -> tuple[float, float]:
 
 @router.get("", response_model=WeatherBundleResponse)
 async def get_weather(
-    parcelId: str,
+    parcelId: str | None = Query(None),
+    lat: float | None = Query(None),
+    lon: float | None = Query(None),
     _: UserPublic = Depends(get_current_user),
     cache: RedisCache = Depends(get_redis_cache),
     fetcher: WeatherFetcher = Depends(get_weather_fetcher),
 ) -> WeatherBundleResponse:
     settings_obj = get_settings()
-    cache_key = f"weather:{parcelId}"
+    
+    # Use lat/lon directly if provided, otherwise get from parcelId
+    if lat is not None and lon is not None:
+        cache_key = f"weather:{lat}:{lon}"
+    elif parcelId:
+        cache_key = f"weather:{parcelId}"
+        lat, lon = _parcel_location(parcelId)
+    else:
+        raise HTTPException(status_code=400, detail="Either parcelId or both lat and lon must be provided")
+    
     cached = await cache.get_json(cache_key)
     if cached:
         return WeatherBundleResponse(**cached)
 
-    lat, lon = _parcel_location(parcelId)
     current_raw = await fetcher.fetch_current(lat=lat, lon=lon)
     forecast_raw = await fetcher.fetch_forecast(lat=lat, lon=lon)
 

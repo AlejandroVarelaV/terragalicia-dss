@@ -6,12 +6,12 @@ export default function App() {
       <header className="app-header">
         <div>
           <p className="eyebrow">TerraGalicia DSS</p>
-          <h1>Interactive parcel map</h1>
+          <h1>Mapa interactivo de parcelas</h1>
           <p className="subtitle">
-            SIGPAC-first parcel loading with automatic local fallback, rendered with React and Leaflet.
+            Visualización de parcelas agrícolas de Galicia.
           </p>
         </div>
-        <div className="header-chip">Resilient data mode</div>
+        <div className="header-chip">Modo datos locais</div>
       </header>
       <main className="map-frame">
         <MapView />

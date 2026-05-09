@@ -91,6 +91,429 @@ select {
   position: relative;
 }
 
+.sigpac-overlay-button {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 1100;
+  padding: 10px 14px;
+  border: 1px solid rgba(16, 32, 21, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #102015;
+  box-shadow: 0 8px 24px rgba(16, 32, 21, 0.12);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.sigpac-overlay-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(16, 32, 21, 0.16);
+}
+
+.sigpac-overlay-button.is-active {
+  background: #102015;
+  color: #f7f9f4;
+}
+
+.map-toast {
+  position: absolute;
+  right: 16px;
+  top: 66px;
+  z-index: 1200;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(16, 32, 21, 0.92);
+  color: #f7f9f4;
+  box-shadow: 0 10px 28px rgba(16, 32, 21, 0.24);
+  max-width: min(320px, calc(100vw - 32px));
+}
+
+.weather-drawer {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1090;
+  pointer-events: none;
+}
+
+.weather-panel {
+  pointer-events: auto;
+  width: min(340px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(16, 32, 21, 0.1);
+  box-shadow: 0 18px 42px rgba(16, 32, 21, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.weather-panel.is-collapsed {
+  width: 82px;
+  padding: 14px 10px;
+}
+
+.weather-panel header,
+.agro-drawer header,
+.whatif-modal header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.weather-panel header h3,
+.agro-drawer h4,
+.whatif-modal h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.weather-panel-actions,
+.agro-drawer header button,
+.weather-panel header button,
+.whatif-modal header button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather-panel-actions button,
+.weather-panel header button,
+.agro-drawer header button,
+.whatif-modal header button {
+  border: 0;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(16, 32, 21, 0.08);
+  color: #102015;
+}
+
+.panel-loading,
+.panel-error,
+.panel-warning,
+.agro-empty-state,
+.error {
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+}
+
+.panel-loading {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1e3a8a;
+}
+
+.panel-error,
+.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #991b1b;
+}
+
+.panel-warning {
+  background: rgba(245, 158, 11, 0.14);
+  color: #92400e;
+}
+
+.panel-body {
+  display: grid;
+  gap: 12px;
+  overflow: auto;
+}
+
+.current-row {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(16, 32, 21, 0.04);
+}
+
+.forecast-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(92px, 1fr);
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.forecast-day {
+  min-height: 108px;
+  padding: 10px;
+  border-radius: 16px;
+  background: rgba(16, 32, 21, 0.04);
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+
+.forecast-icon {
+  font-size: 1.35rem;
+}
+
+.forecast-date,
+.forecast-temp,
+.forecast-label {
+  font-size: 0.82rem;
+}
+
+.forecast-label {
+  color: #4b6a55;
+  font-weight: 600;
+}
+
+.weather-panel.is-collapsed .panel-body,
+.weather-panel.is-collapsed .panel-loading,
+.weather-panel.is-collapsed .panel-error,
+.weather-panel.is-collapsed .panel-warning {
+  display: none;
+}
+
+.agro-copilot {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1100;
+}
+
+.agro-toggle {
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #22c55e, #15803d);
+  color: white;
+  font-size: 1.6rem;
+  box-shadow: 0 14px 30px rgba(21, 128, 61, 0.34);
+  cursor: pointer;
+}
+
+.agro-drawer {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  width: min(360px, calc(100vw - 32px));
+  max-height: min(70vh, 620px);
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(16, 32, 21, 0.1);
+  box-shadow: 0 18px 42px rgba(16, 32, 21, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.agro-messages {
+  display: grid;
+  gap: 8px;
+  overflow: auto;
+}
+
+.msg {
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(16, 32, 21, 0.05);
+}
+
+.msg.user {
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.msg.assistant {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.sources {
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: #4b6a55;
+}
+
+.agro-input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.agro-input input,
+.scenario-row select,
+.whatif-modal button,
+.status-select {
+  border: 1px solid rgba(16, 32, 21, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 10px 12px;
+}
+
+.agro-input button,
+.whatif-actions button,
+.popup-controls .simulate-btn,
+.popup-area-toggle {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: #102015;
+  color: #f7f9f4;
+}
+
+.whatif-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1120;
+  width: min(520px, calc(100vw - 24px));
+  max-height: min(80vh, 760px);
+  overflow: auto;
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(16, 32, 21, 0.1);
+  box-shadow: 0 20px 48px rgba(16, 32, 21, 0.24);
+}
+
+.whatif-body {
+  display: grid;
+  gap: 12px;
+}
+
+.scenario-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(16, 32, 21, 0.04);
+}
+
+.scenario-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b6a55;
+}
+
+.month-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #102015;
+}
+
+.whatif-results {
+  display: grid;
+  gap: 10px;
+}
+
+.res {
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(16, 32, 21, 0.04);
+}
+
+.res.green { border-left: 6px solid #22c55e; }
+.res.yellow { border-left: 6px solid #f59e0b; }
+.res.red { border-left: 6px solid #ef4444; }
+
+.res-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.res-crop {
+  font-weight: 700;
+}
+
+.res-score {
+  font-weight: 800;
+}
+
+.res-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(16, 32, 21, 0.08);
+  overflow: hidden;
+  margin: 10px 0 8px;
+}
+
+.res-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #22c55e;
+}
+
+.res.yellow .res-bar span { background: #f59e0b; }
+.res.red .res-bar span { background: #ef4444; }
+
+.res-explain {
+  font-size: 0.88rem;
+  color: #314236;
+}
+
+.popup-controls {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.popup-controls label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4b6a55;
+}
+
+.popup-controls .status-select {
+  width: 100%;
+}
+
+.popup-area-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.popup-area-value {
+  font-weight: 700;
+}
+
+.popup-area-toggle {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+}
+
+.weather-panel,
+.agro-drawer,
+.whatif-modal,
+.sigpac-overlay-button,
+.map-toast {
+  animation: fade-in 0.18s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .leaflet-map {
   position: relative;
   height: 100%;
@@ -362,6 +785,47 @@ select {
 
   .leaflet-control-layers {
     border-radius: 8px;
+  }
+
+  .sigpac-overlay-button {
+    right: 12px;
+    top: 12px;
+  }
+
+  .weather-drawer {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: 12px;
+    height: auto;
+  }
+
+  .weather-panel {
+    width: 100%;
+    max-height: 42vh;
+    border-radius: 22px 22px 18px 18px;
+  }
+
+  .agro-copilot {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .agro-drawer {
+    right: 0;
+    bottom: 66px;
+    width: min(100vw - 24px, 360px);
+  }
+
+  .whatif-modal {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: 12px;
+    transform: none;
+    width: auto;
+    max-height: 72vh;
+    border-radius: 22px;
   }
 }
 
