@@ -227,7 +227,7 @@ Available scripts in `scripts/fetch_real_data/`:
 End-to-end run example:
 
 ```bash
-export AEMET_API_KEY='your_key_here'
+export AEMET_API_KEY='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4dmFyZWxhZGNAZ21haWwuY29tIiwianRpIjoiZjQ2MTBkNzAtMTMzMC00MDgxLWI4ODAtN2ZhNzkzZDU0NGQwIiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE3NzgxNzMwMDksInVzZXJJZCI6ImY0NjEwZDcwLTEzMzAtNDA4MS1iODgwLTdmYTc5M2Q1NDRkMCIsInJvbGUiOiIifQ.Q1jktMFc2wM2Ye1330fGsV6lJ8qglsO79q44Ld5Fl30'
 bash scripts/fetch_real_data/run_all.sh
 ```
 
