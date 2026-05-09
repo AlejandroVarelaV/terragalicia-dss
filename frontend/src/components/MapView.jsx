@@ -525,7 +525,8 @@ export default function MapView() {
       {showSimulator && selectedParcel && (
         <WhatIfSimulator parcelId={selectedParcel.id} authToken={authToken} onClose={() => setShowSimulator(false)} />
       )}
-      <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom>
+      <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
+        <ZoomControl position="topright" />
         <button
           type="button"
           className={`sigpac-overlay-button ${showSigpacOverlay ? 'is-active' : ''}`}

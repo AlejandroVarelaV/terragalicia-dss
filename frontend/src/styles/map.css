@@ -1022,3 +1022,20 @@ select {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+.leaflet-top.leaflet-right {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+}
+.leaflet-control-zoom {
+  display: flex !important;
+  flex-direction: row !important;
+  margin: 10px 5px 0 0 !important;
+  border: none !important;
+}
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  border-radius: 4px !important;
+  margin: 0 2px !important;
+}
