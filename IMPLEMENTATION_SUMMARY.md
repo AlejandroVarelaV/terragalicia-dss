@@ -115,7 +115,7 @@ OPEN_METEO_URL=https://api.open-meteo.com/v1/forecast
 OPEN_METEO_ARCHIVE_URL=https://archive-api.open-meteo.com/v1/archive
 SIGPAC_WFS_URL=
 CATASTRO_WFS_URL=
-SOILGRIDS_URL=https://rest.soilgrids.org
+SOILGRIDS_URL=https://rest.isric.org
 ```
 
 ### 5. Backend Integration Updates

@@ -102,7 +102,7 @@ REDIS_URL=redis://localhost:6379/0
 - Fallback values: 16.2°C max, 8.4°C min, 2.97mm precip (April average)
 
 ### SoilGrids connection fails
-- **Issue:** DNS can't resolve rest.soilgrids.org in WSL2
+- **Issue:** DNS can't resolve rest.isric.org in WSL2
 - **Solution:** Use rest.isric.org alias instead
 - **In code:** Update SOILGRIDS_URL environment variable
 

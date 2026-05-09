@@ -211,9 +211,9 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 **Purpose:** Soil property data integration with SoilGrids API
 
 **Behavior:**
-1. Primary host `rest.soilgrids.org` - **Not resolvable** (DNS failure in WSL2 environment)
+1. Primary host `rest.isric.org` - **Not resolvable** (DNS failure in WSL2 environment)
    ```
-   NameResolutionError: Failed to resolve 'rest.soilgrids.org' ([Errno -2] Name or service not known)
+  NameResolutionError: Failed to resolve 'rest.isric.org' ([Errno -2] Name or service not known)
    ```
 
 2. Alternative alias `rest.isric.org` - **Reachable** (HTTP 200)
@@ -315,7 +315,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 ## Known Limitations
 
-1. **SoilGrids DNS Resolution:** Primary hostname `rest.soilgrids.org` not resolvable in WSL2 environment
+1. **SoilGrids DNS Resolution:** Primary hostname `rest.isric.org` not resolvable in WSL2 environment
    - Workaround: Use `rest.isric.org` alias or update DNS configuration
    - Impact: Low - alternative endpoint available
 
