@@ -36,8 +36,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:millo"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -77,8 +76,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:pataca"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -118,8 +116,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:kiwi"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -159,8 +156,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:trigo"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -200,8 +196,7 @@
       "value": "Basal NPK application before rain"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -241,8 +236,7 @@
       "value": "Top-dressing after emergence"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -282,8 +276,7 @@
       "value": "Organic compost ring application around kiwi rows"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -323,8 +316,7 @@
       "value": "Nitrogen support before stem elongation"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -360,8 +352,7 @@
       "value": "Copper preventive spray, low wind morning"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -397,8 +388,7 @@
       "value": "Herbicide strip treatment on fallow parcel"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -438,8 +428,7 @@
       "value": "Prior season potato harvest loaded for historical baseline"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -479,8 +468,7 @@
       "value": "Prior season grain harvest record for trend analysis"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   }
 ]

@@ -55,8 +55,13 @@ services:
     ports:
       - "1026:1026"
     depends_on:
+      - context-server
       - mongo
-    command: -dbhost mongo -logLevel DEBUG
+    command: -dbhost mongo -logLevel DEBUG -forwarding
+    environment:
+      ORIONLD_CACHED_CONTEXT_DIRECTORY: /opt/orion/ldcontexts
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:1026/version"]
       interval: 15s
@@ -117,6 +122,15 @@ services:
       - mosquitto_data:/mosquitto/data
       - mosquitto_log:/mosquitto/log
     networks: *service_network
+
+  context-server:
+    image: nginx:1.27-alpine
+    container_name: context-server
+    volumes:
+      - ../fiware/context.jsonld:/usr/share/nginx/html/context.jsonld:ro
+    networks:
+      - terragalicia-net
+    restart: unless-stopped
 
   quantumleap:
     image: orchestracities/quantumleap:latest

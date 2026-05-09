@@ -8,7 +8,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-NGSI_CONTEXT = ["https://uri.fiware.org/ns/data-models", "https://schema.org"]
+NGSI_CONTEXT = ["http://context-server/context.jsonld"]
 
 
 def configure_logging(level: int = logging.INFO) -> None:

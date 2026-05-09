@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "AgriApp": "https://smartdatamodels.org/dataModel.Agrifood/AgriApp",
+    "AgriFarm": "https://smartdatamodels.org/dataModel.Agrifood/AgriFarm",
+    "AgriParcel": "https://smartdatamodels.org/dataModel.Agrifood/AgriParcel",
+    "AgriCrop": "https://smartdatamodels.org/dataModel.Agrifood/AgriCrop",
+    "AgriSoil": "https://smartdatamodels.org/dataModel.Agrifood/AgriSoil",
+    "AgriParcelRecord": "https://smartdatamodels.org/dataModel.Agrifood/AgriParcelRecord",
+    "AgriParcelOperation": "https://smartdatamodels.org/dataModel.Agrifood/AgriParcelOperation",
+    "AgriFertilizer": "https://smartdatamodels.org/dataModel.Agrifood/AgriFertilizer",
+    "WeatherObserved": "https://smartdatamodels.org/dataModel.Weather/WeatherObserved",
+    "WeatherForecast": "https://smartdatamodels.org/dataModel.Weather/WeatherForecast",
+    "WaterQualityObserved": "https://smartdatamodels.org/dataModel.WaterQuality/WaterQualityObserved",
+    "location": "http://www.w3.org/2003/01/geo/wgs84_pos#location",
+    "name": "https://schema.org/name",
+    "description": "https://schema.org/description",
+    "area": "https://smartdatamodels.org/dataModel.Agrifood/area",
+    "parcelStatus": "https://smartdatamodels.org/dataModel.Agrifood/parcelStatus",
+    "belongsToFarm": "https://smartdatamodels.org/dataModel.Agrifood/belongsToFarm",
+    "hasAgriSoil": "https://smartdatamodels.org/dataModel.Agrifood/hasAgriSoil",
+    "hasAgriCrop": "https://smartdatamodels.org/dataModel.Agrifood/hasAgriCrop",
+    "temperature": "https://smartdatamodels.org/dataModel.Weather/temperature",
+    "precipitation": "https://smartdatamodels.org/dataModel.Weather/precipitation",
+    "relativeHumidity": "https://smartdatamodels.org/dataModel.Weather/relativeHumidity"
+  }
+}

@@ -45,8 +45,7 @@ SUBSCRIPTION_PAYLOAD='{
     }
   },
   "@context": [
-    "https://uri.fiware.org/ns/data-models",
-    "https://schema.org"
+    "http://context-server/context.jsonld"
   ]
 }'
 

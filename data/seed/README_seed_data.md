@@ -57,7 +57,7 @@ This folder contains synthetic NGSI-LD JSON-LD seed datasets for MVP demo and de
 ## NGSI-LD format notes
 
 - All files use:
-  - `@context`: `https://uri.fiware.org/ns/data-models`, `https://schema.org`
+  - `@context`: `http://context-server/context.jsonld`
   - URN identifiers with `urn:ngsi-ld:` prefix
 - Numeric measurements include `unitCode` where applicable.
 
@@ -84,7 +84,7 @@ Example (Orion-LD, one file at a time):
 curl -iX POST \
   'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
   -H 'Content-Type: application/ld+json' \
-  -H 'Link: <https://uri.fiware.org/ns/data-models>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+  -H 'Link: <http://context-server/context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
   --data-binary @seed_farms.json
 ```
 

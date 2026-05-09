@@ -17,7 +17,7 @@ class OrionClient:
         self._headers = {
             "Content-Type": "application/ld+json",
             "Accept": "application/ld+json",
-            "Link": '<https://uri.fiware.org/ns/data-models>; rel="http://www.w3.org/ns/json-ld#context"',
+            "Link": '<http://context-server/context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"',
             "fiware-service": settings.orion_service,
             "fiware-servicepath": settings.orion_servicepath,
         }

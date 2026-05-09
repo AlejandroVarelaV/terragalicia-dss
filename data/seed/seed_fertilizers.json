@@ -35,8 +35,7 @@
       "value": "Cooperativa Agro Bergondo"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -75,8 +74,7 @@
       "value": "Agroinsumos Betanzos"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -115,8 +113,7 @@
       "value": "Distribuciones Terra Norte"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -159,8 +156,7 @@
       "value": "Compost Galicia Eco"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   }
 ]

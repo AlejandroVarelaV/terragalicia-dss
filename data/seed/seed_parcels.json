@@ -47,8 +47,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:millo"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -95,8 +94,7 @@
       "object": "urn:ngsi-ld:AgriSoil:acoruna:coastal-sandy:003"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -143,8 +141,7 @@
       "object": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -195,8 +192,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:pataca"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -247,8 +243,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:kiwi"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -295,8 +290,7 @@
       "object": "urn:ngsi-ld:AgriSoil:acoruna:atlantic-acid:001"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -347,8 +341,7 @@
       "object": "urn:ngsi-ld:AgriCrop:catalog:trigo"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -395,8 +388,7 @@
       "object": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   },
   {
@@ -443,8 +435,7 @@
       "object": "urn:ngsi-ld:AgriSoil:acoruna:coastal-sandy:003"
     },
     "@context": [
-      "https://uri.fiware.org/ns/data-models",
-      "https://schema.org"
+      "http://context-server/context.jsonld"
     ]
   }
 ]

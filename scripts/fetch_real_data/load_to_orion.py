@@ -15,7 +15,7 @@ from . import configure_logging, load_json
 LOGGER = logging.getLogger("load_to_orion")
 ORION_URL = os.getenv("ORION_URL", "http://localhost:1026")
 LOCAL_CONTEXT = {
-    "@vocab": "https://uri.fiware.org/ns/data-models/",
+    "@vocab": "http://context-server/context.jsonld",
     "schema": "https://schema.org/",
     "id": "@id",
     "type": "@type",
