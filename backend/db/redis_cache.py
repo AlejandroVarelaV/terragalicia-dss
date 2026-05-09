@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import logging
+import json
 from typing import Any
 
-import orjson
 from redis.asyncio import Redis
 
 logger = logging.getLogger(__name__)
@@ -41,13 +41,15 @@ class RedisCache:
         if raw is None:
             return None
         try:
-            return orjson.loads(raw)
-        except orjson.JSONDecodeError:
+            if isinstance(raw, bytes):
+                raw = raw.decode("utf-8")
+            return json.loads(raw)
+        except json.JSONDecodeError:
             logger.warning("Invalid cached JSON for key=%s", key)
             return None
 
     async def set_json(self, key: str, value: Any, ttl_seconds: int) -> None:
         if self._client is None:
             return
-        payload = orjson.dumps(value)
+        payload = json.dumps(value, ensure_ascii=False).encode("utf-8")
         await self._client.set(name=key, value=payload, ex=ttl_seconds)
