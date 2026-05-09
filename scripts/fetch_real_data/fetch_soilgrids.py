@@ -20,7 +20,7 @@ from . import (
 )
 
 LOGGER = logging.getLogger("fetch_soilgrids")
-SOILGRIDS_BASE_URL = "https://rest.soilgrids.org/soilgrids/v2.0"
+SOILGRIDS_BASE_URL = "https://rest.isric.org/soilgrids/v2.0"
 
 
 @retry(
