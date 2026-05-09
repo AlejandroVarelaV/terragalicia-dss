@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   MapContainer,
   GeoJSON,
+  ZoomControl,
   useMap,
 } from 'react-leaflet';
 import L from 'leaflet';
@@ -217,39 +218,6 @@ function FitToParcels({ bounds }) {
   }, [map, bounds]);
 
   return null;
-}
-
-function ZoomControls() {
-  const map = useMap();
-  return (
-    <div className="zoom-controls">
-      <button
-        type="button"
-        className="zoom-btn"
-        aria-label="Zoom in"
-        onClick={() => map.zoomIn()}
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 3v10M3 8h10" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      </button>
-      <div className="zoom-divider" />
-      <button
-        type="button"
-        className="zoom-btn"
-        aria-label="Zoom out"
-        onClick={() => map.zoomOut()}
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 8h10" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      </button>
-    </div>
-  );
 }
 
 function Legend() {
@@ -545,13 +513,15 @@ export default function MapView() {
   return (
     <div className="map-shell">
       {toastMessage && <div className="map-toast">{toastMessage}</div>}
-      <WeatherPanel
-        mapCenter={mapCenter}
-        open={showWeather}
-        onToggle={() => setShowWeather((current) => !current)}
-        onClose={() => setShowWeather(false)}
-      />
-      <AgroCopilot parcelId={selectedParcel?.id} authToken={authToken} />
+      <div className="floating-action-group">
+        <WeatherPanel
+          mapCenter={mapCenter}
+          open={showWeather}
+          onToggle={() => setShowWeather((current) => !current)}
+          onClose={() => setShowWeather(false)}
+        />
+        <AgroCopilot parcelId={selectedParcel?.id} authToken={authToken} />
+      </div>
       {showSimulator && selectedParcel && (
         <WhatIfSimulator parcelId={selectedParcel.id} authToken={authToken} onClose={() => setShowSimulator(false)} />
       )}
@@ -566,7 +536,7 @@ export default function MapView() {
         <WMSLayers />
         <SigpacOverlayLayer enabled={showSigpacOverlay} onToast={onToast} />
         <MapCenterUpdater onCenterChange={setMapCenter} />
-        <ZoomControls />
+        <ZoomControl position="topright" />
         <FitToParcels bounds={parcelsBounds} />
         {parcelsGeoJson && (
           <GeoJSON data={parcelsGeoJson} style={parcelStyle} onEachFeature={onEachFeature} />

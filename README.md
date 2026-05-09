@@ -185,18 +185,22 @@ flowchart LR
 		  └── run_all.sh                       # End-to-end fetch+load orchestration
 ```
 
+## Recent Updates
+
+- Real agronomic ML scorer based on FAO/CSIC crop data.
+- Open-Meteo weather integration (no API key required).
+- Catastro/SIGPAC WFS integration for real parcel data.
+- AgroCopilot / Axente Agronómico chat assistant.
+- What-If crop simulator for scenario analysis.
+- FIWARE NGSI-LD local context stack (Orion + supporting services).
+
 ## Known Issues
 
-Audit findings currently affecting runtime and developer experience:
+Current known runtime limitations:
 
-1. Backend entrypoint mismatch: `backend/main.py` only exposes `/health`, `/`, and `/sigpac/*`; `/api/v1/*` routes from `backend/api/routes/` are not mounted.
-2. Frontend Docker image mismatch: `frontend/Dockerfile` runs `server.js` placeholder and does not build/serve React app from `frontend/src/`.
-3. Backend Docker image mismatch: `backend/Dockerfile` copies only `main.py`, so route modules/models/services are excluded from container image.
-4. ML Docker image mismatch: `ml/Dockerfile` copies only placeholder `ml/main.py`; no suitability/simulation endpoints exist in current image.
-5. Runtime/API mismatch observed: running container responds with a different `/health` payload than source `backend/main.py`, indicating stale or inconsistent image state.
-6. `docker compose` (plugin syntax) is not available in this environment; scripts rely on `docker-compose` v1.
-7. Core services unstable during audit: Orion and IoT Agent intermittently reset connections; IoT Agent reported unhealthy.
-8. Backend dependency file is incomplete for full code path usage (imports like `python-jose`, `pydantic-settings`, `redis`, `asyncpg`, `orjson` are not listed in `backend/requirements.txt`).
+1. SIGPAC/Catastro live WFS endpoints can intermittently return temporary errors (for example HTTP 503), so the UI may fall back to seed parcels and show the "Datos de proba" badge.
+2. Some FIWARE services (especially IoT Agent and Orion during startup) may need retries or a delayed restart in constrained local environments.
+3. The environment/scripts still assume `docker-compose` command availability in several places.
 
 ## Contributing
 

@@ -134,31 +134,40 @@ select {
   max-width: min(320px, calc(100vw - 32px));
 }
 
-.weather-button-container {
+.floating-action-group {
   position: fixed;
-  right: 20px;
-  bottom: 90px;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   z-index: 1000;
+  align-items: flex-end;
+}
+
+.weather-button-container {
+  position: relative;
+  z-index: auto;
 }
 
 .weather-toggle {
-  width: 58px;
-  height: 58px;
+  width: 48px;
+  height: 48px;
   border: 0;
   border-radius: 50%;
   background: linear-gradient(145deg, #3b82f6, #1d4ed8);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   box-shadow: 0 14px 30px rgba(29, 78, 216, 0.34);
   cursor: pointer;
 }
 
 .weather-drawer {
   position: absolute;
-  right: 0;
-  bottom: 70px;
-  width: min(340px, calc(100vw - 32px));
-  max-height: min(70vh, 620px);
+  left: 0;
+  bottom: 58px;
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(64vh, 520px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -296,10 +305,8 @@ select {
 }
 
 .agro-copilot {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 1000;
+  position: relative;
+  z-index: auto;
 }
 
 .agro-toggle {
@@ -316,7 +323,7 @@ select {
 
 .agro-drawer {
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 70px;
   width: min(360px, calc(100vw - 32px));
   max-height: min(70vh, 620px);
@@ -789,6 +796,17 @@ select {
   margin-bottom: 6px;
 }
 
+.leaflet-control-zoom {
+  display: flex !important;
+  flex-direction: row !important;
+  border: none !important;
+}
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  border-radius: 6px !important;
+  margin: 0 2px !important;
+}
+
 @media (max-width: 720px) {
   .app-shell {
     padding: 14px;
@@ -808,7 +826,8 @@ select {
   }
 
   .sigpac-overlay-button {
-    right: 12px;
+    left: 12px;
+    right: auto;
     top: 12px;
   }
 

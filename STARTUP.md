@@ -195,6 +195,26 @@ Expected output pattern:
 - `Subscription status: 201/204/409 (ok).`
 - One line per `seed_*.json` file: `success=X fail=Y`
 
+## 4b. Loading real data (optional but recommended)
+
+To fetch real soil and weather data:
+
+```bash
+# Install dependencies for fetch scripts
+pip install requests tenacity python-dotenv \
+  geojson shapely --break-system-packages
+
+# Set AEMET key (optional — Open-Meteo works without it)
+export AEMET_API_KEY=your_key_here
+
+# Run real data fetch
+bash scripts/load_real_data.sh
+
+# Verify data loaded
+curl -s http://localhost:1026/ngsi-ld/v1/entities\
+?type=WeatherObserved&limit=3
+```
+
 ### 4.2 Verify seed load
 
 Check farms:
@@ -262,6 +282,12 @@ docker-compose up -d --no-deps backend
 ```
 
 ## 7. Troubleshooting (Common Issues)
+
+### Map shows "Datos de proba" badge
+
+- Problem: map displays fallback badge and not live parcel source.
+- Cause: parcels were loaded from seed data because SIGPAC/Catastro live API was unavailable.
+- Fix: this can be temporary WFS downtime; seed data still uses real Galician coordinates. Run `bash scripts/load_real_data.sh` to refresh latest live data when endpoints recover.
 
 ### Orion fails to start
 

@@ -63,7 +63,7 @@ export default function AgroCopilot({ parcelId, authToken }) {
 
   return (
     <div className={`agro-copilot ${open ? 'open' : ''}`}>
-      <button className="agro-toggle" onClick={() => setOpen((s) => !s)} aria-label="Abrir Axente Agronómico">🌱</button>
+      <button className="agro-toggle" onClick={() => setOpen((s) => !s)} aria-label="Abrir Axente Agronómico" title="Axente Agronómico">🌱</button>
       {open && (
         <div className="agro-drawer">
           <header>
