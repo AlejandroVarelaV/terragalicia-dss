@@ -90,3 +90,9 @@ def health() -> dict[str, str]:
 @app.get("/")
 def root() -> dict[str, str]:
     return {"message": "TerraGalicia DSS API is running"}
+
+
+# Compatibility endpoint for external health checks (nginx/container probes)
+@app.get("/health")
+def health_compat() -> dict[str, str]:
+    return health()

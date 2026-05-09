@@ -26,7 +26,7 @@ FAILURES=0
 check_url "Orion" "http://localhost:1026/version" || FAILURES=$((FAILURES + 1))
 check_url "QuantumLeap" "http://localhost:8668/version" || FAILURES=$((FAILURES + 1))
 check_url "IoT Agent" "http://localhost:4041/iot/about" || FAILURES=$((FAILURES + 1))
-check_url "Backend" "http://localhost:8000/health" || FAILURES=$((FAILURES + 1))
+check_url "Backend" "http://localhost:8000/api/v1/health" || FAILURES=$((FAILURES + 1))
 
 if [[ "${FAILURES}" -gt 0 ]]; then
   echo -e "${RED}${FAILURES} service check(s) failed.${NC}"
