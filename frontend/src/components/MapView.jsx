@@ -513,13 +513,13 @@ export default function MapView() {
   return (
     <div className="map-shell">
       {toastMessage && <div className="map-toast">{toastMessage}</div>}
+      <WeatherPanel
+        mapCenter={mapCenter}
+        open={showWeather}
+        onToggle={() => setShowWeather((current) => !current)}
+        onClose={() => setShowWeather(false)}
+      />
       <div className="floating-action-group">
-        <WeatherPanel
-          mapCenter={mapCenter}
-          open={showWeather}
-          onToggle={() => setShowWeather((current) => !current)}
-          onClose={() => setShowWeather(false)}
-        />
         <AgroCopilot parcelId={selectedParcel?.id} authToken={authToken} />
       </div>
       {showSimulator && selectedParcel && (

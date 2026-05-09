@@ -137,7 +137,7 @@ select {
 .floating-action-group {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -146,8 +146,11 @@ select {
 }
 
 .weather-button-container {
-  position: relative;
-  z-index: auto;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  z-index: 1000;
 }
 
 .weather-toggle {
@@ -164,8 +167,8 @@ select {
 
 .weather-drawer {
   position: absolute;
-  left: 0;
-  bottom: 58px;
+  right: 0;
+  top: 58px;
   width: min(320px, calc(100vw - 32px));
   max-height: min(64vh, 520px);
   overflow: hidden;
@@ -323,8 +326,8 @@ select {
 
 .agro-drawer {
   position: absolute;
-  left: 0;
-  bottom: 70px;
+  right: 0;
+  bottom: 80px;
   width: min(360px, calc(100vw - 32px));
   max-height: min(70vh, 620px);
   display: grid;
