@@ -8,7 +8,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, Query
 
 from api.deps import get_redis_cache
-from backend.services.sigpac import fetch_parcels_by_bbox
+from services.sigpac import fetch_parcels_by_bbox
 
 router = APIRouter(prefix="/sigpac", tags=["sigpac"])
 LOGGER = logging.getLogger("sigpac_api")
