@@ -565,6 +565,7 @@ export default function MapView() {
         {parcelsGeoJson && (
           <GeoJSON data={parcelsGeoJson} style={parcelStyle} onEachFeature={onEachFeature} />
         )}
+        <Legend />
       </MapContainer>
       {parcelSource === 'seed-fallback' && (
         <div className="map-data-badge">Fonte das parcelas: Datos de proba</div>
@@ -572,7 +573,6 @@ export default function MapView() {
       {parcelSource === 'backend-sigpac' && (
         <div className="map-data-badge">Fonte das parcelas: API SIGPAC do backend</div>
       )}
-      <Legend />
     </div>
   );
 }

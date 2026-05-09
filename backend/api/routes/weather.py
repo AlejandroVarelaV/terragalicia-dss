@@ -32,16 +32,19 @@ async def get_weather(
     parcelId: str | None = Query(None),
     lat: float | None = Query(None),
     lon: float | None = Query(None),
-    _: UserPublic = Depends(get_current_user),
+    user: UserPublic | None = Depends(lambda: None),
     cache: RedisCache = Depends(get_redis_cache),
     fetcher: WeatherFetcher = Depends(get_weather_fetcher),
 ) -> WeatherBundleResponse:
     settings_obj = get_settings()
     
-    # Use lat/lon directly if provided, otherwise get from parcelId
+    # Use lat/lon directly if provided (public, no auth needed)
     if lat is not None and lon is not None:
         cache_key = f"weather:{lat}:{lon}"
+    # parcelId requires authentication
     elif parcelId:
+        if not user:
+            raise HTTPException(status_code=401, detail="Authentication required for parcel-based weather queries")
         cache_key = f"weather:{parcelId}"
         lat, lon = _parcel_location(parcelId)
     else:
