@@ -41,16 +41,14 @@ async def get_suitability(
 
     try:
         parcel = await orion.get_entity(parcel_id, "AgriParcel")
-    except Exception:
-        parcel = next((item for item in load_seed(settings_obj, "seed_parcels.json") if item["id"] == parcel_id), None)
-    if not parcel:
-        raise HTTPException(status_code=404, detail="Parcel not found")
+    except Exception as exc:
+        raise HTTPException(status_code=404, detail=f"Parcel {parcel_id} not found. Load data first: ./scripts/load_seed_data.sh") from exc
 
     soil_id = prop(parcel, "hasAgriSoil")
     try:
         soil = await orion.get_entity(soil_id, "AgriSoil") if soil_id else {}
     except Exception:
-        soil = next((item for item in load_seed(settings_obj, "seed_soils.json") if item["id"] == soil_id), {})
+        soil = {}
 
     weather_cache_key = f"suitability-weather:{parcel_id}"
     weather = await cache.get_json(weather_cache_key)
@@ -62,7 +60,7 @@ async def get_suitability(
                 n=24,
             )
         except Exception:
-            weather = [{"date": prop(item, "dateObserved"), "value": prop(item, "temperature")} for item in load_seed(settings_obj, "seed_weather_observed.json")[-24:]]
+            weather = []
         await cache.set_json(weather_cache_key, weather, settings_obj.weather_cache_ttl_seconds)
 
     crops = load_seed(settings_obj, "seed_crops.json")

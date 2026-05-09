@@ -43,6 +43,9 @@ class Settings(BaseSettings):
     meteogalicia_base_url: str = "https://servizos.meteogalicia.gal"
     openweather_base_url: str = "https://api.openweathermap.org/data/2.5"
     openweather_api_key: str | None = None
+    open_meteo_url: str = "https://api.open-meteo.com/v1/forecast"
+    open_meteo_archive_url: str = "https://archive-api.open-meteo.com/v1/archive"
+    aemet_api_key: str | None = None
 
     request_timeout_seconds: float = 10.0
 

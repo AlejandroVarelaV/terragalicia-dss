@@ -189,8 +189,8 @@ async def patch_parcel_status(
 
     try:
         await orion.update_entity_attr(parcel_id, "parcelStatus", body.parcelStatus.value)
-    except Exception:
-        pass
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"Failed to update parcel in Orion CB: {exc}")
 
     status_overrides[parcel_id] = body.parcelStatus.value
     return _parcel_response(parcel, soils, crops, operation_store, status_overrides)

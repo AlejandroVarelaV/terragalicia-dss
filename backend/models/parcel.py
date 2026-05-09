@@ -50,6 +50,7 @@ class SuitabilityItem(BaseModel):
     cropId: str
     score: float
     band: str
+    breakdown: dict[str, Any] | None = None
 
 
 class SuitabilityResponse(BaseModel):

@@ -74,8 +74,8 @@ async def create_operation(
 
     try:
         await orion.create_entity(entity)
-    except Exception:
-        pass
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"Failed to persist operation to Orion CB: {exc}")
 
     operation_store.append(entity)
     return _to_response(entity)

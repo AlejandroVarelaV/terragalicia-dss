@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import hashlib
 from typing import Any
 
 import httpx
+from fastapi import HTTPException
 
 from config import Settings
 
@@ -35,20 +35,13 @@ class MLClient:
                     "cropId": item["cropId"],
                     "score": float(item["score"]),
                     "band": _score_to_band(float(item["score"])),
+                    "breakdown": item.get("breakdown"),
                 }
                 for item in scores
             ]
             return sorted(normalized, key=lambda item: item["score"], reverse=True)
-        except Exception:
-            # Fallback deterministic pseudo-score when ML service is not reachable.
-            ranked: list[dict[str, Any]] = []
-            seed = payload.get("parcel", {}).get("id", "parcel")
-            for crop_id in crop_ids:
-                digest = hashlib.sha256(f"{seed}:{crop_id}".encode("utf-8")).hexdigest()
-                score = (int(digest[:8], 16) % 100) / 100
-                ranked.append({"cropId": crop_id, "score": round(score, 3), "band": _score_to_band(score)})
-            ranked.sort(key=lambda item: item["score"], reverse=True)
-            return ranked
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(status_code=503, detail="Crop scoring service temporarily unavailable.") from exc
 
     async def simulate(self, payload: dict[str, Any]) -> dict[str, Any]:
         try:
@@ -58,13 +51,4 @@ class MLClient:
             if isinstance(data, dict):
                 return data
         except Exception:
-            pass
-
-        scenario = payload.get("scenario", {})
-        irrigation = float(scenario.get("irrigationMm", 0))
-        score = max(0.0, min(1.0, 0.45 + (irrigation / 1000.0)))
-        return {
-            "yieldIndex": round(score, 3),
-            "riskIndex": round(max(0.0, 1 - score), 3),
-            "waterUseMm": irrigation,
-        }
+            raise HTTPException(status_code=503, detail="Crop scoring service temporarily unavailable.")
