@@ -41,6 +41,8 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
+    volumes:
+      - ../Recintos_Corunha:/app/Recintos_Corunha:ro
     depends_on:
       - orion
       - postgres

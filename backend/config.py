@@ -52,6 +52,13 @@ class Settings(BaseSettings):
     suitability_cache_ttl_seconds: int = 6 * 60 * 60
     weather_cache_ttl_seconds: int = 30 * 60
 
+    sigpac_wfs_url: str = "https://www.fega.gob.es/geoserver/ows"
+    sigpac_wfs_timeout_seconds: float = 60.0
+    sigpac_wfs_max_features: int = 5000
+    catastro_wfs_url: str = "https://www.catastro.minhap.es/webinspire/wfs/CadastralParcel"
+    sigpac_cache_ttl_seconds: int = 86400
+    sigpac_gpkg_dir: str = "/app/Recintos_Corunha"
+
     seed_data_dir: Path = Field(default_factory=lambda: Path(__file__).resolve().parents[1] / "data" / "seed")
 
 

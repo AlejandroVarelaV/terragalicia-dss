@@ -14,7 +14,7 @@ import WhatIfSimulator from './WhatIfSimulator.jsx';
 import { STATUS_NAMES } from '../data/uiLabels.js';
 import seedParcels from '../data/seed_parcels.json';
 
-const mapCenter = [43.331, -8.284];
+const mapCenter = [43.2792, -8.2100];
 
 function toFallbackGeoJson(seedItems) {
   const features = (seedItems || [])
@@ -185,6 +185,63 @@ function SigpacOverlayLayer({ enabled, onToast }) {
   );
 }
 
+function ParcelLayer({ setParcelsGeoJson, setParcelsBounds, setParcelSource }) {
+  const map = useMap();
+  const [initialLoadDone, setInitialLoadDone] = React.useState(false);
+
+  useEffect(() => {
+    if (!initialLoadDone) {
+      // Show seed parcels immediately on first render
+      const fallbackGeo = toFallbackGeoJson(seedParcels);
+      const fallbackBounds = computeBoundsFromGeoJson(fallbackGeo);
+      setParcelsGeoJson(fallbackGeo);
+      setParcelsBounds(fallbackBounds);
+      setParcelSource('seed-fallback');
+      setInitialLoadDone(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadParcels = async () => {
+      const bounds = map.getBounds();
+      const bbox = [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].join(',');
+      try {
+        const geo = await fetchSigpacParcels({ bbox });
+        if (!cancelled) {
+          const count = geo?.features?.length || 0;
+          setParcelSource(geo.dataSource || 'backend-sigpac');
+          if (count > 0) {
+            setParcelsGeoJson(geo);
+            setParcelsBounds(computeBoundsFromGeoJson(geo));
+            console.info(`[PARCELS] Using backend SIGPAC parcels (${count} features)`);
+          }
+        }
+      } catch (e) {
+        if (!cancelled) {
+          console.warn('[PARCELS] Backend SIGPAC failed:', e?.message || e);
+        }
+      }
+    };
+
+    if (initialLoadDone) {
+      loadParcels();
+      const handleMoveEnd = () => {
+        loadParcels();
+      };
+      map.on('moveend', handleMoveEnd);
+
+      return () => {
+        cancelled = true;
+        map.off('moveend', handleMoveEnd);
+      };
+    }
+  }, [map, initialLoadDone, setParcelsGeoJson, setParcelsBounds, setParcelSource]);
+
+  return null;
+}
+
 function MapCenterUpdater({ onCenterChange }) {
   const map = useMap();
 
@@ -305,7 +362,7 @@ export default function MapView() {
   const [parcelsBounds, setParcelsBounds] = React.useState(null);
   const [parcelSource, setParcelSource] = React.useState('loading');
   const [selectedParcel, setSelectedParcel] = React.useState(null);
-  const [mapCenter, setMapCenter] = React.useState([43.331, -8.284]);
+  const [mapCenter, setMapCenter] = React.useState([43.2792, -8.2100]);
   const [showSimulator, setShowSimulator] = React.useState(false);
   const [showSigpacOverlay, setShowSigpacOverlay] = React.useState(false);
   const [showWeather, setShowWeather] = React.useState(false);
@@ -388,35 +445,7 @@ export default function MapView() {
     };
   }
 
-  React.useEffect(() => {
-    let mounted = true;
-    const fallbackGeo = toFallbackGeoJson(seedParcels);
-    const fallbackBounds = computeBoundsFromGeoJson(fallbackGeo);
 
-    // Paint seed parcels immediately so map is never empty
-    setParcelsGeoJson(fallbackGeo);
-    setParcelsBounds(fallbackBounds);
-    setParcelSource('seed-fallback');
-
-    (async () => {
-      try {
-        const geo = await fetchSigpacParcels();
-        if (!mounted) return;
-        const count = geo?.features?.length || 0;
-
-        if (count > 0) {
-          setParcelsGeoJson(geo);
-          setParcelsBounds(computeBoundsFromGeoJson(geo) || fallbackBounds);
-          setParcelSource('backend-sigpac');
-          console.info(`[PARCELS] Using backend SIGPAC parcels (${count} features)`);
-        }
-      } catch (e) {
-        console.warn('[PARCELS] Backend SIGPAC failed; keeping seed parcels:', e?.message || e);
-      }
-    })();
-
-    return () => { mounted = false; };
-  }, []);
 
   const onEachFeature = (feature, layer) => {
     layer.on({
@@ -525,7 +554,7 @@ export default function MapView() {
       {showSimulator && selectedParcel && (
         <WhatIfSimulator parcelId={selectedParcel.id} authToken={authToken} onClose={() => setShowSimulator(false)} />
       )}
-      <MapContainer center={mapCenter} zoom={11.5} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
+      <MapContainer center={mapCenter} zoom={13} maxZoom={20} className="leaflet-map" scrollWheelZoom zoomControl={false}>
         <ZoomControl position="topright" />
         <button
           type="button"
@@ -537,18 +566,32 @@ export default function MapView() {
         <WMSLayers />
         <SigpacOverlayLayer enabled={showSigpacOverlay} onToast={onToast} />
         <MapCenterUpdater onCenterChange={setMapCenter} />
-
-        <FitToParcels bounds={parcelsBounds} />
+        <ParcelLayer
+          setParcelsGeoJson={setParcelsGeoJson}
+          setParcelsBounds={setParcelsBounds}
+          setParcelSource={setParcelSource}
+        />
         {parcelsGeoJson && (
-          <GeoJSON data={parcelsGeoJson} style={parcelStyle} onEachFeature={onEachFeature} />
+          <GeoJSON
+            key={parcelSource + '-' + (parcelsGeoJson?.features?.length ?? 0)}
+            data={parcelsGeoJson}
+            style={parcelStyle}
+            onEachFeature={onEachFeature}
+          />
         )}
         <Legend />
       </MapContainer>
-      {parcelSource === 'seed-fallback' && (
-        <div className="map-data-badge">Fonte das parcelas: Datos de proba</div>
-      )}
-      {parcelSource === 'backend-sigpac' && (
-        <div className="map-data-badge">Fonte das parcelas: API SIGPAC do backend</div>
+      {parcelSource !== 'loading' && (
+        <div className="map-data-badge">
+          {{
+            'gpkg-local': 'Fonte: GeoPackage local (A Coruña)',
+            'mock': 'Fonte: Datos de proba (sen conexión)',
+            'catastro': 'Fonte: Catastro WFS (en liña)',
+            'sigpac': 'Fonte: SIGPAC WFS (en liña)',
+            'seed-fallback': 'Fonte: Datos de proba',
+            'empty': 'Fonte: Sen datos nesta zona',
+          }[parcelSource] || `Fonte: ${parcelSource}`}
+        </div>
       )}
     </div>
   );

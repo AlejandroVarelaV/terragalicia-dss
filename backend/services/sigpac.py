@@ -1,18 +1,128 @@
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 from typing import Any, Tuple
 
 import httpx
-from fastapi import HTTPException
 
 from config import get_settings
+
+try:
+    import fiona
+
+    HAS_FIONA = True
+except ImportError:
+    HAS_FIONA = False
 
 LOGGER = logging.getLogger(__name__)
 
 
 def _bbox_to_key(bbox: Tuple[float, float, float, float]) -> str:
     return f"sigpac:bbox:{bbox[0]}:{bbox[1]}:{bbox[2]}:{bbox[3]}"
+
+
+async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float]) -> dict[str, Any] | None:
+    """Fetch parcels from local .gpkg files in Recintos_Corunha directory."""
+    if not HAS_FIONA:
+        LOGGER.warning("fiona not installed; skipping .gpkg fallback")
+        return None
+
+    gpkg_dir = Path(__file__).parent.parent / "Recintos_Corunha"
+    if not gpkg_dir.exists():
+        LOGGER.warning("GPKG directory not found: %s", gpkg_dir)
+        return None
+
+    gpkg_files = list(gpkg_dir.glob("*.gpkg"))
+    if not gpkg_files:
+        LOGGER.warning("No .gpkg files found in %s", gpkg_dir)
+        return None
+
+    features = []
+    minx, miny, maxx, maxy = bbox
+    max_features = 2000
+
+    try:
+        for gpkg_path in gpkg_files:
+            if len(features) >= max_features:
+                break
+
+            try:
+                with fiona.open(gpkg_path, layer="recinto", bbox=(minx, miny, maxx, maxy)) as src:
+                    for feature in src:
+                        if len(features) >= max_features:
+                            break
+
+                        geom = dict(feature.geometry)
+                        props = feature.properties or {}
+                        geojson_feature = {
+                            "type": "Feature",
+                            "geometry": geom,
+                            "properties": {
+                                "id": props.get("dn_oid"),
+                                "provincia": props.get("provincia"),
+                                "municipio": props.get("municipio"),
+                                "poligono": props.get("poligono"),
+                                "parcela": props.get("parcela"),
+                                "recinto": props.get("recinto"),
+                                "area": props.get("dn_surface"),
+                                "landUse": props.get("uso_sigpac"),
+                                "slope": props.get("pendiente_media"),
+                                "source": "gpkg-local",
+                            },
+                        }
+                        features.append(geojson_feature)
+            except Exception as exc:  # noqa: BLE001
+                LOGGER.warning("Failed to read .gpkg file %s: %s", gpkg_path, exc)
+                continue
+
+        if not features:
+            return None
+
+        return {"type": "FeatureCollection", "features": features}
+    except Exception as exc:  # noqa: BLE001
+        LOGGER.warning("Error during .gpkg fetch: %s", exc)
+        return None
+
+
+def _get_mock_parcels(bbox: Tuple[float, float, float, float]) -> dict[str, Any]:
+    """Generate 5 mock parcel features for fallback when no real data is available."""
+    minx, miny, maxx, maxy = bbox
+    width = maxx - minx
+    features = []
+
+    for i in range(5):
+        # Divide bbox into 5 horizontal strips, place one polygon per strip
+        x_center = minx + (width / 5) * (i + 0.5)
+        y_center = (miny + maxy) / 2
+
+        # 0.001 degree square polygon around center
+        offset = 0.0005
+        coords = [
+            [
+                [x_center - offset, y_center - offset],
+                [x_center + offset, y_center - offset],
+                [x_center + offset, y_center + offset],
+                [x_center - offset, y_center + offset],
+                [x_center - offset, y_center - offset],
+            ]
+        ]
+
+        feature = {
+            "type": "Feature",
+            "geometry": {"type": "Polygon", "coordinates": coords},
+            "properties": {
+                "id": f"mock-{i}",
+                "area": 0.5,
+                "landUse": "arable",
+                "source": "mock",
+                "status": "FALLOW",
+                "provincia": "15",
+            },
+        }
+        features.append(feature)
+
+    return {"type": "FeatureCollection", "features": features}
 
 
 async def fetch_parcels_by_bbox(bbox: Tuple[float, float, float, float], redis_cache=None) -> dict[str, Any]:
@@ -85,7 +195,20 @@ async def fetch_parcels_by_bbox(bbox: Tuple[float, float, float, float], redis_c
     except Exception as exc:  # noqa: BLE001
         LOGGER.warning("SIGPAC WFS failed: %s", exc)
 
-    raise HTTPException(status_code=503, detail="Parcel geometry service unavailable. No fallback to synthetic data.")
+    # Try .gpkg local files
+    gpkg_result = await _fetch_from_gpkg(bbox)
+    if gpkg_result and gpkg_result.get("features"):
+        LOGGER.info("Using gpkg-local source for bbox=%s", bbox)
+        if redis_cache is not None:
+            await redis_cache.set_json(key, gpkg_result, 86400)
+        return gpkg_result
+
+    # Fall back to mock data
+    mock_result = _get_mock_parcels(bbox)
+    LOGGER.warning("Using mock data for bbox=%s", bbox)
+    if redis_cache is not None:
+        await redis_cache.set_json(key, mock_result, 3600)
+    return mock_result
 
 
 async def fetch_parcel_by_reference(provincia: str, municipio: str, poligono: str, parcela: str, redis_cache=None) -> dict[str, Any] | None:

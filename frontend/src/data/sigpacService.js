@@ -6,18 +6,37 @@ export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox } = 
     url.searchParams.set('bbox', bbox);
   }
 
-  const response = await fetch(url.toString());
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 25000);
 
-  if (!response.ok) {
-    throw new Error(`Backend SIGPAC API failed with HTTP ${response.status}`);
+  try {
+    const response = await fetch(url.toString(), { signal: controller.signal });
+
+    if (!response.ok) {
+      throw new Error(`Backend SIGPAC API failed with HTTP ${response.status}`);
+    }
+
+    const payload = await response.json();
+
+    if (payload?.type !== 'FeatureCollection' || !Array.isArray(payload?.features)) {
+      throw new Error('Backend SIGPAC API returned an invalid GeoJSON FeatureCollection');
+    }
+
+    if (payload.features.length === 0) {
+      return { type: 'FeatureCollection', features: [], dataSource: 'empty' };
+    }
+
+    const dataSource = payload.features?.[0]?.properties?.source || 'unknown';
+
+    return { type: payload.type, features: payload.features, dataSource };
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new Error('SIGPAC timeout after 25s');
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
-
-  const payload = await response.json();
-  if (payload?.type !== 'FeatureCollection' || !Array.isArray(payload?.features)) {
-    throw new Error('Backend SIGPAC API returned an invalid GeoJSON FeatureCollection');
-  }
-
-  return payload;
 }
 
 export function computeBoundsFromGeoJson(geojson) {
