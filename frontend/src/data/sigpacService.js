@@ -1,9 +1,12 @@
 export const BACKEND_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
-export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox } = {}) {
+export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox, zoom = null } = {}) {
   const url = new URL(`${baseUrl}/sigpac/parcels`);
   if (bbox) {
     url.searchParams.set('bbox', bbox);
+  }
+  if (zoom !== null) {
+    url.searchParams.set('zoom', zoom);
   }
 
   const controller = new AbortController();

@@ -16,9 +16,15 @@ LOGGER = logging.getLogger(__name__)
 async def get_sigpac_parcels(
     bbox: str | None = Query(default=None, description="minLon,minLat,maxLon,maxLat"),
     force_refresh: bool = False,
+    zoom: int | None = Query(default=None, description="Map zoom level"),
     redis=Depends(get_redis_cache),
 ) -> dict[str, Any]:
     """Return parcels for a bbox using the service fallback chain: WFS -> .gpkg files -> mock data."""
+    # Zoom validation: do not fetch parcels if zoom is too low
+    if zoom is not None and zoom < 14:
+        LOGGER.info("Zoom level too low (%d); returning empty features", zoom)
+        return {"type": "FeatureCollection", "features": [], "zoom_too_low": True}
+    
     if bbox:
         parts = [float(part.strip()) for part in bbox.split(",")]
         if len(parts) != 4:

@@ -136,7 +136,7 @@ function SigpacOverlayLayer({ enabled, onToast }) {
       const bbox = [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].join(',');
       setLoading(true);
       try {
-        const geo = await fetchSigpacParcels({ bbox });
+        const geo = await fetchSigpacParcels({ bbox, zoom: map.getZoom() });
         if (!cancelled) {
           setOverlayGeoJson(geo);
         }
@@ -152,10 +152,25 @@ function SigpacOverlayLayer({ enabled, onToast }) {
       }
     };
 
-    loadOverlay();
     const handleMoveEnd = () => {
+      const currentZoom = map.getZoom();
+      if (currentZoom < 14) {
+        setOverlayGeoJson(null);
+        setLoading(false);
+        return;
+      }
       loadOverlay();
     };
+
+    // Check zoom before initial load
+    const currentZoom = map.getZoom();
+    if (currentZoom < 14) {
+      setOverlayGeoJson(null);
+      setLoading(false);
+    } else {
+      loadOverlay();
+    }
+
     map.on('moveend', handleMoveEnd);
 
     return () => {
@@ -207,8 +222,16 @@ function ParcelLayer({ setParcelsGeoJson, setParcelsBounds, setParcelSource }) {
     const loadParcels = async () => {
       const bounds = map.getBounds();
       const bbox = [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].join(',');
+      const zoom = map.getZoom();
+      
+      // Do not fetch parcels if zoom is too low
+      if (zoom < 14) {
+        setParcelsGeoJson({ type: 'FeatureCollection', features: [] });
+        return;
+      }
+      
       try {
-        const geo = await fetchSigpacParcels({ bbox });
+        const geo = await fetchSigpacParcels({ bbox, zoom });
         if (!cancelled) {
           const count = geo?.features?.length || 0;
           setParcelSource(geo.dataSource || 'backend-sigpac');
@@ -369,6 +392,7 @@ export default function MapView() {
   const [toastMessage, setToastMessage] = React.useState('');
   const [authToken, setAuthToken] = React.useState(null);
   const authTokenRef = React.useRef(null);
+  const parcelLayerKey = React.useRef(parcelSource);
 
   const onToast = React.useCallback((message) => {
     setToastMessage(message);
@@ -401,6 +425,10 @@ export default function MapView() {
       }
     })();
   }, []);
+
+  React.useEffect(() => {
+    parcelLayerKey.current = parcelSource;
+  }, [parcelSource]);
 
   // Parcel style functions (moved from mockParcels)
   function parcelStyle(feature) {
@@ -571,9 +599,9 @@ export default function MapView() {
           setParcelsBounds={setParcelsBounds}
           setParcelSource={setParcelSource}
         />
-        {parcelsGeoJson && (
+        {parcelsGeoJson && parcelsGeoJson.features && parcelsGeoJson.features.length > 0 && (
           <GeoJSON
-            key={parcelSource + '-' + (parcelsGeoJson?.features?.length ?? 0)}
+            key={parcelLayerKey.current}
             data={parcelsGeoJson}
             style={parcelStyle}
             onEachFeature={onEachFeature}
