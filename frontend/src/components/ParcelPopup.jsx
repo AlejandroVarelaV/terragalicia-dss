@@ -6,6 +6,7 @@ import {
   getReadableCropLabel,
   getReadableSoilLabel,
   getReadableStatusLabel,
+  getReadableUsoSigpac,
   getSoilValue,
   getStatusValue,
   formatAreaValue,
@@ -27,38 +28,69 @@ export default function ParcelPopup({ parcel, suitability = null, loading = fals
   const cropName = cropValue ? getReadableCropLabel(cropValue) : 'Sen asignar';
   const soilName = soilValue ? getReadableSoilLabel(soilValue) : 'Sen asignar';
   const parcelId = parcel?.id || parcel?.gid || parcel?.ref || 'Unknown';
+  const pendienteRaw = parcel?.pendiente_media ?? parcel?.slope ?? parcel?.slope_percent ?? null;
+  const pendienteDisplay = Number.isFinite(Number(pendienteRaw)) ? `${(Number(pendienteRaw) / 10).toFixed(1)}%` : 'N/D';
+  const altitud = parcel?.altitud ?? parcel?.elevation ?? null;
+  const altitudDisplay = altitud != null ? `${altitud} m` : 'N/D';
+  const uso = parcel?.uso_sigpac ?? parcel?.landUse ?? 'N/D';
+  const coefReg = parcel?.coef_regadio ?? parcel?.coef_regadio ?? null;
+  const coefRegDisplay = (coefReg !== null && coefReg !== undefined && Number(coefReg) > 0) ? 'Sí' : 'Non';
   const bandColor = { high: '#22c55e', medium: '#f59e0b', low: '#ef4444' };
   const sourceLabel = parcel?.source === 'seed-fallback' ? 'Datos de proba' : 'Datos reais';
 
-  const suitabilitySection = loading
-    ? `<div class="popup-suitability-loading">
+  const suitabilitySection = (() => {
+    if (loading) {
+      return `<div class="popup-suitability-loading">
          <span class="popup-spinner"></span>
          <span>Cargando recomendacións...</span>
-       </div>`
-    : suitability?.ranking?.length
-      ? `<div class="popup-suitability">
-         <p class="popup-section-title">Recomendación</p>
-         <ol class="popup-ranking">
-           ${suitability.ranking.slice(0, 3).map((item, i) => {
-             const cropId = item.cropId?.split(':').pop?.() || item.cropId || '';
-             const cropLabel = getReadableCropLabel(cropId);
-             const scoreValue = item.score <= 1 ? item.score * 100 : item.score;
-             return `
-             <li class="popup-ranking-item">
-               <span class="popup-rank-num">${i + 1}</span>
-               <span class="popup-crop-id">${cropLabel}</span>
-               <span class="popup-score-bar">
-                 <span class="popup-score-fill"
-                   style="width:${Math.max(0, Math.min(100, scoreValue))}%;background:${bandColor[item.band || item.colorBand] || '#64748b'}">
-                 </span>
-               </span>
-               <span class="popup-score-pct">${Math.round(scoreValue)}%</span>
-             </li>
-           `;
-           }).join('')}
-         </ol>
-       </div>`
-      : '';
+       </div>`;
+    }
+    if (suitability?.excludedReason) {
+      return `<div class="popup-suitability-excluded">
+        <p class="popup-section-title">Recomendación</p>
+        <div class="popup-excluded-reason">${suitability.excludedReason}</div>
+      </div>`;
+    }
+    if (suitability?.error) {
+      return `<div class="popup-suitability-error">Erro: ${suitability.error}</div>`;
+    }
+    const ranking = suitability?.ranking || [];
+    if (!ranking.length) return '';
+
+    const top = ranking[0];
+    const topCropId = top.cropId?.split(':').pop?.() || top.cropId || '';
+    const topLabel = getReadableCropLabel(topCropId);
+    const topScore = top.score <= 1 ? top.score * 100 : top.score;
+    const topBreakdown = top.breakdown || {};
+
+    const otherItems = ranking.slice(1).map((item) => {
+      const cropId = item.cropId?.split(':').pop?.() || item.cropId || '';
+      const cropLabel = getReadableCropLabel(cropId);
+      const scoreValue = item.score <= 1 ? item.score * 100 : item.score;
+      return `
+        <li class="popup-ranking-item">
+          <span class="popup-rank-num">${""}</span>
+          <span class="popup-crop-id">${cropLabel}</span>
+          <span class="popup-score-bar"><span class="popup-score-fill" style="width:${Math.max(0, Math.min(100, scoreValue))}%;background:${bandColor[item.band || item.colorBand] || '#64748b'}"></span></span>
+          <span class="popup-score-pct">${Math.round(scoreValue)}%</span>
+        </li>`;
+    }).join('');
+
+    const expandBtn = otherItems ? `<button type="button" class="suitability-expand-btn" title="Ver ranking completo">+</button>` : '';
+    return `<div class="popup-suitability">
+      <p class="popup-section-title">Recomendación</p>
+      <div class="popup-top-recommendation">
+        <span class="popup-crop-id">${topLabel}</span>
+        <span class="popup-score-pct">${Math.round(topScore)}%</span>
+        ${expandBtn}
+      </div>
+      <div class="popup-ranking-full" style="display:none;">
+        <ol class="popup-ranking">
+          ${otherItems}
+        </ol>
+      </div>
+    </div>`;
+  })();
 
   const areaMarkup = Number.isFinite(areaHectares)
     ? `<div><dt>Área</dt><dd>
@@ -81,6 +113,10 @@ export default function ParcelPopup({ parcel, suitability = null, loading = fals
         <div><dt>Cultivo</dt><dd>${cropName || 'Sen asignar'}</dd></div>
         <div><dt>Solo</dt><dd>${soilName || 'Sen asignar'}</dd></div>
         ${areaMarkup}
+        <div><dt>Pendiente</dt><dd>${pendienteDisplay}</dd></div>
+        <div><dt>Altitud</dt><dd>${altitudDisplay}</dd></div>
+        <div><dt>Uso SIGPAC</dt><dd>${getReadableUsoSigpac(uso) || uso}</dd></div>
+        <div><dt>Regadío</dt><dd>${coefRegDisplay}</dd></div>
       </dl>
       ${suitabilitySection}
       <div class="popup-controls">

@@ -42,6 +42,9 @@
       "type": "Relationship",
       "object": "urn:ngsi-ld:AgriSoil:acoruna:atlantic-acid:001"
     },
+      "pendiente_media": {"type":"Property","value":20},
+      "altitud": {"type":"Property","value":50},
+      "uso_sigpac": {"type":"Property","value":"TI"},
     "hasAgriCrop": {
       "type": "Relationship",
       "object": "urn:ngsi-ld:AgriCrop:catalog:millo"
@@ -93,6 +96,9 @@
       "type": "Relationship",
       "object": "urn:ngsi-ld:AgriSoil:acoruna:coastal-sandy:003"
     },
+      "pendiente_media": {"type":"Property","value":30},
+      "altitud": {"type":"Property","value":20},
+      "uso_sigpac": {"type":"Property","value":"TI"},
     "@context": [
       "http://context-server/context.jsonld"
     ]
@@ -140,6 +146,9 @@
       "type": "Relationship",
       "object": "urn:ngsi-ld:AgriSoil:acoruna:hillside-clay-loam:004"
     },
+      "pendiente_media": {"type":"Property","value":40},
+      "altitud": {"type":"Property","value":120},
+      "uso_sigpac": {"type":"Property","value":"TI"},
     "@context": [
       "http://context-server/context.jsonld"
     ]
@@ -437,5 +446,18 @@
     "@context": [
       "http://context-server/context.jsonld"
     ]
+  }
+  ,
+  {
+    "id": "urn:ngsi-ld:AgriParcel:urban:zu001",
+    "type": "AgriParcel",
+    "name": { "type": "Property", "value": "Zona Urbana Exemplo" },
+    "location": { "type": "GeoProperty", "value": { "type": "Polygon", "coordinates": [[[ -8.2100,43.2800 ], [ -8.2090,43.2800 ], [ -8.2090,43.2790 ], [ -8.2100,43.2790 ], [ -8.2100,43.2800 ]]] } },
+    "area": { "type": "Property", "value": 0.12, "unitCode": "HAR" },
+    "parcelStatus": { "type": "Property", "value": "FALLOW" },
+    "uso_sigpac": { "type": "Property", "value": "ZU" },
+    "pendiente_media": { "type": "Property", "value": 5 },
+    "altitud": { "type": "Property", "value": 30 },
+    "@context": [ "http://context-server/context.jsonld" ]
   }
 ]

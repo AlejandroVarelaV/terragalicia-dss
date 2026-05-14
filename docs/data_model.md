@@ -1,7 +1,11 @@
 # TerraGalicia DSS NGSI-LD Data Model (MVP)
 
+**Last updated**: May 2026
+
 ## 1. Overview
 TerraGalicia uses **NGSI-LD** (instead of NGSIv2) to model agricultural data as linked entities with explicit semantics through `@context`, standard `Relationship` links, and interoperable geospatial properties. The model separates **static attributes** (rarely changed, mostly cadastral/agronomic metadata) from **dynamic attributes** (time-varying sensor, weather, and operational data). The **IoT Agent (HTTP + MQTT)** is responsible for ingesting field telemetry and selected weather feeds into dynamic attributes on operational entities. **QuantumLeap** historizes entities with time-series value (notably telemetry, weather, parcel state, operations, and forecast snapshots) for analytics, trend views, and ML feature generation.
+
+> **Implementation status (May 2026)**: The NGSI-LD entity model is defined as a target architecture. Currently running: `AgriParcel` (SIGPAC geometries in PostGIS), `WeatherObserved`/`WeatherForecast` (via weather API), `AgriParcelOperation` and `AgriFertilizer` (via backend CRUD), and basic `AgriFarm`/`AgriSoil` stubs. IoT Agent historization (QuantumLeap) is not yet active.
 
 ---
 
@@ -614,7 +618,56 @@ graph LR
 
 ---
 
-## 7. Cross-sector Entities Note
+## 7. PostGIS SIGPAC Schema (Implemented)
+
+The primary geospatial data source is the `recintos_sigpac` table in the PostgreSQL + PostGIS database. This table holds official SIGPAC land-registry parcel records for A Coruña province.
+
+### Table: `recintos_sigpac`
+
+| Column | Type | Description |
+|---|---|---|
+| `gid` | `serial PRIMARY KEY` | Internal row identifier |
+| `geom` | `geometry(MultiPolygon, 4326)` | Parcel boundary (WGS84) — spatial GiST index on this column |
+| `provincia` | `varchar` | Province code (e.g., `15` for A Coruña) |
+| `municipio` | `varchar` | Municipality code |
+| `poligono` | `varchar` | Cadastral polygon number |
+| `parcela` | `varchar` | Cadastral parcel number |
+| `recinto` | `varchar` | Sub-parcel (recinto) identifier |
+| `uso_sigpac` | `varchar` | SIGPAC land-use code (e.g., `TA` arable, `PA` pasture, `FO` forest) |
+| `superficie` | `numeric` | Declared area (hectares) |
+| `coef_regadio` | `numeric` | Irrigation coefficient (0–100) |
+| `pendiente_media` | `numeric` | Average slope percentage |
+
+### Derived `id` field in API responses
+The backend constructs a string ID from cadastral components:
+```
+{provincia}_{municipio}_{poligono}_{parcela}_{recinto}
+```
+
+### Query pattern
+```sql
+SELECT
+  (provincia || '_' || municipio || '_' || poligono || '_' || parcela || '_' || recinto) AS id,
+  uso_sigpac, superficie,
+  COALESCE(ST_AsGeoJSON(ST_Simplify(geom, 0.0002)), ST_AsGeoJSON(geom))::text AS geom_json
+FROM recintos_sigpac
+WHERE geom && ST_MakeEnvelope($1, $2, $3, $4, 4326)
+LIMIT $5
+```
+
+### Fallback chain
+```
+PostGIS (recintos_sigpac)
+  → .gpkg file (A Coruña province, bundled with backend)
+    → seed mock data (development only)
+```
+
+### Relationship to NGSI-LD model
+Each row in `recintos_sigpac` maps to an `AgriParcel` NGSI-LD entity. The backend synthesizes NGSI-LD-compatible properties from PostGIS query results and enriches them with dynamic attributes (`parcelStatus`, `suitabilityScore`) from Orion and the applications database.
+
+---
+
+## 8. Cross-sector Entities Note
 
 Beyond AgriFood models, TerraGalicia should include the following transversal Smart Data Models:
 

@@ -1,28 +1,34 @@
 # TerraGalicia DSS Architecture (MVP)
 
+**Last updated**: May 2026
+
 ## 1. Architecture Overview
 TerraGalicia uses a hybrid **event-driven + REST** architecture aligned with FIWARE reference patterns: synchronous business operations are handled through a FastAPI backend (REST), while telemetry, weather ingestion, and historization rely on event propagation through IoT Agent, Orion Context Broker, and QuantumLeap. The architecture explicitly separates **current context state** (Orion CB, NGSI-LD), **static/geospatial domain data** (PostgreSQL + PostGIS), and **time-series history** (TimescaleDB via QuantumLeap). The AI/ML layer (crop suitability + explanation/chat) is decoupled from FIWARE core so model providers and inference stacks can evolve independently without changing context management contracts.
+
+> **Implementation status (May 2026)**: The core SIGPAC viewer, parcel popup, weather panel, AgroCopilot, WhatIf simulator, and JWT authentication are implemented and running. IoT Agent, QuantumLeap, Grafana, and ML service are defined in Docker Compose but not yet started.
 
 ---
 
 ## 2. Component Inventory
 
-| Component | Technology | Role | Port | Notes |
+| Component | Technology | Role | Port | Status |
 |---|---|---|---|---|
-| Frontend Web App | React + Leaflet + Chart.js + Three.js | UI for map, charts, 2.5D terrain panel, parcel operations, AgroCopilot chat | 3000 (dev), 80/443 via Nginx | Served behind Nginx in prod; mobile-responsive PWA target [DECISION NEEDED] |
-| Backend API | FastAPI (Python 3.11+) | REST API gateway, auth, orchestration across FIWARE/data/AI services | 8000 | Main BFF layer; handles RBAC and aggregation |
-| Orion Context Broker | FIWARE Orion-LD (`fiware/orion-ld`) | NGSI-LD current state storage and query/subscription engine | 1026 | Requires MongoDB backend [DECISION NEEDED: single Mongo or HA replica set] |
-| MongoDB (Orion backend) | MongoDB 6/7 | Persistence backend for Orion current context entities | 27017 | Required by Orion; not a business data store |
-| IoT Agent JSON | FIWARE IoT Agent JSON (`fiware/iotagent-json`) | Southbound ingestion (HTTP/MQTT), payload mapping to NGSI-LD updates | 4041 (northbound), 7896 (southbound HTTP) | Uses MQTT broker for topic ingestion |
-| MQTT Broker | Mosquitto (`eclipse-mosquitto`) or EMQX (`emqx/emqx`) | Telemetry/event messaging from sensors/connectors to IoT Agent | 1883 (MQTT), 9001 (WS optional) | [DECISION NEEDED] Choose broker: Mosquitto (simple) vs EMQX (ops features) |
-| QuantumLeap | QuantumLeap (`orchestracities/quantumleap`) | Time-series historization via Orion subscription notifications | 8668 | STH-Comet compatible API for historical queries |
-| TimescaleDB | PostgreSQL + Timescale extension (`timescale/timescaledb`) | Time-series storage backend for QuantumLeap | 5432 | Retention/continuous aggregates for analytics |
-| PostgreSQL + PostGIS | PostgreSQL 15 + PostGIS (`postgis/postgis`) | Static domain + geospatial store (farms, parcel geometry cache, ops audit projections) | 5433 [DECISION NEEDED] | Separate port recommended to avoid conflict with TimescaleDB on same host |
-| Redis | Redis 7 (`redis`) | Cache for suitability scores, weather snapshots, and session/rate-limit data | 6379 | TTL-based cache invalidation tied to forecast/model refresh windows |
-| Grafana | Grafana OSS (`grafana/grafana`) | Dashboards over TimescaleDB + PostgreSQL metrics and KPIs | 3001 | Role-restricted admin access required |
-| ML Service | FastAPI/MLflow-compatible inference service | Crop classifier + What-If simulation engine | 8010 | Can be separate container/image for model lifecycle isolation |
-| LLM Service | Ollama (`ollama/ollama`) or OpenAI-compatible gateway | AgroCopilot conversational QA + explanation generation | 11434 (Ollama local) | [DECISION NEEDED] Local Ollama vs managed OpenAI endpoint |
-| Nginx Reverse Proxy | Nginx (`nginx`) | TLS termination, routing, compression, security headers, rate limiting | 80 / 443 | Front door for frontend + API + optional Grafana subpath |
+| Frontend Web App | React 18 + Vite + Leaflet + Chart.js | Map UI (canvas-based SIGPAC viewer), parcel popups, weather panel, AgroCopilot chat, WhatIf simulator | 80 via Nginx | **Running** |
+| Backend API | FastAPI (Python 3.11+) | REST API gateway, SIGPAC data service, auth, orchestration | 8000 | **Running** |
+| Orion Context Broker | FIWARE Orion-LD (`fiware/orion-ld`) | NGSI-LD current state storage and query/subscription engine | 1026 | **Running** |
+| MongoDB (Orion backend) | MongoDB 5 | Persistence backend for Orion current context entities | 27017 | **Running** |
+| Context Server | Custom NGSI-LD context server | Serves `@context` definitions for NGSI-LD entities | — | **Running** |
+| PostgreSQL + PostGIS | `postgis/postgis:15-3.4` | SIGPAC parcel geometry (`recintos_sigpac`), static domain data, ops audit projections | 5433 | **Running** |
+| TimescaleDB | `timescale/timescaledb` (pg15) | Time-series storage for QuantumLeap (weather, sensor history) | 5432 | **Running** |
+| Redis | `redis:7-alpine` | SIGPAC query cache (24h TTL), suitability scores, weather snapshots, session data | 6379 | **Running** |
+| IoT Agent JSON | FIWARE IoT Agent JSON (`fiware/iotagent-json`) | Southbound ingestion (HTTP/MQTT), payload mapping to NGSI-LD updates | 4041/7896 | Defined — not started |
+| QuantumLeap | `orchestracities/quantumleap` | Time-series historization via Orion subscription notifications | 8668 | Defined — not started |
+| Grafana | `grafana/grafana:11` | Dashboards over TimescaleDB + PostgreSQL metrics and KPIs | 3001 | Defined — not started |
+| ML Service | Custom FastAPI inference service | Crop classifier + What-If simulation engine | 8010 | Defined — not started |
+| LLM Service | Ollama or OpenAI-compatible gateway | AgroCopilot conversational QA + explanation generation | 11434 | [DECISION NEEDED] Local Ollama vs managed endpoint — not started |
+| Nginx Reverse Proxy | `nginx:1.27-alpine` | Routing, compression, security headers | 80 / 443 | **Running** |
+
+Note: No MQTT broker is currently deployed. It will be added when the IoT Agent is activated [DECISION NEEDED: Mosquitto vs EMQX].
 
 [EXTERNAL DEPENDENCY] Data providers: SIGPAC/SIXPAC, AEMET, MeteoGalicia, Copernicus, CSIC, IGN MDT05.
 
@@ -221,14 +227,17 @@ graph TD
 
 | Endpoint | Methods | Description | Key parameters | Response format |
 |---|---|---|---|---|
-| `/api/v1/farms` | GET, POST | List farms or create farm | `municipality`, `ownerId`, pagination | JSON: list/item with farm core fields + relationships |
+| `/api/v1/auth/login` | POST | Obtain JWT access token | `username`, `password`, `grant_type` (form) | JSON `{ access_token, token_type }` |
+| `/api/v1/sigpac/parcels` | GET | SIGPAC parcels by viewport | `bbox` (minLon,minLat,maxLon,maxLat), `zoom`, `limit` (max 5000) | GeoJSON FeatureCollection + `truncated`, `total_estimate`, `returned` |
+| `/api/v1/sigpac/nearby` | GET | SIGPAC parcels near cursor | `lat`, `lon`, `zoom`, `limit` | GeoJSON FeatureCollection |
+| `/api/v1/farms` | GET, POST | List farms or create farm | `municipality`, `ownerId`, pagination | JSON list/item |
 | `/api/v1/farms/{id}` | GET, PATCH | Retrieve/update farm metadata | `id` | JSON object |
 | `/api/v1/parcels` | GET, POST | List parcels or create parcel | `farmId`, bbox, `status`, `crop` | GeoJSON FeatureCollection + metadata |
 | `/api/v1/parcels/{id}` | GET, PATCH | Retrieve/update parcel details and status | `id` | JSON object with NGSI-LD-mapped fields |
 | `/api/v1/parcels/{id}/suitability` | GET | Compute/fetch parcel suitability | `crop`, `scenario`, `irrigationMm`, `sowingDate` | JSON `{ score, band, factors, explanation, generatedAt }` |
 | `/api/v1/parcels/{id}/operations` | GET, POST | List/create parcel operations | `id`, `from`, `to`, `operationType` | JSON list of operation records |
 | `/api/v1/parcels/{id}/operations/{opId}` | PATCH | Update operation fields | `id`, `opId` | JSON updated record |
-| `/api/v1/weather` | GET | Current + forecast weather for parcel/farm/area | `parcelId`, `farmId`, `lat`, `lon`, `days` | JSON `{ current, forecast, alerts, station }` |
+| `/api/v1/weather` | GET | Current + forecast weather | `lat`, `lon`, `days` | JSON `{ current, forecast, alerts, station }` |
 | `/api/v1/weather/history` | GET | Historical weather series | `parcelId`, `from`, `to`, `step` | JSON time-series array |
 | `/api/v1/crops` | GET, POST | Crop catalog list/create | `season`, `species` | JSON list/item |
 | `/api/v1/crops/{id}` | GET, PATCH | Crop cycle detail/update | `id` | JSON object |
@@ -238,6 +247,7 @@ graph TD
 Notes:
 - Auth: `Authorization: Bearer <access_token>` for all non-public endpoints.
 - Payload style: Backend REST responses are domain JSON; internally mapped to NGSI-LD entities and temporal series.
+- SIGPAC endpoints (`/sigpac/parcels`, `/sigpac/nearby`) do not require authentication.
 
 ---
 
@@ -282,24 +292,23 @@ Notes:
 - Recommended for MVP: Docker Compose on a single VM.
 - Compose profile split suggested: `core`, `fiware`, `ai`, `monitoring` [DECISION NEEDED].
 
-### 8.2 Services to include in docker-compose.yml (no code yet)
+### 8.2 Services in docker-compose.yml
 
-| Service name | Suggested image | depends_on | Configuration needs |
+| Service name | Image | Status | Notes |
 |---|---|---|---|
-| `nginx` | `nginx:1.27-alpine` | `frontend`, `backend` | TLS cert mount, reverse proxy routes, gzip, security headers |
-| `frontend` | App image (built from frontend Dockerfile) | `backend` | API base URL, static asset settings |
-| `backend` | App image (FastAPI) | `orion`, `postgres`, `timescaledb`, `redis`, `ml-service`, `llm-service` | JWT keys, DB URLs, FIWARE URLs, provider API keys |
-| `orion` | `fiware/orion-ld:latest` | `mongo` | Mongo URL, CORS, context settings |
-| `mongo` | `mongo:7` | none | Persistent volume, auth |
-| `iot-agent` | `fiware/iotagent-json:latest` | `orion`, `mqtt-broker`, `mongo` | Service groups, device provisioning, transport config |
-| `mqtt-broker` | `eclipse-mosquitto:2` or `emqx/emqx:5` | none | Topics, auth, persistence |
-| `quantumleap` | `orchestracities/quantumleap:latest` | `orion`, `timescaledb` | Orion URL, DB URL, log level |
-| `timescaledb` | `timescale/timescaledb:latest-pg15` | none | Persistent volume, retention jobs |
-| `postgres` | `postgis/postgis:15-3.4` | none | Persistent volume, PostGIS extensions |
-| `redis` | `redis:7-alpine` | none | Persistence mode [DECISION NEEDED], eviction policy |
-| `grafana` | `grafana/grafana:11` | `timescaledb`, `postgres` | Datasource provisioning, admin credentials |
-| `ml-service` | Custom ML inference image | `redis` | Model artifact path, inference thresholds |
-| `llm-service` | `ollama/ollama:latest` (or external endpoint adapter) | none | Model pull cache, token/context limits |
+| `nginx` | `nginx:1.27-alpine` | **Running** | Reverse proxy: `/` → frontend, `/api/` → backend, `/grafana/` → grafana, `/orion/` → orion |
+| `frontend` | Built from `frontend/Dockerfile` (Vite/React) | **Running** | Served by Nginx on port 80 |
+| `backend` | Built from `backend/Dockerfile` (FastAPI) | **Running** | Port 8000 internally |
+| `orion` | `fiware/orion-ld:latest` | **Running** | Port 1026; depends on `mongo` |
+| `mongo` | `mongo:5` | **Running** | Orion persistence backend |
+| `context-server` | Custom | **Running** | Serves NGSI-LD `@context` definitions |
+| `postgres` | `postgis/postgis:15-3.4` | **Running** | Port 5433; hosts `recintos_sigpac` and domain tables |
+| `timescaledb` | `timescale/timescaledb:latest-pg15` | **Running** | Port 5432; time-series storage (ready for QuantumLeap) |
+| `redis` | `redis:7-alpine` | **Running** | Port 6379; SIGPAC cache (24h TTL), session data |
+| `iot-agent` | `fiware/iotagent-json:latest` | Defined — not started | Needs MQTT broker; activate when sensors deployed |
+| `quantumleap` | `orchestracities/quantumleap:latest` | Defined — not started | Needs Orion subscriptions configured |
+| `grafana` | `grafana/grafana:11` | Defined — not started | Accessible at `/grafana/` when started |
+| `ml-service` | Custom inference image | Defined — not started | Crop classifier + What-If engine |
 
 ### 8.3 Environment variables required (names only)
 - `APP_ENV`
@@ -371,6 +380,78 @@ Notes:
   - Animated crop growth layers.
   - Real-time sensor pulsing/heat shaders.
   - Multi-parcel terrain comparison view [DECISION NEEDED].
+
+---
+
+---
+
+## 10. SIGPAC Data Pipeline (Implemented)
+
+### Data source and storage
+SIGPAC parcel geometries for A Coruña province are stored in the `recintos_sigpac` PostGIS table (SRID 4326). A `.gpkg` file serves as a local fallback when PostGIS is unavailable or returns no data. A seed mock dataset provides a final fallback.
+
+### Query strategy (zoom-based)
+The backend selects geometry resolution based on the requested zoom level to balance detail against payload size:
+
+| Zoom | SQL geometry expression | Frontend gate |
+|---|---|---|
+| < 14 | Backend returns empty (`zoom_too_low: true`) | Not reached (frontend gates at zoom < 15) |
+| = 14 | `ST_AsGeoJSON(ST_Centroid(geom))` — Point | Not reached by frontend |
+| = 15 | `COALESCE(ST_AsGeoJSON(ST_Simplify(geom, 0.0002)), ST_AsGeoJSON(geom))` | First zoom level that loads |
+| = 16 | `COALESCE(ST_AsGeoJSON(ST_Simplify(geom, 0.0001)), ST_AsGeoJSON(geom))` | |
+| ≥ 17 | `ST_AsGeoJSON(geom)` — full geometry | |
+
+`COALESCE` is required because `ST_Simplify` can produce NULL for degenerate polygons at high tolerance.
+
+### Performance optimizations
+- **Spatial index filter**: `geom && ST_MakeEnvelope(minx, miny, maxx, maxy, 4326)` uses the GiST index for a fast bbox pre-filter.
+- **Count-up-to-N+1**: `SELECT count(*) FROM (SELECT 1 FROM recintos_sigpac WHERE geom && bbox LIMIT 5001) sub` — avoids a full `COUNT(*)` scan; terminates at 5001 rows (~15–28 ms vs ~3.9 s).
+- **Statement timeout**: `SET LOCAL statement_timeout = '15000'` inside an explicit transaction; prevents runaway queries.
+- **HARD_LIMIT = 5000**: Maximum parcels returned per request. `truncated = (total_estimate > 5000)`.
+- **Redis cache**: Results keyed by exact bbox string; TTL = 24 hours.
+
+### Frontend rendering
+The frontend uses a single imperative `ParcelCanvasLayer` component:
+- **Renderer**: `L.canvas({ padding: 0.5 })` — all parcels share one `<canvas>` element; no per-feature SVG nodes.
+- **`pointToLayer`**: Returns `L.circleMarker` for Point geometries (zoom-14 centroids) to avoid `L.Marker` DOM images.
+- **Lifecycle**: `useEffect` with explicit `layer.remove()` on cleanup — prevents layer accumulation on pan/zoom.
+- **Callback stability**: `callbackRef` pattern keeps `onEachFeature` current without recreating the canvas layer on every render.
+- **Refresh**: `refreshTrigger` counter in `ParcelLayer`'s `useEffect` dependency array; incrementing it re-runs the effect (cancels in-flight, fetches new bbox, re-registers `moveend`).
+
+---
+
+## 11. Frontend Architecture (Implemented)
+
+The frontend is a React 18 + Vite single-page application served by Nginx.
+
+### Key components (MapView.jsx)
+
+| Component | Role |
+|---|---|
+| `WMSLayers` | Adds OSM + PNOA WMS base layers and layer control to the Leaflet map |
+| `ParcelLayer` | Data fetcher: calls `/api/v1/sigpac/parcels` on `moveend` and `refreshTrigger` changes; updates `parcelsGeoJson` state |
+| `ParcelCanvasLayer` | Imperative canvas renderer for SIGPAC parcels; `L.canvas` renderer; `pointToLayer` → `L.circleMarker` |
+| `MapCenterUpdater` | Tracks map center and zoom level into React state (used by weather panel) |
+| `Legend` | Bottom-left collapsible legend; shows status colors + live mouse coordinates |
+| `WeatherPanel` | Weather data drawer (bottom-right) |
+| `AgroCopilot` | Conversational AI chat (bottom-right) |
+| `WhatIfSimulator` | Modal scenario simulator (triggered from parcel popup) |
+
+### SIGPAC UI controls (top-center, outside MapContainer)
+```
+.sigpac-controls (absolute, top-center)
+  └─ .sigpac-controls-row
+       ├─ .sigpac-toggle-btn  ("Amosar SIGPAC" / "Ocultar SIGPAC")
+       └─ .sigpac-refresh-btn  (visible only when active; disabled while fetching)
+  └─ .sigpac-truncated-banner  (visible only when truncated=true)
+```
+
+### Leaflet icon fix
+```javascript
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({ iconUrl, iconRetinaUrl, shadowUrl });
+```
+Applied at module level (before any component mounts) to resolve Vite asset-pipeline 404s for `marker-icon.png`.
 
 ---
 

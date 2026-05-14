@@ -1,8 +1,8 @@
 **\# TerraGalicia DSS — Product Requirements Document (PRD)**
 
-**\*\*Version\*\***: 1.0    
-**\*\*Date\*\***: April 2026    
-**\*\*Status\*\***: Draft for Technical Review    
+**\*\*Version\*\***: 1.1
+**\*\*Date\*\***: May 2026
+**\*\*Status\*\***: Partial MVP Implemented — Core features running
 **\*\*Target MVP Delivery\*\***: Q3 2026 (12 weeks from start)
 
 **\---**
@@ -345,7 +345,7 @@ TerraGalicia is an open-source, FIWARE-standardized agricultural decision-suppor
 
 | Requirement | Specification |  
 |---|---|  
-| **\*\*Performance\*\*** | Page load \<2s on 4G mobile; map rendering (1000+ parcels) \<5s; API response time \<500ms for 95th percentile |  
+| **\*\*Performance\*\*** | Page load \<2s on 4G mobile; map rendering (5000 parcels) \<1s with canvas renderer (implemented); SIGPAC API response \<2s for dense bboxes; API response time \<500ms for 95th percentile |  
 | **\*\*Scalability\*\*** | Support 10,000+ concurrent users; 1,000+ parcels refreshing weather/alerts every 30 min; horizontal scaling via Docker/Kubernetes |  
 | **\*\*Availability\*\*** | 99.5% uptime SLA; graceful degradation if AEMET/Copernicus APIs are down (cache \+ local model fallback) |  
 | **\*\*Security\*\*** | HTTPS/TLS 1.3 minimum; JWT authentication; role-based access control (RBAC: farmer, cooperative manager, extension agent, admin); no plaintext passwords; comply with GDPR and Spanish data protection law (LPDP) |  
@@ -601,9 +601,10 @@ TerraGalicia is an open-source, FIWARE-standardized agricultural decision-suppor
 
 **\*\*Document Version History\*\***
 
-| Version | Date | Author | Change |  
-|---|---|---|---|  
+| Version | Date | Author | Change |
+|---|---|---|---|
 | 1.0 | Apr 2026 | Product Team | Initial PRD; MVP scope defined |
+| 1.1 | May 2026 | Engineering Team | Partial MVP implemented: SIGPAC viewer (PostGIS + canvas renderer), parcel popup with suitability, weather panel, AgroCopilot, WhatIf simulator, JWT auth. Frontend minimum zoom raised to 15. `SigpacOverlayLayer` removed (duplicate). SIGPAC controls cluster (top-center) with Refrescar button. Truncation banner updated. |
 
 **\*\*Approvals Required\*\***  
 \- \[ \] Product Manager  

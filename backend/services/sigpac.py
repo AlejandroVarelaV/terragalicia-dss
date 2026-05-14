@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 from typing import Any, Tuple
 
+import asyncpg
 import httpx
 
 from config import get_settings
@@ -22,12 +24,12 @@ def _bbox_to_key(bbox: Tuple[float, float, float, float]) -> str:
     return f"sigpac:bbox:{bbox[0]}:{bbox[1]}:{bbox[2]}:{bbox[3]}"
 
 
-async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float]) -> dict[str, Any] | None:
+async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float], zoom: int = 18) -> dict[str, Any] | None:
     """Fetch parcels from local .gpkg files in Recintos_Corunha directory.
     
     Only opens .gpkg files whose spatial extent intersects with the query bbox.
     Filters by extent first, then sorts by proximity to bbox center.
-    Limits results to 500 features per request and sets truncated flag if exceeded.
+    Uses zoom-based feature limits and uniform sampling across files.
     """
     if not HAS_FIONA:
         LOGGER.warning("fiona not installed; skipping .gpkg fallback")
@@ -46,7 +48,17 @@ async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float]) -> dict[str,
     minx, miny, maxx, maxy = bbox
     cx = (minx + maxx) / 2
     cy = (miny + maxy) / 2
-    max_features = 500
+    
+    # Dynamic limit based on zoom level
+    if zoom >= 18:
+        max_features = 1000
+    elif zoom >= 16:
+        max_features = 500
+    elif zoom == 15:
+        max_features = 300
+    else:  # zoom 14
+        max_features = 150
+    
     truncated = False
 
     try:
@@ -77,7 +89,11 @@ async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float]) -> dict[str,
         # Sort by distance (closest first)
         matching_files.sort(key=lambda x: x[1])
         
-        # Second pass: fetch features from matching files in proximity order
+        # Calculate per-file quota for uniform sampling
+        num_files = len(matching_files)
+        quota_per_file = max(10, max_features // num_files) if num_files > 0 else max_features
+        
+        # Second pass: fetch features from matching files in proximity order with uniform sampling
         features = []
         
         for gpkg_path, _ in matching_files:
@@ -88,7 +104,21 @@ async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float]) -> dict[str,
             try:
                 # fiona.open with bbox parameter filters features spatially
                 with fiona.open(gpkg_path, layer="recinto", bbox=(minx, miny, maxx, maxy)) as src:
-                    for feature in src:
+                    file_features = list(src)
+                    total_in_file = len(file_features)
+                    
+                    # Determine sampling strategy for this file
+                    if total_in_file <= quota_per_file:
+                        # Take all features from this file
+                        features_to_use = file_features
+                    else:
+                        # Uniform sampling: take every nth feature
+                        step = total_in_file // quota_per_file
+                        features_to_use = [file_features[i] for i in range(0, total_in_file, step)]
+                        # Ensure we don't exceed quota
+                        features_to_use = features_to_use[:quota_per_file]
+                    
+                    for feature in features_to_use:
                         if len(features) >= max_features:
                             truncated = True
                             break
@@ -125,6 +155,109 @@ async def _fetch_from_gpkg(bbox: Tuple[float, float, float, float]) -> dict[str,
         return result
     except Exception as exc:  # noqa: BLE001
         LOGGER.warning("Error during .gpkg fetch: %s", exc)
+        return None
+
+
+async def _fetch_from_postgis(
+    bbox: Tuple[float, float, float, float],
+    limit: int = 5000,
+    zoom: int = 17,
+) -> dict[str, Any] | None:
+    """Fetch parcels from PostGIS using spatial bbox query."""
+    HARD_LIMIT = 5000
+    try:
+        settings = get_settings()
+        minx, miny, maxx, maxy = bbox
+
+        if zoom <= 14:
+            geom_expr = "ST_AsGeoJSON(ST_Centroid(geom))::text"
+        elif zoom == 15:
+            # COALESCE: ST_Simplify can return NULL for degenerate polygons; fall back to original
+            geom_expr = "COALESCE(ST_AsGeoJSON(ST_Simplify(geom, 0.0002)), ST_AsGeoJSON(geom))::text"
+        elif zoom == 16:
+            geom_expr = "COALESCE(ST_AsGeoJSON(ST_Simplify(geom, 0.0001)), ST_AsGeoJSON(geom))::text"
+        else:
+            geom_expr = "ST_AsGeoJSON(geom)::text"
+
+        effective_limit = min(limit, HARD_LIMIT)
+
+        conn = await asyncpg.connect(settings.database_url_postgis)
+        try:
+            async with conn.transaction():
+                await conn.execute("SET LOCAL statement_timeout = '15000'")
+
+                count_row = await conn.fetchrow(
+                    """
+                    SELECT count(*) FROM (
+                      SELECT 1 FROM recintos_sigpac
+                      WHERE geom && ST_MakeEnvelope($1, $2, $3, $4, 4326)
+                      LIMIT 5001
+                    ) sub
+                    """,
+                    minx, miny, maxx, maxy,
+                )
+                total_estimate = int(count_row["count"]) if count_row else 0
+
+                rows = await conn.fetch(
+                    f"""
+                    SELECT
+                        id,
+                        provincia,
+                        municipio,
+                        poligono,
+                        parcela,
+                        recinto,
+                        dn_surface,
+                        uso_sigpac,
+                        pendiente_media,
+                        {geom_expr} as geometry
+                    FROM recintos_sigpac
+                    WHERE geom && ST_MakeEnvelope($1, $2, $3, $4, 4326)
+                    LIMIT $5
+                    """,
+                    minx,
+                    miny,
+                    maxx,
+                    maxy,
+                    effective_limit,
+                )
+        finally:
+            await conn.close()
+
+        if not rows:
+            return None
+
+        features = []
+        for row in rows:
+            features.append({
+                "type": "Feature",
+                "geometry": json.loads(row["geometry"]),
+                "properties": {
+                    "id": row["id"],
+                    "provincia": row["provincia"],
+                    "municipio": row["municipio"],
+                    "poligono": row["poligono"],
+                    "parcela": row["parcela"],
+                    "recinto": row["recinto"],
+                    "area": row["dn_surface"],
+                    "landUse": row["uso_sigpac"],
+                    "slope": row["pendiente_media"],
+                    "geometry_type": "centroid" if zoom <= 14 else "polygon",
+                    "source": "postgis",
+                }
+            })
+
+        truncated = total_estimate > HARD_LIMIT
+        return {
+            "type": "FeatureCollection",
+            "features": features,
+            "truncated": truncated,
+            "total_estimate": total_estimate,
+            "returned": len(features),
+        }
+
+    except Exception as exc:
+        LOGGER.warning("PostGIS fetch error: %s", exc)
         return None
 
 
@@ -168,11 +301,17 @@ def _get_mock_parcels(bbox: Tuple[float, float, float, float]) -> dict[str, Any]
     return {"type": "FeatureCollection", "features": features}
 
 
-async def fetch_parcels_by_bbox(bbox: Tuple[float, float, float, float], redis_cache=None) -> dict[str, Any]:
+async def fetch_parcels_by_bbox(
+    bbox: Tuple[float, float, float, float],
+    zoom: int = 18,
+    limit: int = 200,
+    redis_cache=None,
+) -> dict[str, Any]:
     """Fetch parcel FeatureCollection for given bbox.
 
-    Tries local .gpkg files first, then fallback to mock data.
+    Tries PostGIS first, then local .gpkg files, then fallback to mock data.
     Caches results in Redis for 24h when redis_cache is provided.
+    Uses zoom level to determine feature limits.
     """
     settings = get_settings()
     key = _bbox_to_key(bbox)
@@ -238,8 +377,16 @@ async def fetch_parcels_by_bbox(bbox: Tuple[float, float, float, float], redis_c
     # except Exception as exc:  # noqa: BLE001
     #     LOGGER.warning("SIGPAC WFS failed: %s", exc)
 
-    # Try .gpkg local files (FIRST)
-    gpkg_result = await _fetch_from_gpkg(bbox)
+    # Try PostGIS first (FIRST)
+    postgis_result = await _fetch_from_postgis(bbox, limit=limit, zoom=zoom)
+    if postgis_result and postgis_result.get("features"):
+        LOGGER.info("Using postgis source for bbox=%s", bbox)
+        if redis_cache is not None:
+            await redis_cache.set_json(key, postgis_result, 86400)
+        return postgis_result
+
+    # Try .gpkg local files (SECOND)
+    gpkg_result = await _fetch_from_gpkg(bbox, zoom=zoom)
     if gpkg_result and gpkg_result.get("features"):
         LOGGER.info("Using gpkg-local source for bbox=%s", bbox)
         if redis_cache is not None:

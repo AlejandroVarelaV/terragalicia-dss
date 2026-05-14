@@ -1,12 +1,15 @@
 export const BACKEND_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
-export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox, zoom = null } = {}) {
+export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox, zoom = null, limit = null } = {}) {
   const url = new URL(`${baseUrl}/sigpac/parcels`);
   if (bbox) {
     url.searchParams.set('bbox', bbox);
   }
   if (zoom !== null) {
     url.searchParams.set('zoom', zoom);
+  }
+  if (limit !== null) {
+    url.searchParams.set('limit', limit);
   }
 
   const controller = new AbortController();
@@ -26,12 +29,20 @@ export async function fetchSigpacParcels({ baseUrl = BACKEND_BASE_URL, bbox, zoo
     }
 
     if (payload.features.length === 0) {
-      return { type: 'FeatureCollection', features: [], dataSource: 'empty' };
+      return { type: 'FeatureCollection', features: [], dataSource: 'empty',
+               truncated: false, total_estimate: 0, returned: 0 };
     }
 
     const dataSource = payload.features?.[0]?.properties?.source || 'unknown';
 
-    return { type: payload.type, features: payload.features, dataSource };
+    return {
+      type: payload.type,
+      features: payload.features,
+      dataSource,
+      truncated: payload.truncated ?? false,
+      total_estimate: payload.total_estimate ?? payload.features.length,
+      returned: payload.returned ?? payload.features.length,
+    };
   } catch (error) {
     if (controller.signal.aborted) {
       throw new Error('SIGPAC timeout after 25s');

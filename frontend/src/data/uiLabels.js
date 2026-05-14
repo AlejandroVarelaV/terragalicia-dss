@@ -6,18 +6,45 @@ export const SOIL_NAMES = {
 };
 
 export const CROP_NAMES = {
-  millo: 'Millo (Millo)',
+  // Crops from suitability scoring rules
+  millo: 'Millo',
   pataca: 'Pataca',
+  trigo: 'Trigo',
+  centeo: 'Centeo',
+  prado: 'Prado',
+  viñedo: 'Viñedo',
+  castano: 'Castiñeiro',
+  horta: 'Horta',
+  frutales: 'Froiteiras',
+  pemento: 'Pemento de Padrón',
+  // Additional crops in catalog
   kiwi: 'Kiwi',
   albarino: 'Uva Albariño',
   mencia: 'Uva Mencía',
   grelos: 'Grelos',
-  trigo: 'Trigo',
-  centeo: 'Centeo',
+  // Legacy/aliases
   potatoe: 'Pataca',
   maize: 'Millo',
   potato: 'Pataca',
 };
+
+export const USO_SIGPAC_NAMES = {
+  TI: 'Terra labrable',
+  VI: 'Viñedo',
+  FY: 'Froiteiras',
+  PA: 'Pasto',
+  PR: 'Pasto con arborado',
+  OV: 'Olivar',
+  ZU: 'Solo urbano',
+  ED: 'Edificacións',
+  IM: 'Improductivo',
+  AG: 'Augas',
+  CA: 'Canles',
+};
+
+export function getReadableUsoSigpac(value) {
+  return translateLabel(value, USO_SIGPAC_NAMES) || extractTextValue(value) || '';
+}
 
 export const STATUS_NAMES = {
   PLANTED: '🌱 Plantada',

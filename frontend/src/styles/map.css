@@ -91,6 +91,13 @@ select {
   position: relative;
 }
 
+/* ─── z-index scale ───────────────────────────────────────────
+   1000  base controls: legend, zoom, floating actions, data badge
+   1100  functional overlays: sigpac-controls cluster, map-toast
+   1200  content panels: whatif-modal, weather-drawer, agro-drawer
+   Leaflet panes stay below (popup ≈700, overlay ≈400)
+   ─────────────────────────────────────────────────────────── */
+
 .sigpac-overlay-button {
   position: absolute;
   left: 10px;
@@ -164,7 +171,6 @@ select {
   bottom: 90px;
   right: 10px;
   width: 280px;
-  z-index: 1001;
   max-height: min(64vh, 520px);
   overflow: hidden;
   display: flex;
@@ -177,6 +183,7 @@ select {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1200;
 }
 
 .weather-panel header,
@@ -323,7 +330,7 @@ select {
   width: 300px;
   max-height: 400px;
   overflow-y: auto;
-  z-index: 1001;
+  z-index: 1200;
   display: grid;
   gap: 12px;
   padding: 14px;
@@ -392,11 +399,11 @@ select {
 .whatif-modal {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1120;
+  top: 110px; /* cleared below sigpac-controls cluster; scale: 1200 */
+  transform: translateX(-50%);
+  z-index: 1200;
   width: min(520px, calc(100vw - 24px));
-  max-height: min(80vh, 760px);
+  max-height: calc(min(80vh, 760px) - 110px);
   overflow: auto;
   display: grid;
   gap: 14px;
@@ -489,10 +496,10 @@ select {
 }
 
 .popup-controls {
-  margin-top: 12px;
+  margin-top: 8px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 6px;
 }
 
 .popup-controls label {
@@ -525,6 +532,7 @@ select {
 .agro-drawer,
 .whatif-modal,
 .sigpac-overlay-button,
+.sigpac-controls,
 .map-toast {
   animation: fade-in 0.18s ease;
 }
@@ -642,16 +650,94 @@ select {
 
 .map-data-badge {
   position: absolute;
-  top: 56px;
+  top: 12px;
   left: 16px;
   z-index: 1000;
-  padding: 8px 12px;
-  border-radius: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
   background: rgba(16, 32, 21, 0.82);
   color: #f4f7f1;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 20px rgba(16, 32, 21, 0.22);
+}
+
+.sigpac-controls {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.sigpac-controls-row {
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.sigpac-toggle-btn,
+.sigpac-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 12px;
+  border: 1px solid rgba(16, 32, 21, 0.12);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #102015;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(16, 32, 21, 0.1);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.sigpac-toggle-btn:hover,
+.sigpac-refresh-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 32, 21, 0.16);
+}
+
+.sigpac-toggle-btn.is-active {
+  background: #102015;
+  color: #f7f9f4;
+}
+
+.sigpac-refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sigpac-source-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 8px 14px;
+  border: 1px solid rgba(16, 32, 21, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4b6a55;
+  font-size: 0.82rem;
+  box-shadow: 0 2px 8px rgba(16, 32, 21, 0.1);
+  white-space: nowrap;
+}
+
+.sigpac-truncated-banner {
+  pointer-events: auto;
+  padding: 7px 16px;
+  border-radius: 8px;
+  background: rgba(251, 191, 36, 0.97);
+  color: #1a1200;
+  font-size: 0.84rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
 }
 
 .map-legend h2 {
@@ -693,42 +779,46 @@ select {
 }
 
 .popup-card {
-  min-width: 220px;
+  min-width: 200px;
   color: #102015;
+  font-size: 0.88rem;
 }
 
 .popup-kicker {
-  margin: 0 0 4px;
-  font-size: 0.76rem;
+  margin: 0 0 2px;
+  font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #5b725f;
 }
 
 .popup-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.05rem;
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .popup-card dl {
   margin: 0;
   display: grid;
-  gap: 8px;
+  gap: 4px;
 }
 
 .popup-card dl > div {
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 10px;
+  grid-template-columns: 65px 1fr;
+  gap: 8px;
 }
 
 .popup-card dt {
-  font-weight: 700;
+  font-weight: 600;
   color: #48604d;
+  font-size: 0.82rem;
 }
 
 .popup-card dd {
   margin: 0;
+  font-size: 0.82rem;
 }
 
 .leaflet-container a {
@@ -859,8 +949,8 @@ select {
 .popup-status-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 0 0 12px;
+  gap: 6px;
+  margin: 0 0 6px;
 }
 
 .popup-status-dot {
@@ -880,8 +970,8 @@ select {
 }
 
 .popup-footer {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid rgba(16,32,21,0.08);
   display: flex;
   justify-content: flex-end;
@@ -941,7 +1031,7 @@ select {
 }
 
 .popup-section-title {
-  margin: 12px 0 8px;
+  margin: 8px 0 4px;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -998,6 +1088,29 @@ select {
   font-weight: 600;
   color: #48604d;
   text-align: right;
+}
+
+.popup-top-recommendation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.suitability-expand-btn {
+  margin-left: auto;
+  padding: 1px 6px;
+  border: 1px solid rgba(16,32,21,0.18);
+  border-radius: 4px;
+  background: rgba(16,32,21,0.06);
+  color: #4b6a55;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.suitability-expand-btn:hover {
+  background: rgba(16,32,21,0.12);
 }
 
 .popup-suitability-loading {

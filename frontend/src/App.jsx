@@ -11,7 +11,6 @@ export default function App() {
             Visualización de parcelas agrícolas de Galicia.
           </p>
         </div>
-        <div className="header-chip">Modo datos locais</div>
       </header>
       <main className="map-frame">
         <MapView />
