@@ -1,680 +1,146 @@
-# TerraGalicia DSS NGSI-LD Data Model (MVP)
+# TerraGalicia DSS — Modelo de datos
 
-**Last updated**: May 2026
-
-## 1. Overview
-TerraGalicia uses **NGSI-LD** (instead of NGSIv2) to model agricultural data as linked entities with explicit semantics through `@context`, standard `Relationship` links, and interoperable geospatial properties. The model separates **static attributes** (rarely changed, mostly cadastral/agronomic metadata) from **dynamic attributes** (time-varying sensor, weather, and operational data). The **IoT Agent (HTTP + MQTT)** is responsible for ingesting field telemetry and selected weather feeds into dynamic attributes on operational entities. **QuantumLeap** historizes entities with time-series value (notably telemetry, weather, parcel state, operations, and forecast snapshots) for analytics, trend views, and ML feature generation.
-
-> **Implementation status (May 2026)**: The NGSI-LD entity model is defined as a target architecture. Currently running: `AgriParcel` (SIGPAC geometries in PostGIS), `WeatherObserved`/`WeatherForecast` (via weather API), `AgriParcelOperation` and `AgriFertilizer` (via backend CRUD), and basic `AgriFarm`/`AgriSoil` stubs. IoT Agent historization (QuantumLeap) is not yet active.
+**Última actualización**: mayo 2026
 
 ---
 
-## 2. Entity Definitions
+## 1. Tabla principal: `recintos_sigpac`
 
-### AgriFarm
-- **NGSI-LD type**: `AgriFarm`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriFarm:farm001`
+La tabla central de la aplicación. Contiene los ~3,87 millones de recintos catastrales de la provincia de A Coruña cargados desde los ficheros `.gpkg` oficiales del SIGPAC.
 
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | manual entry | Unique farm identifier |
-| type | Property | string | Static | system | Must be `AgriFarm` |
-| name | Property | string | Static | manual entry | Farm display name |
-| farmType | Property | string | Static | manual entry | Smallholder, cooperative, mixed |
-| ownerName | Property | string | Static | manual entry | Farm owner/manager |
-| location | GeoProperty | GeoJSON Point/Polygon | Static | SIGPAC / manual entry | Farm centroid or boundary |
-| address | Property | object/string | Static | manual entry | Administrative address |
-| refMunicipality | Relationship | URN (`AdministrativeArea`) | Static | manual entry | Municipality link (A Coruña area) |
-| hasAgriParcel | Relationship | URN list (`AgriParcel`) | Dynamic | API | Parcels belonging to this farm |
-| cooperativeCode [EXTENSION] | Property | string | Static | manual entry | Cooperative membership identifier |
+### Esquema real (verificado en PostGIS)
 
-- **Relationships to other entities**:
-  - `AgriFarm (1) -> (N) AgriParcel` via `hasAgriParcel`
-- **IoT Agent note**: No direct writes. Farm is managed by backend/API.
-- **QuantumLeap note**: Optional historization of `hasAgriParcel` (portfolio evolution) if needed for auditing.
+| Columna | Tipo | Nullable | Descripción |
+|---|---|---|---|
+| `id` | `integer` | NOT NULL | Clave primaria (serial) |
+| `provincia` | `integer` | NOT NULL | Código de provincia (15 = A Coruña) |
+| `municipio` | `smallint` | NOT NULL | Código de municipio (INE) |
+| `agregado` | `smallint` | NOT NULL | Código de agregado catastral |
+| `zona` | `integer` | NOT NULL | Zona catastral |
+| `poligono` | `smallint` | NOT NULL | Número de polígono |
+| `parcela` | `integer` | NOT NULL | Número de parcela |
+| `recinto` | `integer` | NOT NULL | Número de recinto dentro de la parcela |
+| `dn_surface` | `double precision` | NOT NULL | Superficie declarada en hectáreas |
+| `pendiente_media` | `smallint` | NULL | **Pendiente media en décimas de porcentaje** (p.ej. 150 = 15,0 %) |
+| `altitud` | `smallint` | NULL | Altitud media del recinto en metros |
+| `csp` | `smallint` | NULL | Código de la clase de suelo productivo |
+| `coef_regadio` | `smallint` | NULL | Coeficiente de regadío (>0 indica disponibilidad de riego) |
+| `uso_sigpac` | `varchar(2)` | NOT NULL | Código de uso del suelo (ver tabla de usos) |
+| `incidencias` | `varchar(50)` | NULL | Incidencias catastrales |
+| `region` | `integer` | NULL | Región agroclimática |
+| `geom` | `geometry(MultiPolygon, 4326)` | NULL | Geometría en WGS 84 |
 
-### AgriParcel
-- **NGSI-LD type**: `AgriParcel`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriParcel:farm001:parcel01`
+**Índices**: clave primaria en `id`; dos índices GiST sobre `geom` para consultas espaciales.
 
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Unique parcel identifier |
-| type | Property | string | Static | system | Must be `AgriParcel` |
-| location | GeoProperty | GeoJSON Polygon | Static | SIGPAC | Parcel boundary |
-| area | Property | number | Static | SIGPAC | Parcel area in ha (`HAR`) |
-| category | Property | string | Static | SIGPAC | Land-use/crop category |
-| cadastralReference [EXTENSION] | Property | string | Static | SIGPAC | Cadastre/SIXPAC identifier |
-| belongsTo | Relationship | URN (`AgriFarm`) | Static | API | Parent farm |
-| hasAgriSoil | Relationship | URN (`AgriSoil`) | Static | CSIC / API | Dominant soil profile link |
-| hasAgriCrop | Relationship | URN (`AgriCrop`) | Dynamic | API | Current crop assignment |
-| hasAgriParcelRecord | Relationship | URN list (`AgriParcelRecord`) | Dynamic | IoT sensor/API | Recent telemetry records |
-| parcelStatus [EXTENSION] | Property | string enum | Dynamic | manual entry / API | Allowed values: `PLANTED`, `FALLOW`, `PREPARED`, `HARVESTED` |
-| suitabilityScore [EXTENSION] | Property | number | Dynamic | ML model | Crop suitability score (0-1) |
-| lastIrrigationDate [EXTENSION] | Property | date-time | Dynamic | IoT sensor/manual entry | Last irrigation timestamp |
-| soilMoistureAvg24h [EXTENSION] | Property | number | Dynamic | IoT sensor | 24h average soil moisture (`P1` fraction or `%`) |
+> **Nota sobre `pendiente_media`**: el campo se almacena en **décimas de porcentaje**. El backend lo divide entre 10 antes de aplicar las reglas de scoring (`pendiente_pct = pendiente_tenths / 10.0`).
 
-- **Relationships to other entities**:
-  - `AgriParcel (N) -> (1) AgriFarm` via `belongsTo`
-  - `AgriParcel (N) -> (1) AgriSoil` via `hasAgriSoil`
-  - `AgriParcel (N) -> (0..1) AgriCrop` via `hasAgriCrop`
-  - `AgriParcel (1) -> (N) AgriParcelRecord` via `hasAgriParcelRecord`
-  - `AgriParcel (1) -> (N) AgriParcelOperation` via inverse `refParcel`
-- **IoT Agent note**: Writes derived telemetry aggregates (`soilMoistureAvg24h`, optional `lastIrrigationDate`) via MQTT bridge every 15 minutes.
-- **QuantumLeap note**: Historize `parcelStatus`, `suitabilityScore`, `soilMoistureAvg24h`, `lastIrrigationDate`.
+### Códigos de uso SIGPAC más frecuentes
 
-### AgriCrop
-- **NGSI-LD type**: `AgriCrop`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriCrop:parcel01:maize:2026S1`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Unique crop-cycle identifier |
-| type | Property | string | Static | system | Must be `AgriCrop` |
-| cropSpecies | Property | string | Static | manual entry | Species (e.g., maize, potato) |
-| variety [EXTENSION] | Property | string | Static | manual entry | Cultivar/variety |
-| plantingDate | Property | date | Dynamic | manual entry / API | Actual planting date |
-| expectedHarvestDate | Property | date | Dynamic | ML model/manual entry | Forecast/plan harvest date |
-| phenologyStage [EXTENSION] | Property | string | Dynamic | IoT sensor / extension agent | Current stage (emergence, vegetative, etc.) |
-| cropHealthIndex [EXTENSION] | Property | number | Dynamic | ML model / Copernicus | Health index (0-1) |
-| refParcel | Relationship | URN (`AgriParcel`) | Static | API | Parcel where crop is cultivated |
-
-- **Relationships to other entities**:
-  - `AgriCrop (N) -> (1) AgriParcel` via `refParcel`
-- **IoT Agent note**: Usually indirect; optional updates to `phenologyStage` from device/topic enrichers weekly/daily.
-- **QuantumLeap note**: Historize `phenologyStage`, `cropHealthIndex`, and plan date revisions.
-
-### AgriSoil
-- **NGSI-LD type**: `AgriSoil`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriSoil:soilunit:ES15030:001`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Soil unit identifier |
-| type | Property | string | Static | system | Must be `AgriSoil` |
-| soilTextureType | Property | string | Static | CSIC Soil Map | Texture class |
-| soilPH | Property | number | Static | CSIC / lab | Typical pH (`pH`) |
-| organicMatter [EXTENSION] | Property | number | Static | CSIC / lab | Organic matter percentage (`%`) |
-| cationExchangeCapacity [EXTENSION] | Property | number | Static | CSIC / lab | CEC (`cmol(+)/kg`) |
-| drainageClass [EXTENSION] | Property | string | Static | CSIC | Drainage category |
-| salinity [EXTENSION] | Property | number | Dynamic | IoT sensor / lab | Electrical conductivity (`dS/m`) |
-| soilMoistureBaseline [EXTENSION] | Property | number | Dynamic | IoT sensor / model | Baseline moisture (`%`) |
-| location | GeoProperty | GeoJSON Polygon | Static | CSIC | Spatial extent of soil unit |
-
-- **Relationships to other entities**:
-  - `AgriSoil (1) -> (N) AgriParcel` via inverse of `hasAgriSoil`
-- **IoT Agent note**: Optional writes to `salinity` and `soilMoistureBaseline` via HTTP every 1-6 hours.
-- **QuantumLeap note**: Historize `salinity`, `soilMoistureBaseline` when sensors are installed.
-
-### AgriParcelRecord
-- **NGSI-LD type**: `AgriParcelRecord`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-21T10:00:00Z`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Record identifier (time-scoped) |
-| type | Property | string | Static | system | Must be `AgriParcelRecord` |
-| refParcel | Relationship | URN (`AgriParcel`) | Static | API | Parcel measured |
-| source | Property | string | Static | IoT sensor | Sensor/station origin |
-| dateObserved | Property | date-time | Dynamic | IoT sensor | Observation timestamp |
-| soilMoistureVwc [EXTENSION] | Property | number | Dynamic | IoT sensor | Volumetric soil water content (`P1` or `%`) |
-| soilTemperature [EXTENSION] | Property | number | Dynamic | IoT sensor | Soil temperature (`DEG_C`) |
-| airTemperature [EXTENSION] | Property | number | Dynamic | IoT sensor | Near-surface temperature (`DEG_C`) |
-| batteryLevel [EXTENSION] | Property | number | Dynamic | IoT sensor | Device battery (`%`) |
-| signalStrength [EXTENSION] | Property | number | Dynamic | IoT sensor | Radio signal (`dBm`) |
-
-- **Relationships to other entities**:
-  - `AgriParcelRecord (N) -> (1) AgriParcel` via `refParcel`
-- **IoT Agent note**: Primary write target. MQTT topics from field probes, with HTTP fallback. Typical frequency: every 10-30 minutes.
-- **QuantumLeap note**: Historize all dynamic measurement fields and `dateObserved`.
-
-### AgriParcelOperation
-- **NGSI-LD type**: `AgriParcelOperation`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriParcelOperation:parcel01:fertilizing:2026-04-21`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Operation event identifier |
-| type | Property | string | Static | system | Must be `AgriParcelOperation` |
-| operationType | Property | string | Static | manual entry / API | e.g., sowing, fertilizing, irrigation |
-| plannedStartAt [EXTENSION] | Property | date-time | Dynamic | manual entry | Planned start |
-| startedAt | Property | date-time | Dynamic | manual entry / API | Actual start |
-| endedAt | Property | date-time | Dynamic | manual entry / API | Actual end |
-| operatorName [EXTENSION] | Property | string | Static | manual entry | Person/team performing operation |
-| quantityApplied [EXTENSION] | Property | number | Dynamic | manual entry / IoT | Applied input amount (`kg`/`L`) |
-| unitCode [EXTENSION] | Property | string | Dynamic | manual entry / IoT | UCUM/QUDT code for quantity |
-| notes [EXTENSION] | Property | string | Dynamic | manual entry | Free operation notes |
-| refParcel | Relationship | URN (`AgriParcel`) | Static | API | Target parcel |
-| refFertilizer | Relationship | URN (`AgriFertilizer`) | Dynamic | API | Fertilizer used when `operationType=fertilizing` |
-
-- **Relationships to other entities**:
-  - `AgriParcelOperation (N) -> (1) AgriParcel` via `refParcel`
-  - `AgriParcelOperation (N) -> (0..1) AgriFertilizer` via `refFertilizer`
-- **IoT Agent note**: Optional write path from smart spreaders/tanks via MQTT (event-based).
-- **QuantumLeap note**: Historize `operationType`, timing fields, `quantityApplied`, `refFertilizer` to represent fertilization history (no separate entity).
-
-### AgriFertilizer
-- **NGSI-LD type**: `AgriFertilizer`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Agrifood/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:AgriFertilizer:npk-15-15-15:batch2026-03`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Fertilizer product/batch identifier |
-| type | Property | string | Static | system | Must be `AgriFertilizer` |
-| productName | Property | string | Static | manual entry | Commercial name |
-| nutrientN | Property | number | Static | manual entry | Nitrogen percentage (`%`) |
-| nutrientP | Property | number | Static | manual entry | Phosphorus percentage (`%`) |
-| nutrientK | Property | number | Static | manual entry | Potassium percentage (`%`) |
-| formulationType [EXTENSION] | Property | string | Static | manual entry | Granular/liquid/foliar |
-| stockQuantity [EXTENSION] | Property | number | Dynamic | manual entry / IoT | Current stock (`kg`/`L`) |
-| unitCode [EXTENSION] | Property | string | Static | manual entry | Stock unit UCUM/QUDT |
-| expiryDate [EXTENSION] | Property | date | Static | manual entry | Product expiry |
-| supplierName [EXTENSION] | Property | string | Static | manual entry | Supplier reference |
-
-- **Relationships to other entities**:
-  - `AgriFertilizer (1) -> (N) AgriParcelOperation` via inverse of `refFertilizer`
-- **IoT Agent note**: Optional stock updates from smart tanks/scales via HTTP every 1 hour.
-- **QuantumLeap note**: Historize `stockQuantity` and low-stock threshold events.
-
-### WeatherObserved
-- **NGSI-LD type**: `WeatherObserved`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Weather/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:WeatherObserved:station:meteogalicia:15030:2026-04-21T10:00:00Z`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Observation identifier |
-| type | Property | string | Static | system | Must be `WeatherObserved` |
-| dateObserved | Property | date-time | Dynamic | MeteoGalicia / AEMET | Observation time |
-| location | GeoProperty | GeoJSON Point | Static | MeteoGalicia / AEMET | Station coordinates |
-| temperature | Property | number | Dynamic | MeteoGalicia / AEMET | Air temperature (`DEG_C`) |
-| relativeHumidity | Property | number | Dynamic | MeteoGalicia / AEMET | Relative humidity (`P1` or `%`) |
-| precipitation | Property | number | Dynamic | MeteoGalicia / AEMET | Precipitation (`MM`) |
-| windSpeed | Property | number | Dynamic | MeteoGalicia / AEMET | Wind speed (`MTS`) |
-| solarRadiation [EXTENSION] | Property | number | Dynamic | MeteoGalicia | Global radiation (`W/m2`) |
-| refPointOfInterest [EXTENSION] | Relationship | URN (`AgriFarm`/`AgriParcel`) | Dynamic | API | Optional nearest farm/parcel link |
-
-- **Relationships to other entities**:
-  - `WeatherObserved (N) -> (0..N) AgriParcel` via spatial association or `refPointOfInterest`
-- **IoT Agent note**: Ingests from HTTP weather connectors at 10-60 minute intervals.
-- **QuantumLeap note**: Full historization of weather variables for analytics, forecasting features, and alerting.
-
-### WeatherForecast
-- **NGSI-LD type**: `WeatherForecast`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.Weather/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:WeatherForecast:grid:15030:2026-04-22T00:00:00Z`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Forecast identifier |
-| type | Property | string | Static | system | Must be `WeatherForecast` |
-| issuedAt [EXTENSION] | Property | date-time | Dynamic | AEMET / MeteoGalicia | Forecast publication time |
-| validFrom [EXTENSION] | Property | date-time | Dynamic | AEMET / MeteoGalicia | Forecast start |
-| validTo [EXTENSION] | Property | date-time | Dynamic | AEMET / MeteoGalicia | Forecast end |
-| location | GeoProperty | GeoJSON Point/Polygon | Static | AEMET / MeteoGalicia | Forecast cell/point |
-| temperatureMin | Property | number | Dynamic | AEMET / MeteoGalicia | Min temperature (`DEG_C`) |
-| temperatureMax | Property | number | Dynamic | AEMET / MeteoGalicia | Max temperature (`DEG_C`) |
-| precipitationProbability [EXTENSION] | Property | number | Dynamic | AEMET / MeteoGalicia | Probability (`P1` or `%`) |
-| frostRisk [EXTENSION] | Property | number | Dynamic | ML model | Frost risk score (0-1) |
-| refParcel [EXTENSION] | Relationship | URN list (`AgriParcel`) | Dynamic | API | Parcels covered by forecast cell |
-
-- **Relationships to other entities**:
-  - `WeatherForecast (1) -> (N) AgriParcel` via `refParcel`
-- **IoT Agent note**: Updated by scheduled weather ingestor over HTTP every 6 hours (or provider cadence).
-- **QuantumLeap note**: Historize forecast snapshots (`issuedAt`, min/max temp, precipitation probability, frost risk).
-
-### WaterQualityObserved
-- **NGSI-LD type**: `WaterQualityObserved`
-- **@context**: `https://raw.githubusercontent.com/smart-data-models/dataModel.WaterQuality/master/context.jsonld`
-- **Example id pattern**: `urn:ngsi-ld:WaterQualityObserved:source:well12:2026-04-21T10:00:00Z`
-
-| Attribute | NGSI-LD type | Value type | Static/Dynamic | Source | Description |
-|---|---|---|---|---|---|
-| id | Property | URN string | Static | system | Water quality sample identifier |
-| type | Property | string | Static | system | Must be `WaterQualityObserved` |
-| dateObserved | Property | date-time | Dynamic | IoT sensor / lab | Observation timestamp |
-| location | GeoProperty | GeoJSON Point | Static | IoT sensor / manual entry | Well/river source location |
-| ph | Property | number | Dynamic | IoT sensor / lab | Acidity/alkalinity (`pH`) |
-| electricalConductivity [EXTENSION] | Property | number | Dynamic | IoT sensor / lab | EC (`uS/cm`) |
-| nitrate [EXTENSION] | Property | number | Dynamic | IoT sensor / lab | Nitrate concentration (`mg/L`) |
-| dissolvedOxygen [EXTENSION] | Property | number | Dynamic | IoT sensor / lab | Dissolved oxygen (`mg/L`) |
-| turbidity [EXTENSION] | Property | number | Dynamic | IoT sensor / lab | Turbidity (`NTU`) |
-| refParcel [EXTENSION] | Relationship | URN list (`AgriParcel`) | Dynamic | API | Parcels irrigated by this source |
-
-- **Relationships to other entities**:
-  - `WaterQualityObserved (N) -> (0..N) AgriParcel` via `refParcel`
-- **IoT Agent note**: MQTT ingestion from water probes every 30-60 minutes; manual lab upload via HTTP.
-- **QuantumLeap note**: Historize all measured quality indicators and compliance thresholds.
+| Código | Descripción |
+|---|---|
+| `TI` | Tierra de labor en secano |
+| `PR` | Prado natural |
+| `PA` | Pastizal |
+| `FO` | Forestal |
+| `VI` | Viñedo |
+| `CF` | Cítricos y frutales |
+| `ZU` | Zona urbana (excluida del scoring) |
+| `ED` | Edificaciones (excluida) |
+| `IM` | Improductivo (excluida) |
+| `AG` | Corrientes y superficies de agua (excluida) |
+| `CA` | Vías de comunicación (excluida) |
 
 ---
 
-## 3. Entity Relationship Diagram
+## 2. Motor de aptitud de cultivos
 
-```mermaid
-erDiagram
-    AgriFarm ||--o{ AgriParcel : hasAgriParcel
-    AgriParcel }o--|| AgriSoil : hasAgriSoil
-    AgriParcel ||--o| AgriCrop : hasAgriCrop
-    AgriParcel ||--o{ AgriParcelRecord : hasAgriParcelRecord
-    AgriParcel ||--o{ AgriParcelOperation : refParcel
-    AgriFertilizer ||--o{ AgriParcelOperation : refFertilizer
-    WeatherForecast }o--o{ AgriParcel : refParcel
-    WeatherObserved }o--o{ AgriParcel : spatialLink
-    WaterQualityObserved }o--o{ AgriParcel : refParcel
+El endpoint `/api/v1/parcels/{id}/suitability` calcula un ranking de 10 cultivos para cada parcela usando reglas agronómicas explícitas, sin modelos ML. La razón es práctica: no existe un dataset público de rendimientos reales por parcela SIGPAC para A Coruña con la granularidad necesaria para entrenar un modelo.
 
-    AgriFarm {
-      string id
-      string name
-      geojson location
-      string farmType
-    }
-    AgriParcel {
-      string id
-      geojson location
-      number area
-      string parcelStatus_EXT
-      number suitabilityScore_EXT
-    }
-    AgriCrop {
-      string id
-      string cropSpecies
-      date plantingDate
-      number cropHealthIndex_EXT
-    }
-    AgriSoil {
-      string id
-      string soilTextureType
-      number soilPH
-      number salinity_EXT
-    }
-    AgriParcelRecord {
-      string id
-      datetime dateObserved
-      number soilMoistureVwc_EXT
-      number soilTemperature_EXT
-    }
-    AgriParcelOperation {
-      string id
-      string operationType
-      datetime startedAt
-      number quantityApplied_EXT
-    }
-    AgriFertilizer {
-      string id
-      string productName
-      number nutrientN
-      number stockQuantity_EXT
-    }
-    WeatherObserved {
-      string id
-      datetime dateObserved
-      number temperature
-      number precipitation
-    }
-    WeatherForecast {
-      string id
-      datetime issuedAt_EXT
-      number temperatureMin
-      number temperatureMax
-    }
-    WaterQualityObserved {
-      string id
-      datetime dateObserved
-      number ph
-      number nitrate_EXT
-    }
-```
+### Pesos del scoring
 
----
-
-## 4. Static vs Dynamic Summary Table
-
-| Entity | STATIC attributes | DYNAMIC attributes |
+| Factor | Variable SIGPAC | Peso |
 |---|---|---|
-| AgriFarm | id, type, name, farmType, ownerName, location, address, refMunicipality, cooperativeCode [EXTENSION] | hasAgriParcel |
-| AgriParcel | id, type, location, area, category, cadastralReference [EXTENSION], belongsTo, hasAgriSoil | hasAgriCrop, hasAgriParcelRecord, parcelStatus [EXTENSION], suitabilityScore [EXTENSION], lastIrrigationDate [EXTENSION], soilMoistureAvg24h [EXTENSION] |
-| AgriCrop | id, type, cropSpecies, variety [EXTENSION], refParcel | plantingDate, expectedHarvestDate, phenologyStage [EXTENSION], cropHealthIndex [EXTENSION] |
-| AgriSoil | id, type, soilTextureType, soilPH, organicMatter [EXTENSION], cationExchangeCapacity [EXTENSION], drainageClass [EXTENSION], location | salinity [EXTENSION], soilMoistureBaseline [EXTENSION] |
-| AgriParcelRecord | id, type, refParcel, source | dateObserved, soilMoistureVwc [EXTENSION], soilTemperature [EXTENSION], airTemperature [EXTENSION], batteryLevel [EXTENSION], signalStrength [EXTENSION] |
-| AgriParcelOperation | id, type, operationType, operatorName [EXTENSION], refParcel | plannedStartAt [EXTENSION], startedAt, endedAt, quantityApplied [EXTENSION], unitCode [EXTENSION], notes [EXTENSION], refFertilizer |
-| AgriFertilizer | id, type, productName, nutrientN, nutrientP, nutrientK, formulationType [EXTENSION], unitCode [EXTENSION], expiryDate [EXTENSION], supplierName [EXTENSION] | stockQuantity [EXTENSION] |
-| WeatherObserved | id, type, location | dateObserved, temperature, relativeHumidity, precipitation, windSpeed, solarRadiation [EXTENSION], refPointOfInterest [EXTENSION] |
-| WeatherForecast | id, type, location | issuedAt [EXTENSION], validFrom [EXTENSION], validTo [EXTENSION], temperatureMin, temperatureMax, precipitationProbability [EXTENSION], frostRisk [EXTENSION], refParcel [EXTENSION] |
-| WaterQualityObserved | id, type, location | dateObserved, ph, electricalConductivity [EXTENSION], nitrate [EXTENSION], dissolvedOxygen [EXTENSION], turbidity [EXTENSION], refParcel [EXTENSION] |
+| Pendiente | `pendiente_media` (÷10 → %) | 40 % |
+| Disponibilidad de riego | `coef_regadio` | 25 % |
+| Mes de siembra actual | fecha del sistema | 20 % |
+| Altitud | `altitud` | 15 % |
+
+### Reglas por cultivo
+
+| Cultivo | Pendiente máx. (%) | Riego | Ventana de siembra (meses) | Altitud máx. (m) |
+|---|---|---|---|---|
+| Millo | 15 | recomendable | abril–mayo (4–5) | 600 |
+| Pataca | 20 | opcional | marzo–mayo (3–5) | 900 |
+| Trigo | 25 | no necesario | oct.–nov. (10–11) | 800 |
+| Centeo | 35 | no necesario | oct.–nov. (10–11) | 1.000 |
+| Prado | 45 | no necesario | perenne (sin ventana) | 1.100 |
+| Viñedo | 30 | no necesario | perenne (sin ventana) | 700 |
+| Castaño | 50 | no necesario | perenne (sin ventana) | 1.000 |
+| Horta | 10 | necesario | marzo–junio (3–6) | 600 |
+| Frutales | 20 | recomendable | ene.–marzo (1–3) | 700 |
+| Pemento | 12 | necesario | marzo–mayo (3–5) | 500 |
+
+### Cálculo del score
+
+Para cada factor se obtiene una puntuación parcial entre 0,0 y 1,0:
+
+- **Pendiente**: 1,0 si `pendiente_pct ≤ pendiente_max`; decaimiento lineal hasta 0,0 en `pendiente_pct = 2 × pendiente_max`.
+- **Riego**:
+  - `necesario`: 1,0 si `coef_regadio > 0`, si no 0,0.
+  - `recomendable`: 1,0 si `coef_regadio > 0`, si no 0,6.
+  - `no necesario` / `opcional`: siempre 1,0.
+- **Mes**: 1,0 si el mes actual está en la ventana de siembra (o cultivo perenne); 0,0 si está fuera.
+- **Altitud**: 1,0 si `altitud ≤ alt_max`; decaimiento lineal hasta 0,0 en `altitud = 2 × alt_max`.
+
+Puntuación final: `score = pend_score × 0,40 + reg_score × 0,25 + mes_score × 0,20 + alt_score × 0,15`
+
+Bandas de color: verde ≥ 70, amarillo 40–69, rojo < 40.
+
+Las parcelas con `uso_sigpac` en `{ZU, ED, IM, AG, CA}` se excluyen directamente del scoring y devuelven `ranking: []`.
+
+El resultado se cachea en Redis con clave `suitability:{parcel_id}` (TTL configurable vía `suitability_cache_ttl_seconds`).
 
 ---
 
-## 5. IoT Data Flow Diagram
+## 3. Procedencia de los datos SIGPAC
 
-```mermaid
-graph LR
-    subgraph External Sources
-      SIGPAC[SIGPAC/SIXPAC]
-      AEMET[AEMET API]
-      METEO[MeteoGalicia API]
-      COPERNICUS[Copernicus]
-      CSIC[CSIC Soil Map]
-      FARMER[Manual Entry / Backend API]
-      SENSORS[Field Sensors]
-    end
+Los ficheros `.gpkg` de recintos **no se incluyen en el repositorio** (están en `.gitignore`) debido a su tamaño (~2 GB para A Coruña). Hay dos maneras de obtenerlos:
 
-    subgraph FIWARE
-      IOT[IoT Agent HTTP+MQTT]
-      ORION[Orion Context Broker NGSI-LD]
-      QL[QuantumLeap]
-    end
+### Opción A — Drive público del proyecto
 
-    subgraph Analytics
-      ML[Crop Suitability + Risk Models]
-    end
+Los ficheros ya procesados están disponibles en:
 
-    subgraph App
-      FE[Frontend Web App]
-    end
+> **https://drive.google.com/drive/folders/1xlpSNj61GI-Oe2BClK3AkMArwVim31VZ?usp=sharing**
 
-    SIGPAC -->|cadastre+geometry| ORION
-    CSIC -->|soil units| ORION
-    AEMET -->|forecast+obs ingest| IOT
-    METEO -->|forecast+obs ingest| IOT
-    SENSORS -->|MQTT/HTTP telemetry| IOT
-    FARMER -->|parcel status, operations, inventory| ORION
-    COPERNICUS -->|indices/features| ML
+Descargar todos los ficheros `.gpkg` y colocarlos en la carpeta `Recintos_Corunha/` en la raíz del repositorio. Después seguir los pasos de carga descritos en `README.md`.
 
-    IOT -->|updates dynamic attrs| ORION
+### Opción B — Descarga manual vía QGIS
 
-    ORION -->|AgriFarm/AgriParcel/AgriCrop/AgriSoil| FE
-    ORION -->|AgriParcelRecord/WeatherObserved/WeatherForecast/WaterQualityObserved| FE
-    ORION -->|AgriParcelOperation/AgriFertilizer| FE
+Tutorial de referencia:
+> **https://mappinggis.com/2020/03/como-descargar-capas-del-sigpac-en-qgis/**
 
-    ORION -->|historize dynamic attrs| QL
-
-    ORION -->|context snapshots| ML
-    QL -->|time-series features| ML
-    ML -->|suitabilityScore,frostRisk,cropHealthIndex| ORION
-```
-
-**Entities typically updated by IoT Agent**:
-- `AgriParcelRecord`
-- `WeatherObserved`
-- `WeatherForecast` (through weather connector jobs)
-- `WaterQualityObserved`
-- Optional dynamic updates to `AgriParcel`, `AgriSoil`, `AgriFertilizer`, and telemetry-assisted `AgriParcelOperation`
-
-**Entities historized by QuantumLeap (MVP priority)**:
-- `AgriParcelRecord`, `WeatherObserved`, `WeatherForecast`, `WaterQualityObserved`
-- `AgriParcel` dynamic fields (`parcelStatus`, `suitabilityScore`, moisture aggregates)
-- `AgriParcelOperation` event/timing/quantity fields
-- `AgriFertilizer.stockQuantity`
-
-**Entities feeding ML model**:
-- `AgriParcel`, `AgriSoil`, `AgriCrop`, `AgriParcelRecord`, `WeatherObserved`, `WeatherForecast`, `WaterQualityObserved`, `AgriParcelOperation`
+El proceso consiste en conectar el WFS del SIGPAC desde QGIS (`https://www.mapa.gob.es/es/agricultura/temas/sistema-de-informacion-geografica-de-parcelas-agricolas-sigpac/`), filtrar por provincia (código 15 = A Coruña), exportar cada municipio como `.gpkg` y guardarlos en `Recintos_Corunha/`.
 
 ---
 
-## 6. NGSI-LD Example Payloads
+## 4. Modelo NGSI-LD (arquitectura objetivo)
 
-> Base context required by TerraGalicia MVP:
-> - `https://uri.fiware.org/ns/data-models`
-> - `https://schema.org`
+TerraGalicia usa FIWARE Orion Context Broker para almacenar entidades agrícolas en formato NGSI-LD. El Orion está activo y el backend escribe entidades en él, aunque el flujo completo (IoT Agent → Orion → QuantumLeap → TimescaleDB) no está operativo todavía.
 
-### 6.1 AgriParcel example
+Las entidades principales del modelo:
 
-```json
-{
-  "id": "urn:ngsi-ld:AgriParcel:farm001:parcel01",
-  "type": "AgriParcel",
-  "name": {
-    "type": "Property",
-    "value": "North Terrace Parcel"
-  },
-  "location": {
-    "type": "GeoProperty",
-    "value": {
-      "type": "Polygon",
-      "coordinates": [
-        [
-          [-8.3962, 43.3644],
-          [-8.3956, 43.3644],
-          [-8.3955, 43.3640],
-          [-8.3961, 43.3640],
-          [-8.3962, 43.3644]
-        ]
-      ]
-    }
-  },
-  "area": {
-    "type": "Property",
-    "value": 1.42,
-    "unitCode": "HAR"
-  },
-  "category": {
-    "type": "Property",
-    "value": "arable"
-  },
-  "parcelStatus": {
-    "type": "Property",
-    "value": "PLANTED"
-  },
-  "belongsTo": {
-    "type": "Relationship",
-    "object": "urn:ngsi-ld:AgriFarm:farm001"
-  },
-  "hasAgriSoil": {
-    "type": "Relationship",
-    "object": "urn:ngsi-ld:AgriSoil:soilunit:ES15030:001"
-  },
-  "@context": [
-    "https://uri.fiware.org/ns/data-models",
-    "https://schema.org"
-  ]
-}
-```
-
-### 6.2 AgriParcelRecord example
-
-```json
-{
-  "id": "urn:ngsi-ld:AgriParcelRecord:parcel01:2026-04-21T10:00:00Z",
-  "type": "AgriParcelRecord",
-  "refParcel": {
-    "type": "Relationship",
-    "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
-  },
-  "source": {
-    "type": "Property",
-    "value": "iot:soil-probe:node-17"
-  },
-  "dateObserved": {
-    "type": "Property",
-    "value": "2026-04-21T10:00:00Z"
-  },
-  "soilMoistureVwc": {
-    "type": "Property",
-    "value": 0.29,
-    "unitCode": "P1"
-  },
-  "soilTemperature": {
-    "type": "Property",
-    "value": 14.8,
-    "unitCode": "DEG_C"
-  },
-  "airTemperature": {
-    "type": "Property",
-    "value": 16.1,
-    "unitCode": "DEG_C"
-  },
-  "batteryLevel": {
-    "type": "Property",
-    "value": 82,
-    "unitCode": "P1"
-  },
-  "@context": [
-    "https://uri.fiware.org/ns/data-models",
-    "https://schema.org"
-  ]
-}
-```
-
-### 6.3 WeatherObserved example
-
-```json
-{
-  "id": "urn:ngsi-ld:WeatherObserved:station:meteogalicia:15030:2026-04-21T10:00:00Z",
-  "type": "WeatherObserved",
-  "dateObserved": {
-    "type": "Property",
-    "value": "2026-04-21T10:00:00Z"
-  },
-  "location": {
-    "type": "GeoProperty",
-    "value": {
-      "type": "Point",
-      "coordinates": [-8.4115, 43.3623]
-    }
-  },
-  "temperature": {
-    "type": "Property",
-    "value": 15.4,
-    "unitCode": "DEG_C"
-  },
-  "relativeHumidity": {
-    "type": "Property",
-    "value": 0.83,
-    "unitCode": "P1"
-  },
-  "precipitation": {
-    "type": "Property",
-    "value": 1.6,
-    "unitCode": "MM"
-  },
-  "windSpeed": {
-    "type": "Property",
-    "value": 3.8,
-    "unitCode": "MTS"
-  },
-  "source": {
-    "type": "Property",
-    "value": "MeteoGalicia"
-  },
-  "@context": [
-    "https://uri.fiware.org/ns/data-models",
-    "https://schema.org"
-  ]
-}
-```
-
-### 6.4 AgriParcelOperation example (fertilizing)
-
-```json
-{
-  "id": "urn:ngsi-ld:AgriParcelOperation:parcel01:fertilizing:2026-04-21",
-  "type": "AgriParcelOperation",
-  "operationType": {
-    "type": "Property",
-    "value": "fertilizing"
-  },
-  "startedAt": {
-    "type": "Property",
-    "value": "2026-04-21T08:30:00Z"
-  },
-  "endedAt": {
-    "type": "Property",
-    "value": "2026-04-21T09:05:00Z"
-  },
-  "quantityApplied": {
-    "type": "Property",
-    "value": 120,
-    "unitCode": "KGM"
-  },
-  "unitCode": {
-    "type": "Property",
-    "value": "KGM"
-  },
-  "notes": {
-    "type": "Property",
-    "value": "NPK basal application before rain window"
-  },
-  "refParcel": {
-    "type": "Relationship",
-    "object": "urn:ngsi-ld:AgriParcel:farm001:parcel01"
-  },
-  "refFertilizer": {
-    "type": "Relationship",
-    "object": "urn:ngsi-ld:AgriFertilizer:npk-15-15-15:batch2026-03"
-  },
-  "@context": [
-    "https://uri.fiware.org/ns/data-models",
-    "https://schema.org"
-  ]
-}
-```
-
----
-
-## 7. PostGIS SIGPAC Schema (Implemented)
-
-The primary geospatial data source is the `recintos_sigpac` table in the PostgreSQL + PostGIS database. This table holds official SIGPAC land-registry parcel records for A Coruña province.
-
-### Table: `recintos_sigpac`
-
-| Column | Type | Description |
+| Entidad NGSI-LD | Estado | Descripción |
 |---|---|---|
-| `gid` | `serial PRIMARY KEY` | Internal row identifier |
-| `geom` | `geometry(MultiPolygon, 4326)` | Parcel boundary (WGS84) — spatial GiST index on this column |
-| `provincia` | `varchar` | Province code (e.g., `15` for A Coruña) |
-| `municipio` | `varchar` | Municipality code |
-| `poligono` | `varchar` | Cadastral polygon number |
-| `parcela` | `varchar` | Cadastral parcel number |
-| `recinto` | `varchar` | Sub-parcel (recinto) identifier |
-| `uso_sigpac` | `varchar` | SIGPAC land-use code (e.g., `TA` arable, `PA` pasture, `FO` forest) |
-| `superficie` | `numeric` | Declared area (hectares) |
-| `coef_regadio` | `numeric` | Irrigation coefficient (0–100) |
-| `pendiente_media` | `numeric` | Average slope percentage |
+| `AgriFarm` | Activo | Explotación agraria. Atributos: nombre, ubicación, propietario, superficie total. |
+| `AgriParcel` | Activo | Parcela individual. Atributos: geometría, área, municipio, estado, cultivo plantado, referencia a `AgriSoil`. |
+| `AgriParcelOperation` | Activo | Operación sobre una parcela (siembra, fertilización, cosecha). Atributos: tipo, fecha, producto, cantidad. |
+| `AgriCrop` | Definido | Catálogo de cultivos con necesidades agronómicas. |
+| `AgriSoil` | Definido | Datos de suelo (pH, textura, materia orgánica, N-P-K). |
+| `WeatherObserved` | Definido | Observación meteorológica puntual. |
+| `WeatherForecast` | Definido | Previsión meteorológica a 7 días. |
+| `AgriParcelRecord` | En stack | Serie temporal de sensores IoT (sin ingestión activa). |
+| `AgriFertilizer` | Definido | Inventario de fertilizantes por explotación. |
 
-### Derived `id` field in API responses
-The backend constructs a string ID from cadastral components:
-```
-{provincia}_{municipio}_{poligono}_{parcela}_{recinto}
-```
+El `@context` se sirve desde el `context-server` interno (`http://context-server/context.jsonld`) y referencia las definiciones de `smart-data-models/dataModel.Agrifood`.
 
-### Query pattern
-```sql
-SELECT
-  (provincia || '_' || municipio || '_' || poligono || '_' || parcela || '_' || recinto) AS id,
-  uso_sigpac, superficie,
-  COALESCE(ST_AsGeoJSON(ST_Simplify(geom, 0.0002)), ST_AsGeoJSON(geom))::text AS geom_json
-FROM recintos_sigpac
-WHERE geom && ST_MakeEnvelope($1, $2, $3, $4, 4326)
-LIMIT $5
-```
-
-### Fallback chain
-```
-PostGIS (recintos_sigpac)
-  → .gpkg file (A Coruña province, bundled with backend)
-    → seed mock data (development only)
-```
-
-### Relationship to NGSI-LD model
-Each row in `recintos_sigpac` maps to an `AgriParcel` NGSI-LD entity. The backend synthesizes NGSI-LD-compatible properties from PostGIS query results and enriches them with dynamic attributes (`parcelStatus`, `suitabilityScore`) from Orion and the applications database.
-
----
-
-## 8. Cross-sector Entities Note
-
-Beyond AgriFood models, TerraGalicia should include the following transversal Smart Data Models:
-
-- **Device**: To represent physical probes, gateways, and weather stations (manufacturer, firmware, battery, connectivity, calibration metadata).
-- **Alert**: For frost risk, pest outbreaks, irrigation stress, and fertilizer stock warnings, consumable by AgroCopilot and notification channels.
-- **Sensor / SensorObservation (where adopted by deployment profile)**: Useful when device metadata and raw sensor streams must be managed separately from agronomic entities.
-- **Building / PointOfInterest / AdministrativeArea**: Useful for farm facilities, cooperative hubs, and municipality-level aggregation/reporting.
-- **DataService / Dataset (catalog-level metadata)**: Recommended for governance, interoperability, and external sharing (e.g., NGSI-LD exports for public initiatives).
-
-These cross-sector entities improve interoperability with smart rural, water, and climate ecosystems while preserving TerraGalicia’s AgriFood core.
+La historización vía QuantumLeap y la ingestión vía IoT Agent forman parte del trabajo futuro (ver `FUTURE_IMPLEMENTATIONS.md`).

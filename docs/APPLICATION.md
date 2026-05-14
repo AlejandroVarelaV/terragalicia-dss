@@ -1,206 +1,71 @@
-# TerraGalicia DSS — Application Guide
+# TerraGalicia DSS
 
-**Version**: 1.1
-**Date**: May 2026
-**Status**: Partial MVP — Core features running
+**Versión**: 1.2 — Mayo 2026 — Proyecto académico (MVP parcial operativo)
 
 ---
 
-## 1. What is TerraGalicia?
+## Objetivo
 
-TerraGalicia is an open-source agricultural decision-support system (DSS) for smallholder farmers and cooperatives in Galicia. It provides an interactive map-based interface over real SIGPAC land-registry parcel data, enriched with crop suitability scoring, weather forecasts, a conversational AI assistant (AgroCopilot), and a what-if scenario simulator.
+TerraGalicia es un sistema de apoyo a la decisión agrícola (DSS) desarrollado como proyecto académico. La idea de partida es sencilla: Galicia tiene casi 400.000 explotaciones agrarias, muchas de ellas minifundios gestionados por una sola persona, y aunque los datos del SIGPAC son públicos y gratuitos, la interfaz oficial está pensada para técnicos administrativos, no para quien trabaja la tierra. TerraGalicia intenta cerrar esa brecha: ofrece los mismos datos catastrales con una capa de información adicional (aptitud de cultivos, previsión meteorológica, historial de operaciones) sobre un mapa interactivo.
 
----
-
-## 2. Running Infrastructure
-
-The application runs via Docker Compose. All services share a private bridge network; only Nginx exposes public ports.
-
-| Service | Image / Build | Port (internal) | Status |
-|---|---|---|---|
-| `nginx` | `nginx:1.27-alpine` | 80 (public) | Running |
-| `frontend` | Custom Vite/React build | 80 | Running |
-| `backend` | Custom FastAPI build | 8000 | Running |
-| `orion` | `fiware/orion-ld:latest` | 1026 | Running |
-| `mongo` | `mongo:5` | 27017 | Running |
-| `context-server` | Custom NGSI-LD context server | — | Running |
-| `postgres` | `postgis/postgis:15-3.4` | 5433 | Running |
-| `timescaledb` | `timescale/timescaledb` | 5432 | Running |
-| `redis` | `redis:7-alpine` | 6379 | Running |
-| `iot-agent` | `fiware/iotagent-json` | 4041/7896 | Defined, not started |
-| `quantumleap` | `orchestracities/quantumleap` | 8668 | Defined, not started |
-| `grafana` | `grafana/grafana:11` | 3001 | Defined, not started |
-| `ml-service` | Custom inference image | 8010 | Defined, not started |
-
-### Nginx routes
-
-| Path | Upstream |
-|---|---|
-| `/` | frontend:80 |
-| `/api/` | backend:8000 |
-| `/grafana/` | grafana:3000 |
-| `/orion/` | orion:1026 |
+El alcance es académico. No buscamos sustituir plataformas profesionales como DSSAT ni las herramientas de la Xunta de Galicia; lo que queremos demostrar es que con datos públicos, FIWARE como capa de interoperabilidad y un backend Python sobre PostGIS es posible construir algo funcional y útil.
 
 ---
 
-## 3. Accessing the Application
+## Estado del arte
 
-Open `http://localhost` in a browser. The application auto-authenticates as the demo user `farmer1` / `farmer123` on load (JWT token obtained from `/api/v1/auth/login` at startup).
+Los sistemas DSS agrícolas más extendidos (CropX, Trimble Ag, John Deere Operations Center) tienen costes de suscripción que hacen inviable su adopción en el minifundio gallego. Dentro del mundo del software libre, el patrón FIWARE for Agri e iniciativas como Smart Agrifood Solutions muestran que el estándar NGSI-LD encaja bien para modelar entidades agrícolas, aunque la mayoría de los proyectos publicados se quedan en fase de demostración.
 
----
-
-## 4. Map Interface
-
-The map is centered on the A Coruña / Galicia region (43.2792 N, 8.2100 W) at zoom 13.
-
-### Base layers (toggle via layers button, top-right)
-- **Rúas (OpenStreetMap)** — default
-- **Ortofoto (PNOA)** — high-resolution aerial photography (IGN)
-
-### SIGPAC parcel viewer
-SIGPAC parcels are loaded from a PostGIS database (`recintos_sigpac` table) with a `.gpkg` file fallback for the A Coruña province.
-
-**Controls — top-center cluster:**
-- **Amosar SIGPAC / Ocultar SIGPAC** — toggles parcel loading on/off.
-- **Refrescar** — visible only when SIGPAC is active; re-fetches parcels for the current viewport without panning. Disabled while a fetch is in progress.
-- **Truncation banner** — appears below the controls when >5000 parcelas are in the area (backend HARD_LIMIT). Text: *"Amosando 5000 parcelas. Fai zoom ou usa Refrescar para ver outras."*
-
-**Zoom requirement:** parcels only load at zoom ≥ 15 (frontend gate). Below zoom 15 the badge reads *"Preme Amosar SIGPAC e fai zoom para ver parcelas"*.
-
-**Geometry strategy (backend, zoom-dependent):**
-| Zoom | Geometry returned |
-|---|---|
-| ≤ 14 (backend only, not reached by frontend) | `ST_Centroid` (GeoJSON Point) |
-| 15 | `ST_Simplify(geom, 0.0002)` with COALESCE fallback to full geometry |
-| 16 | `ST_Simplify(geom, 0.0001)` with COALESCE fallback to full geometry |
-| ≥ 17 | Full geometry |
-
-**Rendering:** All parcels are drawn on a single Leaflet canvas renderer (`L.canvas({ padding: 0.5 })`). This avoids thousands of SVG DOM nodes and keeps rendering under 1 second for 5000 parcels.
-
-**Parcel colors (status):**
-| Status | Color |
-|---|---|
-| PLANTED | Amber `#f59e0b` |
-| FALLOW | Gray `#9ca3af` |
-| PREPARED | Green `#22c55e` |
-| HARVESTED | Blue `#3b82f6` |
-| Unknown | Slate `#64748b` |
-
-### Parcel popup (click any parcel)
-Clicking a parcel opens a popup with:
-- Cadastral ID, name, area (ha, click to toggle to m²), municipality, soil type, source
-- Current status with color dot
-- Crop suitability ranking (top crops with score bars) — fetched asynchronously from `/api/v1/parcels/{id}/suitability`
-- Status selector (`<select>`) to update parcel status; changes are PATCHed to the backend
-- **Simular** button — opens the WhatIf Simulator for that parcel
-
-### Legend (bottom-left)
-Collapsible panel showing:
-- Status color swatches (PREPARED / FALLOW / PLANTED / HARVESTED)
-- Live mouse coordinates in decimal degrees
-
-### Data source badge (top-left)
-Shows current data source: `Fonte: PostGIS` or `Fonte: GeoPackage local (A Coruña)`, or loading/zoom prompt.
+Para el componente de scoring de aptitud de cultivos la alternativa natural sería un modelo de machine learning. No lo usamos por una razón concreta: no existe un dataset público de rendimientos por parcela SIGPAC con la granularidad necesaria para A Coruña, y entrenar con datos genéricos producirá un modelo que no mejora las reglas agronómicas básicas de la región. Las reglas que implementamos —pendiente máxima, ventana de siembra, necesidades de riego, altitud máxima— están extraídas de manuales agronómicos gallegos y ponderadas con pesos que reflejan la realidad física del territorio: la pendiente tiene el mayor peso (40%) porque en Galicia es el factor limitante más frecuente.
 
 ---
 
-## 5. Weather Panel
+## Funcionalidades operativas
 
-Button: bottom-right (blue circular button). Shows:
-- Current conditions for the map center (temperature, humidity, wind, precipitation)
-- 7-day forecast strip
-- Refresh and future-day navigation buttons
+Lo que está funcionando a día de hoy:
 
-Data fetched from `/api/v1/weather?lat=...&lon=...`.
-
----
-
-## 6. AgroCopilot
-
-Button: bottom-right (green circular button). Opens a chat drawer. Accepts questions in Galician or Spanish about parcels, crops, weather, and operations. Each session is pre-loaded with the selected parcel's context.
-
-Endpoint: `POST /api/v1/copilot/chat`
+- **Visor de parcelas SIGPAC** — carga desde PostGIS (~3,87 M recintos de A Coruña) con renderizado sobre canvas Leaflet. Hasta 5.000 parcelas por petición; banner de aviso si hay más en el viewport.
+- **Popup de parcela** — ID catastral, área (toggle ha/m²), municipio, uso SIGPAC, fuente de datos, estado actual con selector.
+- **Scoring de aptitud de cultivos** — ranking de 10 cultivos con barras de puntuación y desglose de los cuatro factores (pendiente, riego, mes, altitud). Colores verde/amarillo/rojo según umbral.
+- **Panel de tiempo** — condiciones actuales y previsión a 7 días vía Open-Meteo (API libre, sin clave).
+- **AgroCopilot** — interfaz de chat. Con `LLM_API_KEY` configurado responde con contexto de la parcela; sin él devuelve mensajes de fallback explicativos.
+- **Simulador what-if** — ajusta fecha de siembra, tipo de cultivo y disponibilidad de riego; recalcula probabilidad de éxito en tiempo real.
+- **Autenticación JWT** — login automático al cargar la app con el usuario demo (`farmer1` / `farmer123`).
+- **API de operaciones** — registro y consulta de operaciones por parcela (`GET/POST /api/v1/parcels/{id}/operations`).
+- **FIWARE Orion** — activo; almacena entidades `AgriFarm`, `AgriParcel` y operaciones como NGSI-LD.
 
 ---
 
-## 7. WhatIf Simulator
+## Descripción detallada
 
-Triggered from the parcel popup's **Simular** button. Allows adjusting:
-- Sowing date (slider)
-- Crop type (dropdown)
-- Irrigation assumption (toggle)
+### Mapa
 
-Recalculates success probability in real time.
+Al abrir la aplicación el mapa centra en A Coruña (43.28°N, 8.21°O) a zoom 13. Las parcelas SIGPAC solo se cargan a partir del zoom 15; por debajo aparece un aviso. El control de capas (esquina superior derecha) permite alternar entre callejero (OSM) y ortofoto del PNOA (IGN).
 
-Endpoint: `POST /api/v1/simulator/whatif`
+El color de cada parcela indica su estado: verde (PREPARADA), naranja (PLANTADA), gris (BARBECHO), azul (COSECHADA). Los estados se guardan actualmente en memoria y se pierden al recargar; la persistencia en base de datos es trabajo futuro.
 
----
+### Popup de parcela
 
-## 8. Backend API Reference (implemented endpoints)
+Al hacer clic en una parcela aparece un popup con los datos del recinto: ID, nombre, área (clic para cambiar entre ha y m²), municipio, uso oficial, tipo de suelo y fuente del dato (PostGIS o GeoPackage local). Debajo, el ranking de aptitud de cultivos se carga de forma asíncrona desde `/api/v1/parcels/{id}/suitability`. El selector de estado permite cambiar el estado del recinto con un PATCH al backend. El botón **Simular** abre el simulador precargado con los datos de esa parcela.
 
-All endpoints require `Authorization: Bearer <token>` except `/api/v1/auth/login`.
+### Panel de tiempo
 
-| Endpoint | Methods | Description |
-|---|---|---|
-| `/api/v1/auth/login` | POST | Obtain JWT access token (form: `username`, `password`, `grant_type`) |
-| `/api/v1/sigpac/parcels` | GET | SIGPAC parcels by bbox and zoom. Params: `bbox` (minLon,minLat,maxLon,maxLat), `zoom`, `limit` (default 5000, max 5000) |
-| `/api/v1/sigpac/nearby` | GET | SIGPAC parcels near cursor. Params: `lat`, `lon`, `zoom`, `limit` |
-| `/api/v1/parcels/{id}` | GET, PATCH | Retrieve or update parcel metadata and status |
-| `/api/v1/parcels/{id}/suitability` | GET | Crop suitability score and ranking for a parcel |
-| `/api/v1/parcels/{id}/operations` | GET, POST | List or create parcel operations |
-| `/api/v1/weather` | GET | Current + 7-day forecast weather for a location |
-| `/api/v1/copilot/chat` | POST | AgroCopilot conversational endpoint |
-| `/api/v1/simulator/whatif` | POST | What-if scenario simulation |
+Botón circular azul en la esquina inferior derecha. Muestra temperatura, humedad, viento y precipitación para las coordenadas del centro del mapa, más la previsión diaria a 7 días. Los datos vienen de Open-Meteo. El botón de refresco vuelve a consultar la API.
 
-### SIGPAC API response shape
+### AgroCopilot
 
-```json
-{
-  "type": "FeatureCollection",
-  "features": [...],
-  "truncated": false,
-  "total_estimate": 342,
-  "returned": 342
-}
-```
+Botón circular verde, también en la esquina inferior derecha. Abre un panel de chat lateral. Cada sesión se carga con el contexto de la parcela seleccionada (si hay una). Con un servicio LLM configurado vía `LLM_API_KEY` y `LLM_API_BASE`, el copiloto responde con información específica de la parcela; sin él, los mensajes de fallback describen qué haría y qué datos usaría.
 
-Each feature carries:
-- `properties.id` — SIGPAC cadastral ID
-- `properties.source` — `"postgis"` or `"gpkg-local"`
-- `properties.geometry_type` — `"centroid"` (zoom ≤ 14) or `"polygon"`
-- `properties.status` — parcel status enum
-- Standard SIGPAC attributes (provincia, municipio, poligono, parcela, recinto, uso_sigpac, superficie)
+### Simulador what-if
+
+Permite ajustar tres parámetros: fecha de siembra (slider de semanas desde hoy), tipo de cultivo (desplegable con los 10 cultivos del catálogo) y si se asume disponibilidad de riego (toggle). La puntuación se recalcula en tiempo real usando las mismas reglas del motor de aptitud pero parametrizadas con los valores del simulador en lugar de los de la parcela real.
 
 ---
 
-## 9. SIGPAC Data Pipeline
+## Referencia técnica
 
-```
-SIGPAC official WFS  ──→  recintos_sigpac (PostGIS table, SRID 4326)
-                              │
-                              ├─ bbox + zoom query (ST_MakeEnvelope + &&)
-                              ├─ count-up-to-5001 (early exit, avoids full COUNT(*))
-                              ├─ 15s statement_timeout (SET LOCAL inside transaction)
-                              └─ Redis cache (24h TTL, keyed by exact bbox string)
-                                      │
-                              ├─ On cache miss: PostGIS query
-                              ├─ On PostGIS failure: .gpkg file fallback (A Coruña)
-                              └─ On .gpkg failure: mock/seed data
-```
+El stack completo (14 servicios Docker) y el pipeline de datos SIGPAC están documentados en [docs/architecture.md](architecture.md).
 
-The backend enforces `HARD_LIMIT = 5000`. The `truncated` flag is set when `total_estimate > 5000`.
+El esquema real de `recintos_sigpac`, las reglas de scoring de los 10 cultivos y las fuentes de datos se describen en [docs/data_model.md](data_model.md).
 
----
-
-## 10. Currently Not Implemented (Planned for Phase 2)
-
-- **IoT Agent / QuantumLeap**: Not started. No live sensor ingestion or time-series history.
-- **Grafana**: Not started. Operational dashboards pending.
-- **ML service**: Suitability scores use a pre-configured stub (no trained model).
-- **LLM service**: AgroCopilot uses a backend handler without a local model; responses depend on context-server configuration.
-- **MQTT broker**: Not in the current Compose stack.
-- **Offline capability**: No service worker or app shell.
-- **SMS alerts**: Email/push only (not yet implemented).
-- **Pest phenology alerts**: Deferred.
-- **Cooperative multi-parcel dashboard**: Deferred.
-- **SIGPAC coverage outside A Coruña**: `.gpkg` fallback only covers A Coruña province; PostGIS table coverage depends on ingested data.
+Las funcionalidades que quedaron fuera del MVP por restricciones de tiempo están en [FUTURE_IMPLEMENTATIONS.md](../FUTURE_IMPLEMENTATIONS.md).
