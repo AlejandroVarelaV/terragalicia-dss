@@ -54,6 +54,7 @@ class WeatherFetcher:
             data = resp.json()
             daily = data.get("daily", {})
             dates = daily.get("time", [])
+            et0_list = daily.get("et0_fao_evapotranspiration") or []
             result: List[dict[str, Any]] = []
             for i, dt in enumerate(dates):
                 item = {
@@ -69,7 +70,7 @@ class WeatherFetcher:
                     "relativeHumidity_max": daily.get("relative_humidity_2m_max", [None])[i],
                     "relativeHumidity_min": daily.get("relative_humidity_2m_min", [None])[i],
                     "frostRisk": 0.0,
-                    "et0": daily.get("et0_fao_evapotranspiration", [None])[i],
+                    "et0": et0_list[i] if i < len(et0_list) else None,
                 }
                 result.append(item)
             if result:
@@ -165,6 +166,8 @@ class WeatherFetcher:
         return {
             "temperature_max": 16.2,
             "temperature_min": 8.4,
+            "temperatureMax": 16.2,
+            "temperatureMin": 8.4,
             "temperature": (16.2 + 8.4) / 2.0,
             "precipitation": 2.97,
             "relativeHumidity": 0.76,
@@ -174,5 +177,14 @@ class WeatherFetcher:
         }
 
     def _climatology_list(self, days: int) -> List[dict[str, Any]]:
-        return [self._climatology_single() for _ in range(days)]
+        today = date.today()
+        result = []
+        for i in range(days):
+            dt = (today + timedelta(days=i)).isoformat()
+            entry = self._climatology_single()
+            entry["date"] = dt
+            entry["validFrom"] = dt
+            entry["validTo"] = dt
+            result.append(entry)
+        return result
 

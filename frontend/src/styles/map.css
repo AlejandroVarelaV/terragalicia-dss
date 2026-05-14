@@ -170,9 +170,9 @@ select {
   position: absolute;
   bottom: 90px;
   right: 10px;
-  width: 280px;
-  max-height: min(64vh, 520px);
-  overflow: hidden;
+  width: 290px;
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1151,4 +1151,47 @@ select {
 .leaflet-control-zoom-out {
   border-radius: 4px !important;
   margin: 0 2px !important;
+}
+
+.forecast-section {
+  display: grid;
+  gap: 6px;
+}
+
+.forecast-section-title {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4b6a55;
+}
+
+.forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.81rem;
+}
+
+.forecast-table th {
+  text-align: left;
+  color: #48604d;
+  font-size: 0.73rem;
+  font-weight: 600;
+  padding: 3px 5px;
+  border-bottom: 1px solid rgba(16, 32, 21, 0.1);
+}
+
+.forecast-table td {
+  padding: 4px 5px;
+  color: #102015;
+}
+
+.forecast-table tbody tr:nth-child(even) {
+  background: rgba(16, 32, 21, 0.03);
+}
+
+.forecast-table .forecast-day-col {
+  font-weight: 600;
+  color: #314236;
 }

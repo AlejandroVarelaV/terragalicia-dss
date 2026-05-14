@@ -588,8 +588,7 @@ export default function MapView() {
             if (popupRef.current) popupRef.current.remove();
             popupRef.current = L.popup({
               closeButton: true,
-              maxWidth: 260,
-              maxHeight: 380,
+              maxWidth: 310,
               className: 'parcel-popup',
               autoPanPaddingTopLeft: [10, 100],
               closeOnClick: false,

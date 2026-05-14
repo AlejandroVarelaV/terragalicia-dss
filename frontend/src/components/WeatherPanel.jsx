@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BACKEND_BASE_URL } from '../data/sigpacService.js';
 
+const DAYS_GL = ['Domingo', 'Luns', 'Martes', 'Mércores', 'Xoves', 'Venres', 'Sábado'];
+
 export default function WeatherPanel({ mapCenter, open, onToggle, onClose }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
@@ -24,6 +26,7 @@ export default function WeatherPanel({ mapCenter, open, onToggle, onClose }) {
   }, [mapCenter, open]);
 
   const current = data?.current || null;
+  const forecast = data?.forecast || [];
   const isClimatology = data?.dataQuality === 'climatological_average' || current?.dataQuality === 'climatological_average';
 
   const formatHumidity = (value) => {
@@ -36,6 +39,16 @@ export default function WeatherPanel({ mapCenter, open, onToggle, onClose }) {
   const formatTemp = (value) => {
     if (value == null || Number.isNaN(Number(value))) return '—';
     return `${Number(value).toFixed(1)}°C`;
+  };
+
+  const getDayName = (validFrom) => {
+    if (!validFrom) return '—';
+    try {
+      const d = new Date(validFrom + 'T12:00:00');
+      return DAYS_GL[d.getDay()];
+    } catch {
+      return '—';
+    }
   };
 
   const currentLabel = loading ? 'Cargando...' : 'Actual';
@@ -67,6 +80,34 @@ export default function WeatherPanel({ mapCenter, open, onToggle, onClose }) {
                 <div>Vento: {current.windSpeed ?? 'N/D'} m/s</div>
               </div>
             </div>
+          )}
+          {!loading && data && forecast.length > 0 && (
+            <div className="forecast-section">
+              <p className="forecast-section-title">Previsión 7 días</p>
+              <table className="forecast-table">
+                <thead>
+                  <tr>
+                    <th>Día</th>
+                    <th>Máx</th>
+                    <th>Mín</th>
+                    <th>Prec.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {forecast.map((day, i) => (
+                    <tr key={i}>
+                      <td className="forecast-day-col">{getDayName(day.validFrom)}</td>
+                      <td>{formatTemp(day.temperatureMax)}</td>
+                      <td>{formatTemp(day.temperatureMin)}</td>
+                      <td>{day.precipitation != null ? `${Number(day.precipitation).toFixed(1)}mm` : 'N/D'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {!loading && !error && data && forecast.length === 0 && (
+            <div className="panel-warning">Previsión non dispoñible de momento.</div>
           )}
         </div>
       )}
